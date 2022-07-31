@@ -168,7 +168,8 @@ const Dashboard = () => {
 
     return (
         <div>
-            <h2 className="page-header">Dashboard</h2>
+            <h2 className="page-header">Selamat Datang di Dashboard Evaluasi Kinerja</h2>
+            <h6 className='margin-bottom'>Hi User1, Selamat datang kembali</h6>
             <div className="row">
                 <div className="col-6">
                     <div className="row">

@@ -84,8 +84,12 @@ input:focus {
 }
 
 .page-header {
-    margin-bottom: 40px;
+    margin-bottom: 0px;
     text-transform: capitalize;
+}
+
+.margin-bottom {
+    margin-bottom: 20px;
 }
 
 .card {
