@@ -13,6 +13,7 @@ import Table from '../components/table/Table'
 import Badge from '../components/badge/Badge'
 
 import statusCards from '../assets/JsonData/status-card-data.json'
+import './Dashboard.css'
 
 const chartOptions = {
     series: [{
@@ -171,7 +172,7 @@ const Dashboard = () => {
             <h2 className="page-header">Selamat Datang di Dashboard Evaluasi Kinerja</h2>
             <h6 className='margin-bottom'>Hi User1, Selamat datang kembali</h6>
             <div className="row">
-                <div className="col-6">
+                {/* <div className="col-6">
                     <div className="row">
                         {
                             statusCards.map((item, index) => (
@@ -185,9 +186,9 @@ const Dashboard = () => {
                             ))
                         }
                     </div>
-                </div>
+                </div> */}
                 <div className="col-6">
-                    <div className="card full-height">
+                    <div className="card full-height min-height-500">
                         {/* chart */}
                         <Chart
                             options={themeReducer === 'theme-mode-dark' ? {
@@ -198,12 +199,46 @@ const Dashboard = () => {
                                 theme: { mode: 'light'}
                             }}
                             series={chartOptions.series}
-                            type='line'
+                            type='bar'
                             height='100%'
                         />
                     </div>
                 </div>
                 <div className="col-4">
+                    <div className="card full-height min-height-500">
+                        {/* chart */}
+                        <Chart
+                            options={themeReducer === 'theme-mode-dark' ? {
+                                ...chartOptions.options,
+                                theme: { mode: 'dark'}
+                            } : {
+                                ...chartOptions.options,
+                                theme: { mode: 'light'}
+                            }}
+                            series={chartOptions.series}
+                            type='donut'
+                            height='100%'
+                        />
+                    </div>
+                </div>
+                <div className="col-6">
+                    <div className="card full-height min-height-500">
+                        {/* chart */}
+                        <Chart
+                            options={themeReducer === 'theme-mode-dark' ? {
+                                ...chartOptions.options,
+                                theme: { mode: 'dark'}
+                            } : {
+                                ...chartOptions.options,
+                                theme: { mode: 'light'}
+                            }}
+                            series={chartOptions.series}
+                            type='bar'
+                            height='100%'
+                        />
+                    </div>
+                </div>
+                {/* <div className="col-4">
                     <div className="card">
                         <div className="card__header">
                             <h3>top customers</h3>
@@ -238,7 +273,7 @@ const Dashboard = () => {
                             <Link to='/'>view all</Link>
                         </div>
                     </div>
-                </div>
+                </div> */}
             </div>
         </div>
     )

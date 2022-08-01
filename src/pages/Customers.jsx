@@ -3,6 +3,8 @@ import React from 'react'
 import Table from '../components/table/Table'
 
 import customerList from '../assets/JsonData/customers-list.json'
+// import Dropdown from 'react-dropdown';
+// import 'react-dropdown/style.css';
 
 const customerTableHead = [
     '',
@@ -28,11 +30,17 @@ const renderBody = (item, index) => (
     </tr>
 )
 
+// const options = [
+//     'one', 'two', 'three'
+//   ];
+//   const defaultOption = options[0];
+
 const Customers = () => {
     return (
         <div>
-            <h2 className="page-header">
-                customers
+            <h2 className="page-header bottom-margin-500">
+                Master Data:
+                {/* <Dropdown options={options} onChange={this._onSelect} value={defaultOption} placeholder="Select an option" />; */}
             </h2>
             <div className="row">
                 <div className="col-12">
