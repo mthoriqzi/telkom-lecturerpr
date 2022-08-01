@@ -35,7 +35,7 @@ const renderBody = (item, index) => (
 //   ];
 //   const defaultOption = options[0];
 
-const Customers = () => {
+const Data = () => {
     return (
         <div>
             <h2 className="page-header bottom-margin-500">
@@ -61,4 +61,4 @@ const Customers = () => {
     )
 }
 
-export default Customers
+export default Data
