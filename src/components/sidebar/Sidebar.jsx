@@ -24,6 +24,7 @@ const SidebarItem = props => {
     )
 }
 
+
 const Sidebar = props => {
 
     const activeItem = sidebar_items.findIndex(item => item.route === props.location.pathname)
@@ -32,7 +33,12 @@ const Sidebar = props => {
         <div className='sidebar'>
             <div className="sidebar__logo">
                 <img src={logo} alt="company logo" />
+                <h4>FAKULTAS <br />
+                REKAYASA INDUSTRI <br />
+                TELKOM UNIVERSITY</h4>
             </div>
+            {/* <div className="col-8"> */}
+            {/* </div> */}
             {
                 sidebar_items.map((item, index) => (
                     <Link to={item.route} key={index}>

@@ -1,7 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import reportWebVitals from './reportWebVitals'
-
 import { createStore } from 'redux'
 
 import { Provider } from 'react-redux'
@@ -18,6 +17,7 @@ import Layout from './components/layout/Layout'
 const store = createStore(
   rootReducer
 )
+
 
 document.title = 'Tua CRM'
 
