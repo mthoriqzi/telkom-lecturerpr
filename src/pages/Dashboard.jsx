@@ -13,7 +13,7 @@ import Table from '../components/table/Table'
 import Badge from '../components/badge/Badge'
 
 import statusCards from '../assets/JsonData/status-card-data.json'
-import './Dashboard.css'
+import './Pages.css'
 
 const chartOptions = {
     series: [{

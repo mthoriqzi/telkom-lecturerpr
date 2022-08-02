@@ -19,7 +19,7 @@ const store = createStore(
 )
 
 
-document.title = 'Tua CRM'
+document.title = 'DEK-FRI'
 
 ReactDOM.render(
   <Provider store={store}>
