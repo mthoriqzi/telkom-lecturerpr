@@ -1,14 +1,21 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import * as XLSX from 'xlsx';
 import DataTable from 'react-data-table-component';
 import Table from '../components/table/Table'
 import customerList from '../assets/JsonData/customers-list.json'
- 
+import Axios from 'axios';
+
+
 function Data() {
  
-  // const [columns, setColumns] = useState([]);
-  // const [data, setData] = useState([]);
+  // const [data, setColumns] = useState([]);
+  const [data, setData] = useState("");
  
+  useEffect(() => {
+    Axios.get('http://localhost:3001/api/get').then((response) => {
+      console.log(response);
+    });
+  }, []);
   // process CSV data
   // const processData = dataString => {
   //   const dataStringLines = dataString.split(/\r\n|\n/);
@@ -57,7 +64,11 @@ function Data() {
     'total spend',
     'location'
   ]
-
+  const sendToDB = (data) => {
+    Axios.post("http://localhost:3001/api/insert", {
+      "data": data
+    });
+  }
   
   // handle file upload
   const handleFileUpload = e => {
@@ -68,6 +79,7 @@ function Data() {
       const wb = XLSX.read(bstr, { type: 'binary' });
       const data = XLSX.utils.sheet_to_json(wb.Sheets[wb.SheetNames[1]])
       console.log(JSON.stringify(data), "\n\n");
+      sendToDB(data);
       // processData(data);
     };
     reader.readAsBinaryString(file);
