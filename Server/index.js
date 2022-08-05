@@ -20,17 +20,26 @@ app.get('/api/get', (req, res) => {
     db.query(sqlSelect, (err, result) => {
         // console.log(result);
         res.send(result);
+        
     });
 });
 
 app.post('/api/insert', (req, res) => {
     const input_data = req.body.data;
     // console.log(req.body.data);
+
     data_values = "";
-    input_data.map((item) => {
-        template_data = "(" + item["NO"] + ",'" + item["KODE NAMA"] + "','" + item["KODE"] + "', " + item["NO URUT"] + ", '" + item["PROGRAM STUDI"] + "','" + item["STATUS KEPEGAWAIAN"] + "','" + item["JFA"] + "'," + item["Dik Diakui"] + "," + item["Lit Diakui"] + "," + item["Abdimas Diakui"] + "," + item["Penunjang"] + "," + item["Prof Diakui"] + "," + item["Total SKS"] + ",'" + item["PEMENUHAN TRIDHARMA"] + "'), ";
-        data_values += template_data
-    });
+    // var i =0;
+    // for (var item of input_data){
+        input_data.map((item) => {
+            template_data = "(" + item["NO"] + ",'" + item["KODE NAMA"] + "','" + item["KODE"] + "', " + item["NO URUT"] + ", '" + item["PROGRAM STUDI"] + "','" + item["STATUS KEPEGAWAIAN"] + "','" + item["JFA"] + "'," + item["Dik Diakui"] + "," + item["Lit Diakui"] + "," + item["Abdimas Diakui"] + "," + item["Penunjang"] + "," + item["Prof Diakui"] + "," + item["Total SKS"] + ",'" + item["PEMENUHAN TRIDHARMA"] + "'), ";
+            data_values += template_data;
+            // i++;
+            // if (i==3){
+            //     break;
+            // }
+        });
+    // };
     // console.log(data_values);
     
     const sqlInsert = "insert into data values " + data_values.slice(0,-2) + ";";
