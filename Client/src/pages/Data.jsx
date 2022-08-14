@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import * as XLSX from 'xlsx';
 import Table from '../components/table/Table'
 import Axios from 'axios';
+import { Link } from 'react-router-dom'
 
 function Data() {
  
@@ -52,11 +53,16 @@ function Data() {
   }
 
   const renderHead = (item, index) => <th key={index}>{item}</th>
-
+{/* {item.kode_nama} */}
+          {/* <a href="individu.jsx"><td>{item.kode_nama}</td></a> */}
+          
   const renderBody = (item, index) => (
-      <tr key={index}>
+  
+        <tr key={index}>
           <td>{item.no}</td>
-          <td>{item.kode_nama}</td>
+          <Link to={"User/"+item.kode_nama} key={index}>
+            <td>{item.kode_nama}</td>
+          </Link>
           <td>{item.kode}</td>
           <td>{item.no_urut}</td>
           <td>{item.program_studi}</td>
@@ -80,6 +86,7 @@ function Data() {
         accept=".csv,.xlsx,.xls"
         onChange={handleFileUpload}
       />
+      
       {dataList.length!=0 &&
       <div className="row">
           <div className="col-12">
@@ -92,13 +99,14 @@ function Data() {
                          
                           bodyData = {dataList}
                           renderBody={(item, index) => renderBody(item, index)}
+                          
                        />
                     
                   </div>
               </div>
           </div>
       </div>
-    }
+      }
     </div>
   );
 }

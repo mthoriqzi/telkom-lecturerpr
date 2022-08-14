@@ -28,7 +28,8 @@ const Table = props => {
 
         setCurrPage(page)
     }
-    // console.log(props.bodyData)
+    // console.log(index)
+    // console.log(dataShow.map((item, index) => props.renderBody(item, index)))
     return (
         <div>
             <div className="table-wrapper">
@@ -49,6 +50,7 @@ const Table = props => {
                             <tbody>
                                 {
                                     dataShow.map((item, index) => props.renderBody(item, index))
+                                    
                                 }
                             </tbody>
                         ) : null
