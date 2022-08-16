@@ -53,8 +53,6 @@ function Data() {
   }
 
   const renderHead = (item, index) => <th key={index}>{item}</th>
-{/* {item.kode_nama} */}
-          {/* <a href="individu.jsx"><td>{item.kode_nama}</td></a> */}
           
   const renderBody = (item, index) => (
   
