@@ -14,17 +14,17 @@ import plotly.express as px
 import plotly.graph_objs as go
 from plotly.offline import download_plotlyjs, init_notebook_mode, plot, iplot
 #mysql
-import pymysql
-from sqlalchemy import create_engine
 import mysql.connector
 
-engine = create_engine('mysql://root:password@127.0.0.1/DB')
-cursor = engine.connect()
+conn = mysql.connector.connect(
+      host="localhost",
+      user="root",
+      passwd="password",
+      database="DB"
+    )
+cursor = conn.cursor()
 
-
-
-
-td = pd.read_sql("SELECT * FROM data", engine)
+td = pd.read_sql("SELECT * FROM data", conn)
 td_drop = td.dropna() 
 td_r = td_drop.rename(columns={"Dik Diakui":"D1", "Lit Diakui":"D2", "Abdimas Diakui":"D3", "Penunjang":"P"})
 td_x =td_r.iloc[:,7:11] 
