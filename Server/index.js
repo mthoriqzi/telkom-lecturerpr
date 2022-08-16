@@ -5,10 +5,11 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 
 const db = mysql.createPool({
-    host: "localhost",
+    host: "127.0.0.1",
     user: 'root',
     password: 'password',
-    database: 'DB'
+    database: 'DB',
+    port: 3306
 });
 
 app.use(cors());
@@ -20,7 +21,35 @@ app.get('/api/get', (req, res) => {
     db.query(sqlSelect, (err, result) => {
         // console.log(result);
         res.send(result);
-        
+    });
+});
+
+app.get('/api/get-cluster', (req, res) => {
+    const sqlSelect = "select * from hasil_cluster";
+    db.query(sqlSelect, (err, result) => {
+        // console.log(result);
+        res.send(result);
+    });
+});
+app.get('/api/get-cluster-0', (req, res) => {
+    const sqlSelect = "select * from hasil_cluster where cluster=0";
+    db.query(sqlSelect, (err, result) => {
+        // console.log(result);
+        res.send(result);
+    });
+});
+app.get('/api/get-cluster-1', (req, res) => {
+    const sqlSelect = "select * from hasil_cluster where cluster=1";
+    db.query(sqlSelect, (err, result) => {
+        // console.log(result);
+        res.send(result);
+    });
+});
+app.get('/api/get-cluster-2', (req, res) => {
+    const sqlSelect = "select * from hasil_cluster where cluster=2";
+    db.query(sqlSelect, (err, result) => {
+        // console.log(result);
+        res.send(result);
     });
 });
 
@@ -40,7 +69,7 @@ app.post('/api/insert', (req, res) => {
             // }
         });
     // };
-    // console.log(data_values);
+    console.log(data_values);
     
     const sqlInsert = "insert into data values " + data_values.slice(0,-2) + ";";
     db.query(sqlInsert, (err, result) => {
