@@ -5,10 +5,11 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 
 const db = mysql.createPool({
-    host: "localhost",
+    host: "127.0.0.1",
     user: 'root',
     password: 'password',
-    database: 'DB'
+    database: 'DB',
+    port: 3306
 });
 
 app.use(cors());

@@ -11,9 +11,15 @@ import StatusCard from '../components/status-card/StatusCard'
 import Table from '../components/table/Table'
 
 import Badge from '../components/badge/Badge'
+// import React from 'react';/
+
+import { ScatterChart, Scatter, XAxis, 
+    YAxis, CartesianGrid } from 'recharts';
 
 import statusCards from '../assets/JsonData/status-card-data.json'
 import './Pages.css'
+
+
 
 const chartOptions = {
     series: [{
@@ -162,6 +168,24 @@ const renderOrderBody = (item, index) => (
         </td>
     </tr>
 )
+// const baseURL = "http://127.0.0.1:5000";
+// const [post, setPost] = React.useState(null);
+
+// React.useEffect(() => {
+//   axios.get(baseURL).then((response) => {
+//     setPost(response.data);
+//   });
+// }, []);
+
+// if (!post) return null;
+
+// return (
+//   <div>
+//     <h1>{post.kode_nama}</h1>
+//     <p>{post.cluster}</p>
+//   </div>
+// );
+
 
 const Dashboard = () => {
 
@@ -224,18 +248,7 @@ const Dashboard = () => {
                 <div className="col-6">
                     <div className="card full-height min-height-500">
                         {/* chart */}
-                        <Chart
-                            options={themeReducer === 'theme-mode-dark' ? {
-                                ...chartOptions.options,
-                                theme: { mode: 'dark'}
-                            } : {
-                                ...chartOptions.options,
-                                theme: { mode: 'light'}
-                            }}
-                            series={chartOptions.series}
-                            type='bar'
-                            height='100%'
-                        />
+                
                     </div>
                 </div>
                 {/* <div className="col-4">
