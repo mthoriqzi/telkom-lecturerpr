@@ -131,9 +131,9 @@ function Cluster() {
             <td>{item.program_studi}</td>
             <td>{item.status_kepegawaian}</td>
             <td>{item.jfa}</td>
-            <td>{item.dik_diakui}</td>
-            <td>{item.lit_diakui}</td>
-            <td>{item.abdimas_diakui}</td>
+            <td>{item.dik_diakui.toFixed(2)}</td>
+            <td>{item.lit_diakui.toFixed(2)}</td>
+            <td>{item.abdimas_diakui.toFixed(2)}</td>
         </tr>
     )
     var value0 = []
@@ -226,9 +226,12 @@ function Cluster() {
             <h2>Hasil Cluster Periode:</h2>
             <br></br>
             {dataList0.length!=0 & dataList1.length!=0 & dataList2.length!=0 && 
+            <div>
             
-            <div className="col-6">
-                <div className="card full-height min-height-500">
+            <div className="row">
+            <div className="col-12">
+                {/* <div className="card full-height min-height-500"> */}
+                <div className="card__body">
                
                         {/* chart */}
                         <ReactApexChart
@@ -241,9 +244,11 @@ function Cluster() {
                             }}
                             series={scatterCluster.series}
                             type='scatter'
-                            height='100%'
+                            height='350'
                         />
                 </div>
+            </div>
+            </div>
             </div>
 }
             {dataList0.length!=0 & dataList1.length!=0 & dataList2.length!=0 && 

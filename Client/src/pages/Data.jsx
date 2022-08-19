@@ -66,12 +66,12 @@ function Data() {
           <td>{item.program_studi}</td>
           <td>{item.status_kepegawaian}</td>
           <td>{item.jfa}</td>
-          <td>{item.dik_diakui}</td>
-          <td>{item.lit_diakui}</td>
-          <td>{item.abdimas_diakui}</td>
-          <td>{item.penunjang}</td>
+          <td>{item.dik_diakui.toFixed(2)}</td>
+          <td>{item.lit_diakui.toFixed(2)}</td>
+          <td>{item.abdimas_diakui.toFixed(2)}</td>
+          <td>{item.penunjang.toFixed(2)}</td>
           <td>{item.prof_diakui}</td>
-          <td>{item.total_sks}</td>
+          <td>{item.total_sks.toFixed(2)}</td>
           <td>{item.pemenuhan_tridarma}</td>
       </tr>
   )
