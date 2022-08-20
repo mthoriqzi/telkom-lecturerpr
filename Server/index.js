@@ -53,6 +53,15 @@ app.get('/api/get-cluster-2', (req, res) => {
     });
 });
 
+app.get('/api/get-user', (req, res) => {
+    // console.log(req.query.kode_nama)
+    const sqlSelect = `select * from data where kode_nama="${req.query.kode_nama}"`;
+    db.query(sqlSelect, (err, result) => {
+        console.log(result);
+        res.send(result);
+    });
+});
+
 app.post('/api/insert', (req, res) => {
     const input_data = req.body.data;
     // console.log(req.body.data);
