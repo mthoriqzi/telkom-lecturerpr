@@ -35,6 +35,7 @@ function Data() {
     Axios.post("http://localhost:3001/api/insert", {
       "data": data
     });
+    Axios.get("http://localhost:5000/api/flask", 'GET')
   }
 
   // handle file upload

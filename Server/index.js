@@ -2,7 +2,7 @@ const express = require('express');
 const mysql = require('mysql');
 const app = express();
 const bodyParser = require('body-parser');
-// const cors = require('cors');
+const cors = require('cors');
 
 const db = mysql.createPool({
     host: "127.0.0.1",
@@ -12,7 +12,7 @@ const db = mysql.createPool({
     port: 3306
 });
 
-// app.use(cors());
+app.use(cors());
 app.use(express.json());
 app.use(bodyParser.urlencoded({extended:true}));
 
@@ -85,13 +85,14 @@ app.post('/api/insert', (req, res) => {
             // }
         });
     // };
-    console.log(data_values);
+    // console.log(data_values);
     
     const sqlInsert = "insert into data values " + data_values.slice(0,-2) + ";";
     db.query(sqlInsert, (err, result) => {
         if(err) throw err;
             console.log(result);
     });
+    //   "data": data
     // const sqlInsert = "insert into data (no, kode_nama, kode, no_urut, program_studi, status_kepegawaian, jfa, dik_diakui, lit_diakui, abdimas_diakui, penunjang, prof_diakui, total_sks, pemenuhan_tridarma) values (1, 'a', 'a', 1, 'a', 'a', 'a', 1,1,1,1,1,1,'c');";
 });
 // const cors = require('cors');
