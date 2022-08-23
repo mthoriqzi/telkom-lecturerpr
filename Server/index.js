@@ -13,8 +13,14 @@ const db = mysql.createPool({
 });
 
 app.use(cors());
+app.use('/login', (req, res) => {
+    res.send({
+      token: 'test123'
+    });
+  });
 app.use(express.json());
 app.use(bodyParser.urlencoded({extended:true}));
+
 
 app.get('/api/get', (req, res) => {
     res.set('Access-Control-Allow-Origin', '*');
