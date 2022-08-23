@@ -25,34 +25,19 @@ app.get('/api/get', (req, res) => {
     });
 });
 
-app.get('/api/get-cluster', (req, res) => {
+app.get('/api/get-cluster/:periode', (req, res) => {
     res.set('Access-Control-Allow-Origin', '*');
-    const sqlSelect = "select * from hasil_cluster";
-    db.query(sqlSelect, (err, result) => {
-        
-        // console.log(result);
-        res.send(result);
-    });
-});
-app.get('/api/get-cluster-0', (req, res) => {
-    res.set('Access-Control-Allow-Origin', '*');
-    const sqlSelect = "select * from hasil_cluster where cluster=0";
+    const sqlSelect = "select * from hasil_cluster_"+req.params.periode;
+    // console.log(sqlSelect)
     db.query(sqlSelect, (err, result) => {
         // console.log(result);
         res.send(result);
     });
 });
-app.get('/api/get-cluster-1', (req, res) => {
+app.get('/api/get-cluster/:periode/:cluster', (req, res) => {
     res.set('Access-Control-Allow-Origin', '*');
-    const sqlSelect = "select * from hasil_cluster where cluster=1";
-    db.query(sqlSelect, (err, result) => {
-        // console.log(result);
-        res.send(result);
-    });
-});
-app.get('/api/get-cluster-2', (req, res) => {
-    res.set('Access-Control-Allow-Origin', '*');
-    const sqlSelect = "select * from hasil_cluster where cluster=2";
+    const sqlSelect = "select * from hasil_cluster_"+req.params.periode+" where cluster="+req.params.cluster;
+    // console.log(sqlSelect)
     db.query(sqlSelect, (err, result) => {
         // console.log(result);
         res.send(result);
@@ -63,7 +48,7 @@ app.get('/api/get-user', (req, res) => {
     // console.log(req.query.kode_nama)
     const sqlSelect = `select * from data where kode_nama="${req.query.kode_nama}"`;
     db.query(sqlSelect, (err, result) => {
-        console.log(result);
+        // console.log(result);
         res.send(result);
     });
 });
@@ -71,7 +56,9 @@ app.get('/api/get-user', (req, res) => {
 app.post('/api/insert', (req, res) => {
     res.set('Access-Control-Allow-Origin', '*');
     const input_data = req.body.data;
-    // console.log(req.body.data);
+    // const test = req.body.periode;
+    // console.log(test)
+    // console.log(req.body.data); 
 
     data_values = "";
     // var i =0;
@@ -85,14 +72,17 @@ app.post('/api/insert', (req, res) => {
             // }
         });
     // };
-    // console.log(data_values);
-    
-    const sqlInsert = "insert into data values " + data_values.slice(0,-2) + ";";
+
+    const createTable = "create table if not exists " + req.body.periode + " (no int, kode_nama varchar(255), kode varchar(255), no_urut int, program_studi varchar(255), status_kepegawaian varchar(255), jfa varchar(255), dik_diakui double, lit_diakui double, abdimas_diakui double, penunjang double, prof_diakui double, total_sks double, pemenuhan_tridarma varchar(255));"
+    // console.log(createTable)
+    db.query(createTable, (err, result) => {
+        if(err) throw err;
+    });
+    const sqlInsert = "insert into " + req.body.periode + " values " + data_values.slice(0,-2) + ";";
+    // console.log(sqlInsert)
     db.query(sqlInsert, (err, result) => {
         if(err) throw err;
-            console.log(result);
     });
-    //   "data": data
     // const sqlInsert = "insert into data (no, kode_nama, kode, no_urut, program_studi, status_kepegawaian, jfa, dik_diakui, lit_diakui, abdimas_diakui, penunjang, prof_diakui, total_sks, pemenuhan_tridarma) values (1, 'a', 'a', 1, 'a', 'a', 'a', 1,1,1,1,1,1,'c');";
 });
 // const cors = require('cors');

@@ -3,6 +3,8 @@ import * as XLSX from 'xlsx';
 import Table from '../components/table/Table'
 import Axios from 'axios';
 import { Link } from 'react-router-dom'
+// import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
+// import "../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js";
 
 function Data() {
  
@@ -31,11 +33,13 @@ function Data() {
     'PEMENUHAN TRIDHARMA'
   ]
 
-  const sendToDB = (data) => {
+  const sendToDB = (data, periode) => {
     Axios.post("http://localhost:3001/api/insert", {
       "data": data
-    });
-    Axios.get("http://localhost:5000/api/flask", 'GET')
+    ,"periode":periode});
+    const flask = "http://localhost:5000/api/"+periode
+    // console.log(flask)
+    Axios.get(flask, 'GET')
   }
 
   // handle file upload
@@ -45,9 +49,10 @@ function Data() {
     reader.onload = (evt) => {
       const bstr = evt.target.result;
       const wb = XLSX.read(bstr, { type: 'binary' });
-      const data = XLSX.utils.sheet_to_json(wb.Sheets[wb.SheetNames[1]])
-      // console.log(JSON.stringify(data), "\n\n");
-      sendToDB(data);
+      const data = XLSX.utils.sheet_to_json(wb.Sheets[wb.SheetNames[0]])
+      // data.push(wb.SheetNames[0])
+      // console.log(data[data.length-2]);
+      sendToDB(data,wb.SheetNames[0]);
       // processData(data);
     };
     reader.readAsBinaryString(file);
@@ -79,12 +84,39 @@ function Data() {
 
   return (
     <div>
-      <h3>MASTER DATA</h3>
-      <input
-        type="file"
-        accept=".csv,.xlsx,.xls"
-        onChange={handleFileUpload}
-      />
+      <div className='row'>
+        <div className='col-3'>
+          <h3>MASTER DATA</h3>
+        </div>
+        <div className='col-3'>
+          <div class="dropdown">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-bs-toggle="dropdown" aria-expanded="false">
+              Pilih Periode
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+              <li><button class="dropdown-item" type="button">2022 - Genap</button></li>
+              <li><button class="dropdown-item" type="button">2022 - Ganjil</button></li>
+              <li><button class="dropdown-item" type="button">2021 - Genap</button></li>
+              <li><button class="dropdown-item" type="button">2021 - Ganjil</button></li>
+              <li><button class="dropdown-item" type="button">2020 - Genap</button></li>
+              <li><button class="dropdown-item" type="button">2020 - Ganjil</button></li>
+              <li><button class="dropdown-item" type="button">2019 - Genap</button></li>
+              <li><button class="dropdown-item" type="button">2019 - Ganjil</button></li>
+            </ul>
+          </div>
+        </div>
+        <div className='col-3'>  
+          {/* <button style="display:block;width:120px; height:30px;" onclick="document.getElementById('getFile').click()">Input Data Periode</button> */}
+          <input
+            // id="getFile"
+            // placeholder="Enter a tag"
+            type="file"
+            // style="display:none"
+            accept=".csv,.xlsx,.xls"
+            onChange={handleFileUpload}
+          />
+        </div>
+      </div>
       
       {dataList.length!=0 &&
       <div className="row">
