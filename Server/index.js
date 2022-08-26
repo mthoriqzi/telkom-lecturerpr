@@ -22,11 +22,10 @@ app.use(express.json());
 app.use(bodyParser.urlencoded({extended:true}));
 
 
-app.get('/api/get', (req, res) => {
+app.get('/api/get/:periode', (req, res) => {
     res.set('Access-Control-Allow-Origin', '*');
-    const sqlSelect = "select * from data";
+    const sqlSelect = "select * from "+req.params.periode;
     db.query(sqlSelect, (err, result) => {
-        // console.log(result);
         res.send(result);
     });
 });
@@ -34,9 +33,7 @@ app.get('/api/get', (req, res) => {
 app.get('/api/get-cluster/:periode', (req, res) => {
     res.set('Access-Control-Allow-Origin', '*');
     const sqlSelect = "select * from hasil_cluster_"+req.params.periode;
-    // console.log(sqlSelect)
     db.query(sqlSelect, (err, result) => {
-        // console.log(result);
         res.send(result);
     });
 });
@@ -59,16 +56,39 @@ app.get('/api/get-user', (req, res) => {
     });
 });
 
+app.post('/api/insert/individu', (req, res) => {
+    res.set('Access-Control-Allow-Origin', '*');
+    const input_data = req.body.data;
+    // isi dummy data
+    input_data.no=0
+    input_data.no_urut=0
+    input_data.prof_diakui=0
+
+    data_values = "(" + input_data.no + ",'" + input_data.kode_nama + "','" + input_data.kode + "'," + input_data.no_urut + ",'" + input_data.program_studi + "','" + input_data.status_kepegawaian + "','" + input_data.jfa + "'," + input_data.dik_diakui + "," + input_data.lit_diakui + "," + input_data.abdimas_diakui + "," + input_data.penunjang + "," + input_data.prof_diakui + "," + input_data.total_sks + ",'" + input_data.pemenuhan_tridarma + "')"
+    const createTable = "create table if not exists " + req.body.periode + " (no int, kode_nama varchar(255), kode varchar(255), no_urut int, program_studi varchar(255), status_kepegawaian varchar(255), jfa varchar(255), dik_diakui double, lit_diakui double, abdimas_diakui double, penunjang double, prof_diakui double, total_sks double, pemenuhan_tridarma varchar(255));"
+    db.query(createTable, (err, result) => {
+        if(err) throw err;
+    });
+    const sqlInsert = "insert into " + req.body.periode + " values " + data_values + ";";
+    // console.log(sqlInsert)
+    db.query(sqlInsert, (err, result) => {
+        if(err) throw err;
+    });
+}); 
+
 app.post('/api/insert', (req, res) => {
     res.set('Access-Control-Allow-Origin', '*');
     const input_data = req.body.data;
     // const test = req.body.periode;
-    // console.log(test)
+    // console.log(input_data)
     // console.log(req.body.data); 
 
     data_values = "";
     // var i =0;
     // for (var item of input_data){
+    if(input_data.size==1){
+        data_values = input_data
+    }else{
         input_data.map((item) => {
             template_data = "(" + item["NO"] + ",'" + item["KODE NAMA"] + "','" + item["KODE"] + "', " + item["NO URUT"] + ", '" + item["PROGRAM STUDI"] + "','" + item["STATUS KEPEGAWAIAN"] + "','" + item["JFA"] + "'," + item["Dik Diakui"] + "," + item["Lit Diakui"] + "," + item["Abdimas Diakui"] + "," + item["Penunjang"] + "," + item["Prof Diakui"] + "," + item["Total SKS"] + ",'" + item["PEMENUHAN TRIDHARMA"] + "'), ";
             data_values += template_data;
@@ -77,7 +97,7 @@ app.post('/api/insert', (req, res) => {
             //     break;
             // }
         });
-    // };
+    };
 
     const createTable = "create table if not exists " + req.body.periode + " (no int, kode_nama varchar(255), kode varchar(255), no_urut int, program_studi varchar(255), status_kepegawaian varchar(255), jfa varchar(255), dik_diakui double, lit_diakui double, abdimas_diakui double, penunjang double, prof_diakui double, total_sks double, pemenuhan_tridarma varchar(255));"
     // console.log(createTable)
