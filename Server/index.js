@@ -13,13 +13,30 @@ const db = mysql.createPool({
 });
 
 app.use(cors());
-app.use('/login', (req, res) => {
-    res.send({
-      token: 'test123'
-    });
-  });
+
 app.use(express.json());
 app.use(bodyParser.urlencoded({extended:true}));
+
+app.use(cors());
+app.post('/login', (req, res) => {
+    console.log(req)
+    if(req.body.username=="dosen" && req.body.password=="dosen"){
+        res.send({
+            token: 'test123'
+          });
+    }
+    if(req.body.username=="direktorat" && req.body.password=="kasar"){
+        res.send({
+            token: 'test12'
+          });
+    }
+    else{
+        res.send({"salah":"password"})
+    }
+
+
+  });
+// app.use(bodyParser.urlencoded({extended:true}));
 
 
 app.get('/api/get/:periode', (req, res) => {
