@@ -3,8 +3,6 @@ import * as XLSX from 'xlsx';
 import Table from '../components/table/Table'
 import Axios from 'axios';
 import { Link } from 'react-router-dom'
-// import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
-// import "../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js";
 
 function Data() {
   const [dataList, setDataList] = useState([])
@@ -14,6 +12,10 @@ function Data() {
     kode_nama: "",
     kode: "",
     no_urut: "",
+    pendidikan_terakhir: "",
+    kelompok_keahlian: "",
+    inpassing: "",
+    sertifikasi: "",
     program_studi: "",
     status_kepegawaian: "",
     jfa: "",
@@ -37,6 +39,10 @@ function Data() {
     'KODE NAMA',
     'KODE',
     'NO URUT',
+    'PENDIDIKAN TERAKHIR',
+    'KELOMPOK KEAHLIAN',
+    'INPASSING',
+    'SERTIFIKASI',
     'PROGRAM STUDI',
     'STATUS KEPEGAWAIAN',
     'JFA',
@@ -73,6 +79,7 @@ function Data() {
       const bstr = evt.target.result;
       const wb = XLSX.read(bstr, { type: 'binary' });
       const data = XLSX.utils.sheet_to_json(wb.Sheets[wb.SheetNames[0]])
+      console.log(data)
       sendToDB(data,wb.SheetNames[0]);
     };
     reader.readAsBinaryString(file);
@@ -89,6 +96,10 @@ function Data() {
           </Link>
           <td>{item.kode}</td>
           <td>{item.no_urut}</td>
+          <td>{item.pendidikan_terakhir}</td>
+          <td>{item.kelompok_keahlian}</td>
+          <td>{item.inpassing}</td>
+          <td>{item.sertifikasi}</td>
           <td>{item.program_studi}</td>
           <td>{item.status_kepegawaian}</td>
           <td>{item.jfa}</td>
@@ -124,11 +135,9 @@ function Data() {
         <div className='col-3'>
           <div class="dropdown">
             <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-bs-toggle="dropdown" aria-expanded="false">
-                Pilih Periode
+                {periode}
             </button>
             <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
-                <li><button class="dropdown-item" type="button" onClick={() => setPeriode("Genap_2022")}>2022 - Genap</button></li>
-                <li><button class="dropdown-item" type="button" onClick={() => setPeriode("Ganjil_2022")}>2022 - Ganjil</button></li>
                 <li><button class="dropdown-item" type="button" onClick={() => setPeriode("Genap_2021")}>2021 - Genap</button></li>
                 <li><button class="dropdown-item" type="button" onClick={() => setPeriode("Ganjil_2021")}>2021 - Ganjil</button></li>
                 <li><button class="dropdown-item" type="button" onClick={() => setPeriode("Genap_2020")}>2020 - Genap</button></li>
@@ -187,6 +196,32 @@ function Data() {
                     </div>
                   </div>
                   <div class="row mb-3">
+                    <label for="colFormLabel" class="col-sm-4 col-form-label">Kode</label>
+                    <div class="col-sm-8">
+                      <input 
+                        type="Text" 
+                        class="form-control" 
+                        id="colFormLabel" 
+                        name="Pendidikan Terakhir"
+                        value={inputs.pendidikan_terakhir}
+                        onChange={changeHandle}
+                        placeholder="Pendidikan Terakhir"/>
+                    </div>
+                  </div>
+                  <div class="row mb-3">
+                    <label for="colFormLabel" class="col-sm-4 col-form-label">Kode</label>
+                    <div class="col-sm-8">
+                      <input 
+                        type="Text" 
+                        class="form-control" 
+                        id="colFormLabel" 
+                        name="Kelompok Keahlian"
+                        value={inputs.kelompok_keahlian}
+                        onChange={changeHandle}
+                        placeholder="Kelompok Keahlian"/>
+                    </div>
+                  </div>
+                  <div class="row mb-3">
                     <label for="colFormLabel" class="col-sm-4 col-form-label">Program Studi</label>
                     <div class="col-sm-8">
                       <input 
@@ -210,6 +245,32 @@ function Data() {
                         value={inputs.status_kepegawaian}
                         onChange={changeHandle}
                         placeholder="Status Kepegawaian"/>
+                    </div>
+                  </div>
+                  <div class="row mb-3">
+                    <label for="colFormLabel" class="col-sm-4 col-form-label">JFA</label>
+                    <div class="col-sm-8">
+                      <input
+                        type="Text"
+                        class="form-control"
+                        id="colFormLabel"
+                        name="Inpassing"
+                        value={inputs.inpassing}
+                        onChange={changeHandle}
+                        placeholder="Inpassing"/>
+                    </div>
+                  </div>
+                  <div class="row mb-3">
+                    <label for="colFormLabel" class="col-sm-4 col-form-label">JFA</label>
+                    <div class="col-sm-8">
+                      <input
+                        type="Text"
+                        class="form-control"
+                        id="colFormLabel"
+                        name="Sertifikasi"
+                        value={inputs.sertifikasi}
+                        onChange={changeHandle}
+                        placeholder="Sertifikasi"/>
                     </div>
                   </div>
                   <div class="row mb-3">
@@ -334,9 +395,9 @@ function Data() {
       <div className="row">
           <div className="col-12">
               <div className="card">
-                  <div className="card__body">
+                  <div className="card__body height-600">
                       <Table
-                          limit='10'
+                          limit='9999'
                           headData={customerTableHead}
                           renderHead={(item, index) => renderHead(item, index)}
                          

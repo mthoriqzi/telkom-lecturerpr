@@ -49,7 +49,7 @@ def users(periode):
         td = pd.read_sql(data,engine)
         td_drop = td.dropna() 
         td_r = td_drop.rename(columns={"Dik Diakui":"D1", "Lit Diakui":"D2", "Abdimas Diakui":"D3", "Penunjang":"P"})
-        td_x =td_r.iloc[:,7:11] 
+        td_x =td_r.iloc[:,11:15] 
         x_array = np.array(td_x)
         kmedoids = KMedoids(n_clusters = 3, random_state=42)
         kmedoids.fit(x_array)
@@ -77,7 +77,7 @@ def users(periode):
         # td_x.to_csv('./hasil scatter.csv', index= False)
 
 
-        query_createtable = "create table IF NOT EXISTS hasil_cluster_"+ periode + " (no int, kode_nama varchar(255), kode varchar(255), no_urut int, program_studi varchar(255), status_kepegawaian varchar(255), jfa varchar(255), dik_diakui double, lit_diakui double, abdimas_diakui double, penunjang double, prof_diakui double, total_sks double, pemenuhan_tridarma varchar(255), cluster int, PC1_1d double, PC1_2d double, PC2_2d double, PC1_3d double, PC2_3d double, PC3_3d double)"
+        query_createtable = "create table IF NOT EXISTS hasil_cluster_"+ periode + " (no int, kode_nama varchar(255), kode varchar(255), no_urut int, pendidikan_terakhir varchar(255), kelompok_keahlian varchar(255), inpassing varchar(255), sertifikasi varchar(255), program_studi varchar(255), status_kepegawaian varchar(255), jfa varchar(255), dik_diakui double, lit_diakui double, abdimas_diakui double, penunjang double, prof_diakui double, total_sks double, pemenuhan_tridarma varchar(255), cluster int, PC1_1d double, PC1_2d double, PC2_2d double, PC1_3d double, PC2_3d double, PC3_3d double)"
         session.execute(query_createtable)
         session.commit()
 
@@ -85,6 +85,10 @@ def users(periode):
         kode_nama = td_r['kode_nama']
         kode = td_r['kode']
         no_urut = td_r['no_urut']
+        pendidikan_terakhir = td_r['pendidikan_terakhir']
+        kelompok_keahlian= td_r['kelompok_keahlian']
+        inpassing= td_r['inpassing']
+        sertifikasi= td_r['sertifikasi']
         program_studi = td_r['program_studi']
         status_kepegawaian = td_r['status_kepegawaian']
         jfa = td_r['jfa']
@@ -108,7 +112,7 @@ def users(periode):
         # for r in range(0, 2):
         for r in range(0, len(td_r)):
             # values = "(" + str(no[r]) +",'"+ kode_nama[r] + "','1',1,'1','1','1',1,1,1,1,1,1,'1',1,1,1,1,1,1,3), "
-            values = "(" + str(no[r]) +",'"+ kode_nama[r] +"','"+ kode[r] +"',"+ str(no_urut[r]) +",'"+ program_studi[r] +"','"+ status_kepegawaian[r] +"','"+ jfa[r] +"',"+ str(dik_diakui[r]) +","+ str(lit_diakui[r]) +","+ str(abdimas_diakui[r]) +","+ str(penunjang[r]) +","+ str(prof_diakui[r]) +","+ str(total_sks[r]) +",'"+ pemenuhan_tridarma[r] +"',"+ str(cluster[r]) +","+ str(PC1_1d[r]) +","+ str(PC1_2d[r]) +","+ str(PC2_2d[r]) +","+ str(PC1_3d[r]) +","+ str(PC2_3d[r]) +","+ str(PC3_3d[r]) + "), "
+            values = "(" + str(no[r]) +",'"+ kode_nama[r] +"','"+ kode[r] +"',"+ str(no_urut[r]) +",'"+ pendidikan_terakhir[r] +"','"+ kelompok_keahlian[r] +"','"+ inpassing[r] +"','"+ sertifikasi[r] +"','"+ program_studi[r] +"','"+ status_kepegawaian[r] +"','"+ jfa[r] +"',"+ str(dik_diakui[r]) +","+ str(lit_diakui[r]) +","+ str(abdimas_diakui[r]) +","+ str(penunjang[r]) +","+ str(prof_diakui[r]) +","+ str(total_sks[r]) +",'"+ pemenuhan_tridarma[r] +"',"+ str(cluster[r]) +","+ str(PC1_1d[r]) +","+ str(PC1_2d[r]) +","+ str(PC2_2d[r]) +","+ str(PC1_3d[r]) +","+ str(PC2_3d[r]) +","+ str(PC3_3d[r]) + "), "
             data_values += values
 
         # session.execute("insert into hasil_cluster values " + values + ";")

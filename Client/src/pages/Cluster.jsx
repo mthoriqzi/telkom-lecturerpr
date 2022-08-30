@@ -119,11 +119,9 @@ function Cluster() {
                 <div className="col-6">
                     <div class="dropdown">
                         <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-bs-toggle="dropdown" aria-expanded="false">
-                            Pilih Periode
+                            {periode}
                         </button>
                         <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
-                            <li><button class="dropdown-item" type="button" onClick={() => setPeriode("Genap_2022")}>2022 - Genap</button></li>
-                            <li><button class="dropdown-item" type="button" onClick={() => setPeriode("Ganjil_2022")}>2022 - Ganjil</button></li>
                             <li><button class="dropdown-item" type="button" onClick={() => setPeriode("Genap_2021")}>2021 - Genap</button></li>
                             <li><button class="dropdown-item" type="button" onClick={() => setPeriode("Ganjil_2021")}>2021 - Ganjil</button></li>
                             <li><button class="dropdown-item" type="button" onClick={() => setPeriode("Genap_2020")}>2020 - Genap</button></li>
@@ -166,9 +164,9 @@ function Cluster() {
                     <div className="row">
                         <div className="col-12">
                             <div className="card">
-                                <div className="card__body">
+                                <div className="card__body height-300">
                                     <Table
-                                        limit='7'
+                                        limit='9999'
                                         headData={customerTableHead}
                                         renderHead={(item, index) => renderHead(item, index)}
 
