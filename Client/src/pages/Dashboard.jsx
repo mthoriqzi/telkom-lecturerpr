@@ -14,10 +14,6 @@ import Table from '../components/table/Table'
 import Axios from 'axios';
 
 import Badge from '../components/badge/Badge'
-// import React from 'react';/
-
-import { ScatterChart, Scatter, XAxis, 
-    YAxis, CartesianGrid } from 'recharts';
 
 import statusCards from '../assets/JsonData/status-card-data.json'
 import './Pages.css'
@@ -28,7 +24,7 @@ function Dashboard () {
 
 const [dataList, setDataList] = useState([])
 useEffect(() => {
-    Axios.get('http://localhost:3001/api/get-cluster').then((response) => {
+    Axios.get('http://localhost:3001/api/get-cluster/Ganjil_2019').then((response) => {
         setDataList(response.data);
     });
 
