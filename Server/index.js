@@ -107,7 +107,7 @@ app.post('/api/insert', (req, res) => {
 // const cors = require('cors');
 // app.use(cors({
 //     origin: '*'
-// }));
+// })); 
 
 app.listen(3001, () => {
     console.log("running on port 3001");

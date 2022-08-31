@@ -54,13 +54,18 @@ function Data() {
     'TOTAL SKS',
     'PEMENUHAN TRIDHARMA'
   ]
+  function delay(time) {
+    return new Promise(resolve => setTimeout(resolve, time));
+  }
 
   const sendToDB = (data, periode) => {
+    
     Axios.post("http://localhost:3001/api/insert", {
       "data": data,
       "periode":periode});
-    const flask = "http://localhost:5000/api/"+periode
-    Axios.get(flask, 'GET')
+    
+      const flask = "http://localhost:5000/api/"+periode
+    delay(1000).then(() => Axios.get(flask, 'GET') );
   }
 
   const sendToDBindividu = (data, periode) => {
@@ -68,7 +73,7 @@ function Data() {
       "data": data,
       "periode":periode});
     const flask = "http://localhost:5000/api/"+periode
-    Axios.get(flask, 'GET')
+    delay(1000).then(() => Axios.get(flask, 'GET') );
   }
 
   // handle file upload
