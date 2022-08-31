@@ -17,7 +17,7 @@ app.use(cors());
 app.use(express.json());
 app.use(bodyParser.urlencoded({extended:true}));
 
-app.use(cors());
+// app.use(cors());
 app.post('/login', (req, res) => {
     console.log(req)
     if(req.body.username=="dosen" && req.body.password=="dosen"){

@@ -8,12 +8,12 @@ import Cluster from '../pages/Cluster'
 import Login from '../pages/Login'
 import Individu from '../pages/Individu'
 
-const Routes = () => {
+const Routes = ({token}) => {
     return (
         <Switch>
             <Route path='/' exact component={Dashboard}/>
             <Route path='/Login' exact component={Login}/>
-            <Route path='/Data' component={Data}/>
+            <Route path='/Data' render={props => <Data token={token} />}/>
             <Route path='/cluster' component={Cluster}/>
             <Route path='/User/:id' component={Individu}/>
         </Switch>
