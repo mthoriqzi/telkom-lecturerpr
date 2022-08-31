@@ -23,12 +23,12 @@ import ReactApexChart from 'react-apexcharts';
 function Dashboard () {
 
 const [dataList, setDataList] = useState([])
+const [periode, setPeriode] = useState("Genap_2019")
 useEffect(() => {
-    Axios.get('http://localhost:3001/api/get-cluster/Ganjil_2019').then((response) => {
-        setDataList(response.data);
+    Axios.get('http://localhost:3001/api/get/'+periode).then((response) => {
+      setDataList(response.data);
     });
-
-}, []);
+  }, [periode]);
 
 // const piechart = {
 //     series: [dataList[], 55],
@@ -109,6 +109,79 @@ const statusPegawai = {
       }
 }
 
+var PenataMudaTk1 = 0
+var Penata = 0
+var PenataTk1 = 0
+var Pembina = 0
+var PembinaTk1 = 0
+var PembinaUtamaMuda = 0
+var PembinaUtamaMadya = 0
+var PembinaUtama = 0
+
+
+if (dataList.length!=0){
+    for (var i in dataList){
+        console.log(dataList["status_kepegawaian"])
+        if (dataList[i]["inpassing_dosen"]=="PENATA MUDA TK 1")
+        // console.log("mashok")
+        PenataMudaTk1 = PenataMudaTk1 + 1
+
+        if (dataList[i]["inpassing_dosen"]=="PENATA")
+        // console.log("mashok")
+        Penata = Penata + 1
+        
+        if (dataList[i]["inpassing_dosen"]=="PENATA TK 1")
+        // console.log("mashok")
+        PenataTk1 = PenataTk1 + 1
+
+        if (dataList[i]["inpassing_dosen"]=="PEMBINA")
+        // console.log("mashok")
+        Pembina = Pembina + 1
+
+        if (dataList[i]["inpassing_dosen"]=="PEMBINA TK 1")
+        // console.log("mashok")
+        PembinaTk1 = PembinaTk1 + 1
+
+        if (dataList[i]["inpassing_dosen"]=="PEMBINA UTAMA MUDA")
+        // console.log("mashok")
+        PembinaUtamaMuda = PembinaUtamaMuda + 1
+
+        if (dataList[i]["inpassing_dosen"]=="PEMBINA UTAMA MADYA")
+        // console.log("mashok")
+        PembinaUtamaMadya = PembinaUtamaMadya + 1
+
+        if (dataList[i]["inpassing_dosen"]=="PEMBINA UTAMA")
+        // console.log("mashok")
+        PembinaUtama = PembinaUtama + 1
+
+    }
+
+}
+
+const inpassingdosen = {
+    series: [{
+        data: [PenataMudaTk1, Penata, PenataTk1, Pembina, PembinaTk1, PembinaUtamaMuda, PembinaUtamaMadya, PembinaUtama]
+      }],
+      options: {
+        chart: {
+          type: 'bar',
+          height: 100
+        },
+        plotOptions: {
+          bar: {
+            borderRadius: 4,
+            horizontal: true,
+          }
+        },
+        dataLabels: {
+          enabled: false
+        },
+        xaxis: {
+          categories: ['Penata Muda Tk. 1', 'Penata', 'Penata Tingkat 1', 'Pembina', 'Pembina Tingkat 1','Pembina Utama Muda','Pembina Utama Madya','Pembina Utama'
+          ],
+        }
+      }
+}
 const chartOptions = {
     series: [{
         name: 'Online Customers',
@@ -140,99 +213,7 @@ const chartOptions = {
     }
 }
 
-const topCustomers = {
-    head: [
-        'user',
-        'total orders',
-        'total spending'
-    ],
-    body: [
-        {
-            "username": "john doe",
-            "order": "490",
-            "price": "$15,870"
-        },
-        {
-            "username": "frank iva",
-            "order": "250",
-            "price": "$12,251"
-        },
-        {
-            "username": "anthony baker",
-            "order": "120",
-            "price": "$10,840"
-        },
-        {
-            "username": "frank iva",
-            "order": "110",
-            "price": "$9,251"
-        },
-        {
-            "username": "anthony baker",
-            "order": "80",
-            "price": "$8,840"
-        }
-    ]
-}
 
-const renderCusomerHead = (item, index) => (
-    <th key={index}>{item}</th>
-)
-
-const renderCusomerBody = (item, index) => (
-    <tr key={index}>
-        <td>{item.username}</td>
-        <td>{item.order}</td>
-        <td>{item.price}</td>
-    </tr>
-)
-
-const latestOrders = {
-    header: [
-        "order id",
-        "user",
-        "total price",
-        "date",
-        "status"
-    ],
-    body: [
-        {
-            id: "#OD1711",
-            user: "john doe",
-            date: "17 Jun 2021",
-            price: "$900",
-            status: "shipping"
-        },
-        {
-            id: "#OD1712",
-            user: "frank iva",
-            date: "1 Jun 2021",
-            price: "$400",
-            status: "paid"
-        },
-        {
-            id: "#OD1713",
-            user: "anthony baker",
-            date: "27 Jun 2021",
-            price: "$200",
-            status: "pending"
-        },
-        {
-            id: "#OD1712",
-            user: "frank iva",
-            date: "1 Jun 2021",
-            price: "$400",
-            status: "paid"
-        },
-        {
-            id: "#OD1713",
-            user: "anthony baker",
-            date: "27 Jun 2021",
-            price: "$200",
-            status: "refund"
-        }
-    ]
-}
 
 const orderStatus = {
     "shipping": "primary",

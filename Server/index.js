@@ -13,13 +13,30 @@ const db = mysql.createPool({
 });
 
 app.use(cors());
-app.use('/login', (req, res) => {
-    res.send({
-      token: 'test123'
-    });
-  });
+
 app.use(express.json());
 app.use(bodyParser.urlencoded({extended:true}));
+
+// app.use(cors());
+app.post('/login', (req, res) => {
+    console.log(req)
+    if(req.body.username=="dosen" && req.body.password=="dosen"){
+        res.send({
+            token: 'test123'
+          });
+    }
+    if(req.body.username=="direktorat" && req.body.password=="kasar"){
+        res.send({
+            token: 'test12'
+          }); 
+    }
+    else{
+        res.send({"salah":"password"})
+    }
+
+
+  });
+// app.use(bodyParser.urlencoded({extended:true}));
 
 
 app.get('/api/get/:periode', (req, res) => {
@@ -47,11 +64,12 @@ app.get('/api/get-cluster/:periode/:cluster', (req, res) => {
     });
 });
 
-app.get('/api/get-user', (req, res) => {
+app.get('/api/get-user/:periode/:kode_nama', (req, res) => {
     // console.log(req.query.kode_nama)
-    const sqlSelect = `select * from data where kode_nama="${req.query.kode_nama}"`;
+    res.set('Access-Control-Allow-Origin', '*');
+    const sqlSelect = "select * from "+req.params.periode +" where kode_nama='"+req.params.kode_nama+"'";
     db.query(sqlSelect, (err, result) => {
-        // console.log(result);
+        console.log(sqlSelect);
         res.send(result);
     });
 });
@@ -108,6 +126,15 @@ app.post('/api/insert', (req, res) => {
 // app.use(cors({
 //     origin: '*'
 // })); 
+app.post('/api/delete', (req, res) => {
+    // console.log(req.query.kode_nama)
+    const sqlDelete = `delete from ${req.body.periode} where kode_nama="${req.body.data}"`;
+    console.log(sqlDelete)
+    db.query(sqlDelete, (err, result) => {
+        // console.log(result);
+        res.send(result);
+    });
+});
 
 app.listen(3001, () => {
     console.log("running on port 3001");

@@ -1,10 +1,11 @@
 import React, { useState, useEffect} from 'react'
 import logo from '../assets/images/logotelkom.png'
 import PropTypes from 'prop-types';
+import './Login.css';
 
 
 async function loginUser(credentials) {
-    return fetch('http://localhost:8080/login', {
+    return fetch('http://localhost:3001/login', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -23,19 +24,21 @@ const Login = ({ setToken }) => {
           username,
           password
         });
-        setToken(token);
+        if("token" in token ){
+            setToken(token);
+
+        }
       }
+      
     return (
         <div className="row">
             <div className="col-6 bg-hijau">
-                <h1>DEK-FRI</h1>
-                <h4>DASHBOARD EVALUASI KINERJA</h4>
-                <h4>FAKULTAS REKAYASA INDUSTRI</h4>
+
             </div>
             <div className="col-6">
                 <img src={logo} alt="logo tel-u" />
                 <div className='login_form'>
-        
+      <div className="login-wrapper">
       <h1>Please Log In</h1>
       <form onSubmit={handleSubmit}>
         <label>
@@ -50,6 +53,7 @@ const Login = ({ setToken }) => {
           <button type="submit">Submit</button>
         </div>
       </form>
+      </div>
     </div>
 
                 </div>

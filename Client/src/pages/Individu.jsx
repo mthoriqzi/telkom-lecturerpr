@@ -6,11 +6,12 @@ const Individu = (props) => {
     const [data, setData] = useState([])
   
     useEffect(() => {
-        Axios.get(`http://localhost:3001/api/get-user?kode_nama=${props.match.params.id}`).then((response) => {
+        // Axios.get(`http://localhost:3001/api/get-user?kode_nama=${props.match.params.id}`, {"periode": "Ganjil_2020"}).then((response) => {
+        Axios.get("http://localhost:3001/api/get-user/Ganjil_2020/"+props.match.params.id).then((response) => {
             setData(response.data);
         });
     }, []);
-
+    console.log(data.length)
     return (
         <div>
         {data.length!=0 &&
@@ -26,11 +27,21 @@ const Individu = (props) => {
                                         <td>: {data[0].kode_nama}</td>
                                     </tr>
                                     <tr>
+                                        <td>KODE</td>
+                                        <td>: {data[0].kode}</td>
+                                    </tr>
+                                    <tr>
                                         <td>JFA</td>
                                         <td>: {data[0].jfa}</td>
                                     </tr>
-                                   {/* PENDIDIKAN       : {data2[0].}<br/> */}
-                                   {/* KELOMPOK KEAHLIAN: {data2[0].status_kepegawaian}<br/> */}
+                                    <tr>
+                                        <td>PENDIDIKAN</td>
+                                        <td>: {data[0].pendidikan_terakhir}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>KELOMPOK KEAHLIAN</td>
+                                        <td>: {data[0].kelompok_keahlian}</td>
+                                    </tr>
                                     <tr>
                                         <td>PROGRAM STUDI</td>
                                         <td>: {data[0].program_studi}</td>
@@ -48,29 +59,29 @@ const Individu = (props) => {
                                         <td>Periode</td>
                                         <td>Dharma 1</td>
                                         <td>Dharma 2</td>
-                                        <td>Dharma 3</td>
+                                        <td>Dharma 2</td>
                                         <td>Penunjang</td>
                                     </tr>
                                     <tr>
                                         <td>Ganjil</td>
-                                        <td>Dharma 1</td>
-                                        <td>Dharma 2</td>
-                                        <td>Dharma 3</td>
-                                        <td>Penunjang</td>
+                                        <td>{data[0].dik_diakui.toFixed(1)}</td>
+                                        <td>{data[0].lit_diakui.toFixed(1)}</td>
+                                        <td>{data[0].abdimas_diakui.toFixed(1)}</td>
+                                        <td>{data[0].penunjang}</td>
                                     </tr>
                                     <tr>
                                         <td>Genap</td>
-                                        <td>Dharma 1</td>
-                                        <td>Dharma 2</td>
-                                        <td>Dharma 3</td>
-                                        <td>Penunjang</td>
+                                        <td>{data[0].dik_diakui.toFixed(1)}</td>
+                                        <td>{data[0].lit_diakui.toFixed(1)}</td>
+                                        <td>{data[0].abdimas_diakui.toFixed(1)}</td>
+                                        <td>{data[0].penunjang}</td>
                                     </tr>
                                     <tr>
                                         <td>Ganjil</td>
-                                        <td>Dharma 1</td>
-                                        <td>Dharma 2</td>
-                                        <td>Dharma 3</td>
-                                        <td>Penunjang</td>
+                                        <td>{data[0].dik_diakui.toFixed(1)}</td>
+                                        <td>{data[0].lit_diakui.toFixed(1)}</td>
+                                        <td>{data[0].abdimas_diakui.toFixed(1)}</td>
+                                        <td>{data[0].penunjang}</td>
                                     </tr>
                                 {/* <h2>Kinerja Dosen {props.match.params.id}</h2>
                                 <h3>{data2[0].status_kepegawaian}</h3> */}
