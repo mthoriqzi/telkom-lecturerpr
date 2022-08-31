@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react'
+import React, { useState, useEffect} from 'react'
 
 import './layout.css'
 
@@ -12,11 +12,15 @@ import { useSelector, useDispatch } from 'react-redux'
 
 import ThemeAction from '../../redux/actions/ThemeAction'
 
+import Login from "../../pages/Login"
+
 const Layout = () => {
 
     const themeReducer = useSelector(state => state.ThemeReducer)
 
     const dispatch = useDispatch()
+
+    const [token, setToken] = useState();
 
     useEffect(() => {
         const themeClass = localStorage.getItem('themeMode', 'theme-mode-light')
@@ -28,6 +32,50 @@ const Layout = () => {
         dispatch(ThemeAction.setColor(colorClass))
     }, [dispatch])
 
+    if(!token) {
+        return <Login setToken={setToken} />
+      }
+    console.log(token)
+
+    // if(token.token =="test12") {
+    //     console.log("mashok")
+        
+
+    //     return (
+            
+    //         <BrowserRouter>
+    //             <Route render={(props) => (
+    //                 <div>
+    //                     <Sidebar {...props}/>
+    //                     <div className="layout__content">
+    //                         <TopNav/>
+    //                         <div className="layout__content-main">
+    //                             <Routes/>
+    //                         </div>
+    //                     </div>
+    //                 </div>
+    //             )}/>
+    //         </BrowserRouter>
+    //     ) 
+    // }
+
+    // const layout1 = () => {
+    //     <BrowserRouter>
+    //     <Route render={(props) => (
+    //         <div className={`layout ${themeReducer.mode} ${themeReducer.color}`}>
+    //             <Sidebar {...props}/>
+    //             <div className="layout__content">
+    //                 <TopNav/>
+    //                 <div className="layout__content-main">
+    //                     <Routes/>
+    //                 </div>
+    //             </div>
+    //         </div>
+    //     )}/>
+    // </BrowserRouter>
+    // }
+    console.log("direktorat1")
+
     return (
         <BrowserRouter>
             <Route render={(props) => (
@@ -36,7 +84,7 @@ const Layout = () => {
                     <div className="layout__content">
                         <TopNav/>
                         <div className="layout__content-main">
-                            <Routes/>
+                            <Routes token={token}/>
                         </div>
                     </div>
                 </div>

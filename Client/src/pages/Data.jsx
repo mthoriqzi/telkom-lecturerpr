@@ -3,9 +3,11 @@ import * as XLSX from 'xlsx';
 import Table from '../components/table/Table'
 import Axios from 'axios';
 import { Link } from 'react-router-dom'
+// import Login from "../pages/Login"
 
-function Data() {
+function Data({token}) {
   const [dataList, setDataList] = useState([])
+  
   const [periode, setPeriode] = useState("Genap_2019")
   const [inputs, setInputs] = useState({
     no: "",
@@ -54,13 +56,21 @@ function Data() {
     'TOTAL SKS',
     'PEMENUHAN TRIDHARMA'
   ]
+  // if(!token) {
+  //   return <Login setToken={setToken} />
+  // }
+  function delay(time) {
+    return new Promise(resolve => setTimeout(resolve, time));
+  }
 
   const sendToDB = (data, periode) => {
     Axios.post("http://localhost:3001/api/insert", {
       "data": data,
       "periode":periode});
     const flask = "http://localhost:5000/api/"+periode
-    Axios.get(flask, 'GET')
+
+    
+    delay(1000).then(() => Axios.get(flask, 'GET'))
   }
 
   const sendToDBindividu = (data, periode) => {
@@ -124,8 +134,9 @@ function Data() {
     console.log(inputs)
     sendToDBindividu(inputs,periode);
   }
-
+//  console.log(token)
   return (
+    
     <div>
       <div className='row'>
         <div className='col-3'>
@@ -148,6 +159,7 @@ function Data() {
           </div>
         </div>
         {/* Input File */}
+        {/* {token.token==="test123" && */}
         <div className='col-3'>  
           {/* <button style="display:block;width:120px; height:30px;" onclick="document.getElementById('getFile').click()">Input Data Periode</button> */}
           <input
@@ -159,7 +171,9 @@ function Data() {
             onChange={handleFileUpload}
           />
         </div>
+{/* } */}
         {/* Input Data Individu */}
+        {token.token==="test123" &&
         <form className='col-3' onSubmit={submitHandle}>
           <div class="modal fade" id="exampleModalToggle" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
             <div class="modal-dialog modal-lg modal-dialog-centered">
@@ -380,6 +394,8 @@ function Data() {
                     </div>
                   </div>
                 </div>
+        
+        
                 <div class="modal-footer">
                   <button class="btn btn-primary" data-bs-target="#" data-bs-toggle="modal" data-bs-dismiss="modal" type="submit">Submit</button>
                 </div>
@@ -388,8 +404,10 @@ function Data() {
           </div>
             <a class="btn btn-primary" data-bs-toggle="modal" href="#exampleModalToggle" role="button">Input Data Individu</a>
         </form>
+}
+
       </div>
-      
+              
       {/* Tabel */}
       {dataList.length!=0 &&
       <div className="row">
