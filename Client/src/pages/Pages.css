@@ -1,0 +1,17 @@
+.min-height-500{
+    min-height: 500px;
+}
+
+.bg-hijau{
+  background-color: #79b5be;
+}
+
+.height-300{
+  overflow-x: auto;
+  max-height: 300px;
+}
+
+.height-600{
+  overflow: auto;
+  max-height: 600px;
+}
