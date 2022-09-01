@@ -237,7 +237,7 @@ function Data({token}) {
                     </div>
                   </div>
                   <div class="row mb-3">
-                    <label for="colFormLabel" class="col-sm-4 col-form-label">Kode</label>
+                    <label for="colFormLabel" class="col-sm-4 col-form-label">Pendidikan Terakhir</label>
                     <div class="col-sm-8">
                       <input 
                         type="Text" 
@@ -250,7 +250,7 @@ function Data({token}) {
                     </div>
                   </div>
                   <div class="row mb-3">
-                    <label for="colFormLabel" class="col-sm-4 col-form-label">Kode</label>
+                    <label for="colFormLabel" class="col-sm-4 col-form-label">Kelompok Keahlian</label>
                     <div class="col-sm-8">
                       <input 
                         type="Text" 
@@ -289,7 +289,7 @@ function Data({token}) {
                     </div>
                   </div>
                   <div class="row mb-3">
-                    <label for="colFormLabel" class="col-sm-4 col-form-label">JFA</label>
+                    <label for="colFormLabel" class="col-sm-4 col-form-label">Inpassing</label>
                     <div class="col-sm-8">
                       <input
                         type="Text"
@@ -302,7 +302,7 @@ function Data({token}) {
                     </div>
                   </div>
                   <div class="row mb-3">
-                    <label for="colFormLabel" class="col-sm-4 col-form-label">JFA</label>
+                    <label for="colFormLabel" class="col-sm-4 col-form-label">Sertifikasi</label>
                     <div class="col-sm-8">
                       <input
                         type="Text"
