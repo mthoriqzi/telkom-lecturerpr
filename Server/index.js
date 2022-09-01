@@ -20,6 +20,7 @@ app.use(bodyParser.urlencoded({extended:true}));
 // app.use(cors());
 app.post('/login', (req, res) => {
     console.log(req)
+    res.set('Access-Control-Allow-Origin', '*');
     if(req.body.username=="dosen" && req.body.password=="dosen"){
         res.send({
             token: 'test123'
