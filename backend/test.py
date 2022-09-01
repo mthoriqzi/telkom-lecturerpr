@@ -23,6 +23,7 @@ from flask_cors import CORS, cross_origin
 basedir = os.path.abspath(os.path.dirname(__file__))
 
 app = Flask(__name__)
+CORS(app)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:password@localhost:3306/DB'
 engine = create_engine('mysql://root:password@localhost:3306/DB')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
@@ -31,12 +32,12 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
 db = SQLAlchemy(app)
 session = db.session()
 
-CORS(app)
-# app.config['CORS_HEADERS'] = 'Content-Type'
+# CORS(app)
+app.config['CORS_HEADERS'] = 'Content-Type'
 # cors = CORS(app, resources={r"/*": {"origins": "*"}})
 
 #routes
-@app.route('/api/<periode>', methods=['POST', 'GET', 'DELETE'])
+@app.route('/api', methods=['POST', 'GET', 'DELETE'])
 @cross_origin()
 def users(periode):
     # gets all users
@@ -129,4 +130,4 @@ def users(periode):
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=True, host='0.0.0.0', port=4999)

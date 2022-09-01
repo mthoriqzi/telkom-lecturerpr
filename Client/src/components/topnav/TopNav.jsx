@@ -46,7 +46,13 @@ const renderUserMenu =(item, index) => (
     </Link>
 )
 
-const Topnav = () => {
+const Topnav = ({token}) => {
+    if(token=="test12")
+    console.log(token)
+        curr_user.display_name="Direktorat"
+    console.log(curr_user.display_name)
+
+
     return (
         <div className='topnav'>
             <div className="topnav__search">

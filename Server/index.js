@@ -20,12 +20,12 @@ app.use(bodyParser.urlencoded({extended:true}));
 // app.use(cors());
 app.post('/login', (req, res) => {
     console.log(req)
-    if(req.body.username=="dosen" && req.body.password=="dosen"){
+    if(req.body.username=="sdm" && req.body.password=="sdm"){
         res.send({
             token: 'test123'
           });
     }
-    if(req.body.username=="direktorat" && req.body.password=="kasar"){
+    if(req.body.username=="rektorat" && req.body.password=="kasar"){
         res.send({
             token: 'test12'
           });

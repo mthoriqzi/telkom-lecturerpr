@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect, useRef } from 'react';
 import * as XLSX from 'xlsx';
 import Table from '../components/table/Table'
@@ -6,8 +7,9 @@ import { Link } from 'react-router-dom'
 // import Login from "../pages/Login"
 
 function Data({token}) {
+  // const token="test123"
   const [dataList, setDataList] = useState([])
-  
+  const [jumlah, setJumlah] = useState(0)
   const [periode, setPeriode] = useState("Genap_2019")
   const [inputs, setInputs] = useState({
     no: "",
@@ -35,7 +37,7 @@ function Data({token}) {
       setDataList(response.data);
     });
   }, [periode]);
-  console.log(dataList.length)
+  // console.log(dataList.length)
   const customerTableHead = [
     'NO',
     'KODE NAMA',
@@ -68,9 +70,7 @@ function Data({token}) {
       "data": data,
       "periode":periode});
     const flask = "http://localhost:5000/api/"+periode
-
-    
-    delay(1000).then(() => Axios.get(flask, 'GET'))
+    delay(1000).then(() => Axios.get(flask, 'GET') );
   }
 
   const sendToDBindividu = (data, periode) => {
@@ -78,7 +78,7 @@ function Data({token}) {
       "data": data,
       "periode":periode});
     const flask = "http://localhost:5000/api/"+periode
-    Axios.get(flask, 'GET')
+    delay(1000).then(() => Axios.get(flask, 'GET') );
   }
 
   // handle file upload
@@ -89,17 +89,17 @@ function Data({token}) {
       const bstr = evt.target.result;
       const wb = XLSX.read(bstr, { type: 'binary' });
       const data = XLSX.utils.sheet_to_json(wb.Sheets[wb.SheetNames[0]])
-      console.log(data)
+      // console.log(data)
       sendToDB(data,wb.SheetNames[0]);
     };
     reader.readAsBinaryString(file);
   }
 
   const renderHead = (item, index) => <th key={index}>{item}</th>
-          
+
   const renderBody = (item, index) => (
-  
-        <tr key={index}>
+
+        <tr key={index} onChange={handleChange}>
           <td>{item.no}</td>
           <Link to={"User/"+item.kode_nama} key={index}>
             <td>{item.kode_nama}</td>
@@ -120,6 +120,9 @@ function Data({token}) {
           <td>{item.prof_diakui}</td>
           <td>{item.total_sks.toFixed(2)}</td>
           <td>{item.pemenuhan_tridarma}</td>
+          <td>Edit</td>
+          <td><button value={item.kode_nama} onClick={() => handleRemoveItem(item.kode_nama)}>Delete</button></td>
+          {/* <td><button value={item.kode_nama} onChange={handleChange} >Delete</button></td> */}
       </tr>
   )
 
@@ -131,16 +134,41 @@ function Data({token}) {
   }
   const submitHandle = e => {
     e.preventDefault()
-    console.log(inputs)
+    // console.log(inputs)
     sendToDBindividu(inputs,periode);
   }
+
+  function deleteData(kode_nama) {
+    const data = dataList.filter(person => person.kode_nama != kode_nama)
+    // setDataList({data
+    // });
+
+
+    // if()
+
+    console.log()
+  }
+
+  function handleChange(e) {
+    console.log(dataList.length)
+    setJumlah(jumlah+1)
+    // setDataList(dataList.filter(item => item.kode_nama !== e.target.value));
+
+  }
+  const handleRemoveItem = name => {
+    // setDataList(dataList.filter(item => item.kode_nama !== name))
+    // console.log(dataList.length)
+    Axios.post("http://localhost:3001/api/delete", {
+      "data": name,
+      "periode":periode});
+}
 //  console.log(token)
   return (
-    
+
     <div>
       <div className='row'>
         <div className='col-3'>
-          <h3>MASTER DATA</h3>
+          <h3>MASTER DATA {jumlah}</h3>
         </div>
         {/* Pilih Periode */}
         <div className='col-3'>
@@ -159,7 +187,7 @@ function Data({token}) {
           </div>
         </div>
         {/* Input File */}
-        {/* {token.token==="test123" && */}
+        {token.token==="test123" &&
         <div className='col-3'>  
           {/* <button style="display:block;width:120px; height:30px;" onclick="document.getElementById('getFile').click()">Input Data Periode</button> */}
           <input
@@ -171,7 +199,7 @@ function Data({token}) {
             onChange={handleFileUpload}
           />
         </div>
-{/* } */}
+}
         {/* Input Data Individu */}
         {token.token==="test123" &&
         <form className='col-3' onSubmit={submitHandle}>
@@ -210,7 +238,7 @@ function Data({token}) {
                     </div>
                   </div>
                   <div class="row mb-3">
-                    <label for="colFormLabel" class="col-sm-4 col-form-label">Kode</label>
+                    <label for="colFormLabel" class="col-sm-4 col-form-label">Pendidikan Terakhir</label>
                     <div class="col-sm-8">
                       <input 
                         type="Text" 
@@ -223,7 +251,7 @@ function Data({token}) {
                     </div>
                   </div>
                   <div class="row mb-3">
-                    <label for="colFormLabel" class="col-sm-4 col-form-label">Kode</label>
+                    <label for="colFormLabel" class="col-sm-4 col-form-label">Kelompok Keahlian</label>
                     <div class="col-sm-8">
                       <input 
                         type="Text" 
@@ -262,7 +290,7 @@ function Data({token}) {
                     </div>
                   </div>
                   <div class="row mb-3">
-                    <label for="colFormLabel" class="col-sm-4 col-form-label">JFA</label>
+                    <label for="colFormLabel" class="col-sm-4 col-form-label">Inpassing</label>
                     <div class="col-sm-8">
                       <input
                         type="Text"
@@ -275,7 +303,7 @@ function Data({token}) {
                     </div>
                   </div>
                   <div class="row mb-3">
-                    <label for="colFormLabel" class="col-sm-4 col-form-label">JFA</label>
+                    <label for="colFormLabel" class="col-sm-4 col-form-label">Sertifikasi</label>
                     <div class="col-sm-8">
                       <input
                         type="Text"
@@ -394,8 +422,8 @@ function Data({token}) {
                     </div>
                   </div>
                 </div>
-        
-        
+
+
                 <div class="modal-footer">
                   <button class="btn btn-primary" data-bs-target="#" data-bs-toggle="modal" data-bs-dismiss="modal" type="submit">Submit</button>
                 </div>
@@ -407,10 +435,11 @@ function Data({token}) {
 }
 
       </div>
-              
+
       {/* Tabel */}
       {dataList.length!=0 &&
       <div className="row">
+        {/* {dataList} */}
           <div className="col-12">
               <div className="card">
                   <div className="card__body height-600">
@@ -418,12 +447,12 @@ function Data({token}) {
                           limit='9999'
                           headData={customerTableHead}
                           renderHead={(item, index) => renderHead(item, index)}
-                         
+
                           bodyData = {dataList}
                           renderBody={(item, index) => renderBody(item, index)}
-                          
+
                        />
-                    
+
                   </div>
               </div>
           </div>
@@ -432,5 +461,5 @@ function Data({token}) {
     </div>
   );
 }
- 
+
 export default Data;

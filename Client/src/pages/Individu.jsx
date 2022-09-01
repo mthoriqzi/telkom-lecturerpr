@@ -4,12 +4,47 @@ import Axios from 'axios';
 const Individu = (props) => {
     
     const [data, setData] = useState([])
+    const [dataList, setDataList] = useState([])
+    const [periode, setPeriode] = useState("Ganjil_2019")
   
     useEffect(() => {
         Axios.get(`http://localhost:3001/api/get-user?kode_nama=${props.match.params.id}`).then((response) => {
             setData(response.data);
+        Axios.get('http://localhost:3001/api/get/'+periode).then((response) => {
+            setDataList(response.data);
+              });
         });
     }, []);
+// var dharma1 = 0
+// var dharma2 = 0
+// var dharma3 = 0
+
+
+// if (dataList.length!=0){
+//     for (var i in dataList){
+//         // console.log(dataList["status_kepegawaian"])
+//         if (dataList[i]["kode_nama"]==data[0].kode_nama)
+//             if (dataList[i][""]=="DOSEN PEGAWAI TETAP")
+//         pegawai_tetap = pegawai_tetap + 1
+//         // console.log("mashok")
+//         pegawai_tetap = pegawai_tetap + 1
+
+//         if (dataList[i]["status_kepegawaian"]=="DOSEN CALON PEGAWAI TETAP")
+//         // console.log("mashok2")
+//         pegawai_calonpegawaitetap = pegawai_calonpegawaitetap + 1
+
+//         if (dataList[i]["status_kepegawaian"]=="DOSEN PROFESIONAL FULL TIME")
+//         // console.log("mashok1")
+//         pegawai_profulltime = pegawai_profulltime + 1
+
+//         if (dataList[i]["status_kepegawaian"]=="DOSEN PROFESIONAL PART TIME")
+//         // console.log("mashok2")
+//         pegawai_proparttime = pegawai_proparttime + 1
+
+
+//     }
+
+// }
 
     return (
         <div>
