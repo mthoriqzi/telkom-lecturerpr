@@ -185,9 +185,9 @@ function Cluster() {
                     <div className="row">
                         <div className="col-12">
                             <div className="card">
-                                <div className="card__body">
+                                <div className="card__body height-300">
                                     <Table
-                                        limit='7'
+                                        limit='9999'
                                         headData={customerTableHead}
                                         renderHead={(item, index) => renderHead(item, index)}
 
@@ -206,9 +206,9 @@ function Cluster() {
                     <div className="row">
                         <div className="col-12">
                             <div className="card">
-                                <div className="card__body">
+                                <div className="card__body height-300">
                                     <Table
-                                        limit='7'
+                                        limit='9999'
                                         headData={customerTableHead}
                                         renderHead={(item, index) => renderHead(item, index)}
 

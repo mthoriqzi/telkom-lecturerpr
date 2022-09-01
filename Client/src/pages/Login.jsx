@@ -31,33 +31,41 @@ const Login = ({ setToken }) => {
       }
       
     return (
-        <div className="row">
-            <div className="col-6 bg-hijau">
-
-            </div>
-            <div className="col-6">
-                <img src={logo} alt="logo tel-u" />
-                <div className='login_form'>
-      <div className="login-wrapper">
-      <h1>Please Log In</h1>
-      <form onSubmit={handleSubmit}>
-        <label>
-          <p>Username</p>
-          <input type="text" onChange={e => setUserName(e.target.value)} />
-        </label>
-        <label>
-          <p>Password</p>
-          <input type="password" onChange={e => setPassword(e.target.value)}/>
-        </label>
-        <div>
-          <button type="submit">Submit</button>
+      <div className="row vh-100 m-0">
+        <div className="col-6 bg-hijau my-auto h-100 d-flex align-items-center justify-content-center text-center text-white">
+          <div>
+            <h1 className='big'>DEK-FRI</h1>
+            <h3>Dashboard Evaluasi Kinerja</h3>
+            <h3>Fakultas Rekayasa Industri</h3>
+          </div>
         </div>
-      </form>
-      </div>
-    </div>
-
-                </div>
+        <div className="col-6 row">
+          <div className="col-9"></div>
+          <div className="col-3">
+            <img src={logo} alt="logo tel-u" className="logo mt-5"/> 
+          </div>
+          <div>
+            <div className="login-wrapper">
+              <h1>Log In</h1>
+                <form onSubmit={handleSubmit}>
+                  <label>
+                    <p>Username</p>
+                    <input type="text" onChange={e => setUserName(e.target.value)} />
+                  </label>
+                  <br/><br/>
+                  <label>
+                    <p>Password</p>
+                    <input type="password" onChange={e => setPassword(e.target.value)}/>
+                  </label>
+                  <div>
+                  <br/>
+                    <button type="submit" className='btn btn-success'>Log In</button>
+                  </div>
+                </form>
+              </div>
             </div>
+          </div>
+        </div>
     )
 }
 Login.propTypes = {
