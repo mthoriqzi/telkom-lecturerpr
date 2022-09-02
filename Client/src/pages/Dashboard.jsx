@@ -20,6 +20,7 @@ import './Pages.css'
 import ReactApexChart from 'react-apexcharts';
 
 
+
 function Dashboard () {
 
 const [dataList, setDataList] = useState([])
@@ -704,6 +705,15 @@ const orderStatus = {
     "paid": "success",
     "refund": "danger"
 }
+    const namauser=({token}) => {
+      var pengguna ="admin"
+    if (token.token == "test12"){
+        console.log("masuk token12")
+        pengguna="Direktorat"}
+    if (token.token == "test123"){
+    console.log("masuk token123")
+        pengguna="Dosen"}
+    }
 
 const renderOrderHead = (item, index) => (
     <th key={index}>{item}</th>
@@ -741,10 +751,11 @@ const renderOrderBody = (item, index) => (
 
     const themeReducer = useSelector(state => state.ThemeReducer.mode)
 
+
     return (
         <div>
             <h2 className="page-header">Selamat Datang di Dashboard Evaluasi Kinerja</h2>
-            <h6 className='margin-bottom'>Hi User1, Selamat datang kembali</h6>
+            <h6 className='margin-bottom'>Hi , Selamat datang kembali</h6>
             <div className="row">
                 {/* <div className="col-6">
                     <div className="row">
