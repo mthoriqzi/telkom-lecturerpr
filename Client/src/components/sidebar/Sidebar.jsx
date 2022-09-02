@@ -33,9 +33,9 @@ const Sidebar = props => {
         <div className='sidebar'>
             <div className="sidebar__logo">
                 <img src={logo} alt="company logo" />
-                <h4>FAKULTAS <br />
+                <h5>FAKULTAS <br />
                 REKAYASA INDUSTRI <br />
-                TELKOM UNIVERSITY</h4>
+                TELKOM UNIVERSITY</h5>
             </div>
             {/* <div className="col-8"> */}
             {/* </div> */}

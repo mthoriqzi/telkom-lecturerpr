@@ -282,7 +282,7 @@ return (
             {dataList.length!=0 &&
                 <div className='row'>
                     <div className="col-5">
-                        <h1>Jumlah Dosen Tiap Cluster</h1>
+                        <h2>Jumlah Dosen Tiap Cluster</h2>
                             <div className="card">
                                 <div className="card__body">
                                 <ReactApexChart
@@ -301,7 +301,7 @@ return (
                         </div>
                     </div>
                     <div className="col-7">
-                        <h1>Analisis Cluster</h1>
+                        <h2>Analisis Cluster</h2>
                         <div className="card">
                             <div className="card__body">
                             <p>Berikut merupakan atribut rata-rata dari setiap cluster. Hal ini membantu mendeskripsikan setiap cluster yang terbentuk.</p>
@@ -342,7 +342,7 @@ return (
                 }
                 {dataList0.length!=0 &&
                 <div>
-                    <h1>Cluster 0</h1>
+                    <h2>Cluster 0</h2>
                     <div className="row">
                         <div className="col-12">
                             <div className="card">
@@ -363,7 +363,7 @@ return (
                 }
                 {dataList1.length!=0 &&
                 <div>
-                    <h1>Cluster 1</h1>
+                    <h2>Cluster 1</h2>
                     <div className="row">
                         <div className="col-12">
                             <div className="card">
@@ -384,7 +384,7 @@ return (
                 }
  {dataList2.length!=0 &&
                 <div>
-                    <h1>Cluster 2</h1>
+                    <h2>Cluster 2</h2>
                     <div className="row">
                         <div className="col-12">
                             <div className="card">
