@@ -21,16 +21,16 @@ function Cluster() {
     
           
     useEffect(() => {
-        Axios.get('http://localhost:3001/api/get-cluster/'+periode).then((response) => {
+        Axios.get('http://34.101.42.148:3001/api/get-cluster/'+periode).then((response) => {
             setDataList(response.data);
         });
-        Axios.get('http://localhost:3001/api/get-cluster/'+periode+'/0').then((response) => {
+        Axios.get('http://34.101.42.148:3001/api/get-cluster/'+periode+'/0').then((response) => {
             setDataList0(response.data);
         });
-        Axios.get('http://localhost:3001/api/get-cluster/'+periode+'/1').then((response) => {
+        Axios.get('http://34.101.42.148:3001/api/get-cluster/'+periode+'/1').then((response) => {
             setDataList1(response.data);
         });
-        Axios.get('http://localhost:3001/api/get-cluster/'+periode+'/2').then((response) => {
+        Axios.get('http://34.101.42.148:3001/api/get-cluster/'+periode+'/2').then((response) => {
             setDataList2(response.data);
         });
     }, [periode]);

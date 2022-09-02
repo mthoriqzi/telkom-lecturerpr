@@ -8,7 +8,7 @@ const Individu = (props) => {
   
     useEffect(() => {
         // Axios.get(`http://localhost:3001/api/get-user?kode_nama=${props.match.params.id}`, {"periode": "Ganjil_2020"}).then((response) => {
-        Axios.get("http://localhost:3001/api/get-user/"+periode+"/"+props.match.params.id).then((response) => {
+        Axios.get("http://34.101.42.148:3001/api/get-user/"+periode+"/"+props.match.params.id).then((response) => {
             setData(response.data);
         });
     }, []);

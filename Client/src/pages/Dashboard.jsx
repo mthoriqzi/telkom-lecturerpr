@@ -25,7 +25,7 @@ function Dashboard () {
 const [dataList, setDataList] = useState([])
 const [periode, setPeriode] = useState("Ganjil_2019")
 useEffect(() => {
-    Axios.get('http://localhost:3001/api/get/'+periode).then((response) => {
+    Axios.get('http://34.101.42.148:3001/api/get/'+periode).then((response) => {
       setDataList(response.data);
     });
   }, [periode]);
