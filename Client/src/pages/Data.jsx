@@ -68,7 +68,7 @@ function Data({token}) {
     Axios.post("http://localhost:3001/api/insert", {
       "data": data,
       "periode":periode});
-    const flask = "http://localhost:5000/api/"+periode
+    const flask = "http://localhost:4999/api/"+periode
     delay(1000).then(() => Axios.get(flask, 'GET') );
   }
 
@@ -76,7 +76,7 @@ function Data({token}) {
     Axios.post("http://localhost:3001/api/insert/individu", {
       "data": data,
       "periode":periode});
-    const flask = "http://localhost:5000/api/"+periode
+    const flask = "http://localhost:4999/api/"+periode
     delay(1000).then(() => Axios.get(flask, 'GET') );
   }
 

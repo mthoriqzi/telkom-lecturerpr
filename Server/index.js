@@ -20,6 +20,7 @@ app.use(bodyParser.urlencoded({extended:true}));
 // app.use(cors());
 app.post('/login', (req, res) => {
     console.log(req)
+    res.set('Access-Control-Allow-Origin', '*');
     if(req.body.username=="dosen" && req.body.password=="dosen"){
         res.send({
             token: 'test123'
@@ -28,14 +29,14 @@ app.post('/login', (req, res) => {
     if(req.body.username=="direktorat" && req.body.password=="kasar"){
         res.send({
             token: 'test12'
-          }); 
+          });  
     }
     else{
         res.send({"salah":"password"})
     }
 
 
-  });
+  });  
 // app.use(bodyParser.urlencoded({extended:true}));
 
 

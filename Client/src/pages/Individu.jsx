@@ -4,10 +4,11 @@ import Axios from 'axios';
 const Individu = (props) => {
     
     const [data, setData] = useState([])
+    const [periode, setPeriode] = useState("Ganjil_2019")
   
     useEffect(() => {
         // Axios.get(`http://localhost:3001/api/get-user?kode_nama=${props.match.params.id}`, {"periode": "Ganjil_2020"}).then((response) => {
-        Axios.get("http://localhost:3001/api/get-user/Ganjil_2020/"+props.match.params.id).then((response) => {
+        Axios.get("http://localhost:3001/api/get-user/"+periode+"/"+props.match.params.id).then((response) => {
             setData(response.data);
         });
     }, []);
@@ -67,21 +68,21 @@ const Individu = (props) => {
                                         <td>{data[0].dik_diakui.toFixed(1)}</td>
                                         <td>{data[0].lit_diakui.toFixed(1)}</td>
                                         <td>{data[0].abdimas_diakui.toFixed(1)}</td>
-                                        <td>{data[0].penunjang}</td>
+                                        <td>{data[0].penunjang.toFixed(1)}</td>
                                     </tr>
                                     <tr>
                                         <td>Genap</td>
                                         <td>{data[0].dik_diakui.toFixed(1)}</td>
                                         <td>{data[0].lit_diakui.toFixed(1)}</td>
                                         <td>{data[0].abdimas_diakui.toFixed(1)}</td>
-                                        <td>{data[0].penunjang}</td>
+                                        <td>{data[0].penunjang.toFixed(1)}</td>
                                     </tr>
                                     <tr>
                                         <td>Ganjil</td>
                                         <td>{data[0].dik_diakui.toFixed(1)}</td>
                                         <td>{data[0].lit_diakui.toFixed(1)}</td>
                                         <td>{data[0].abdimas_diakui.toFixed(1)}</td>
-                                        <td>{data[0].penunjang}</td>
+                                        <td>{data[0].penunjang.toFixed(1)}</td>
                                     </tr>
                                 {/* <h2>Kinerja Dosen {props.match.params.id}</h2>
                                 <h3>{data2[0].status_kepegawaian}</h3> */}
