@@ -790,23 +790,7 @@ const renderOrderBody = (item, index) => (
                         }
                     </div>
                 </div> */}
-                <div className="col-6">
-                    <div className="card full-height min-height-500">
-                        {/* chart */}
-                        <Chart
-                            options={themeReducer === 'theme-mode-dark' ? {
-                                ...chartOptions.options,
-                                theme: { mode: 'dark'}
-                            } : {
-                                ...chartOptions.options,
-                                theme: { mode: 'light'}
-                            }}
-                            series={chartOptions.series}
-                            type='bar'
-                            height='100%'
-                        />
-                    </div>
-                </div>
+ 
                 {dataList.length!=0 &&
                 <div className="col-6">
                     <div className="card full-height min-height-500">
