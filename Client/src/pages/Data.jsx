@@ -243,7 +243,7 @@ function Data({token}) {
                         type="Text" 
                         class="form-control" 
                         id="colFormLabel" 
-                        name="Pendidikan Terakhir"
+                        name="pendidikan_terakhir"
                         value={inputs.pendidikan_terakhir}
                         onChange={changeHandle}
                         placeholder="Pendidikan Terakhir"/>
@@ -256,7 +256,7 @@ function Data({token}) {
                         type="Text" 
                         class="form-control" 
                         id="colFormLabel" 
-                        name="Kelompok Keahlian"
+                        name="kelompok_keahlian"
                         value={inputs.kelompok_keahlian}
                         onChange={changeHandle}
                         placeholder="Kelompok Keahlian"/>
@@ -295,7 +295,7 @@ function Data({token}) {
                         type="Text"
                         class="form-control"
                         id="colFormLabel"
-                        name="Inpassing"
+                        name="inpassing"
                         value={inputs.inpassing}
                         onChange={changeHandle}
                         placeholder="Inpassing"/>
@@ -308,7 +308,7 @@ function Data({token}) {
                         type="Text"
                         class="form-control"
                         id="colFormLabel"
-                        name="Sertifikasi"
+                        name="sertifikasi"
                         value={inputs.sertifikasi}
                         onChange={changeHandle}
                         placeholder="Sertifikasi"/>
