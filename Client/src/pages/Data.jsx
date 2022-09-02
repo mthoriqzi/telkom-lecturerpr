@@ -32,7 +32,7 @@ function Data({token}) {
   })
 
   useEffect(() => {
-    Axios.get('http://localhost:3001/api/get/'+periode).then((response) => {
+    Axios.get('http://34.101.42.148:3001/api/get/'+periode).then((response) => {
       setDataList(response.data);
     });
   }, [periode]);
@@ -65,18 +65,18 @@ function Data({token}) {
   }
 
   const sendToDB = (data, periode) => {
-    Axios.post("http://localhost:3001/api/insert", {
+    Axios.post("http://34.101.42.148:3001/api/insert", {
       "data": data,
       "periode":periode});
-    const flask = "http://localhost:4999/api/"+periode
+    const flask = "http://34.101.42.148:4999/api/"+periode
     delay(1000).then(() => Axios.get(flask, 'GET') );
   }
 
   const sendToDBindividu = (data, periode) => {
-    Axios.post("http://localhost:3001/api/insert/individu", {
+    Axios.post("http://34.101.42.148:3001/api/insert/individu", {
       "data": data,
       "periode":periode});
-    const flask = "http://localhost:4999/api/"+periode
+    const flask = "http://34.101.42.148:4999/api/"+periode
     delay(1000).then(() => Axios.get(flask, 'GET') );
   }
 
@@ -157,7 +157,7 @@ function Data({token}) {
   const handleRemoveItem = name => {
     // setDataList(dataList.filter(item => item.kode_nama !== name))
     // console.log(dataList.length)
-    Axios.post("http://localhost:3001/api/delete", {
+    Axios.post("http://34.101.42.148:3001/api/delete", {
       "data": name,
       "periode":periode});
 }
@@ -167,7 +167,7 @@ function Data({token}) {
     <div>
       <div className='row'>
         <div className='col-3'>
-          <h3>MASTER DATA {jumlah}</h3>
+          <h3>MASTER DATA </h3> 
         </div>
         {/* Pilih Periode */}
         <div className='col-3'>
