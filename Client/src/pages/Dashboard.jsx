@@ -149,7 +149,7 @@ const statusPegawai = {
             colors: ['#fff']
           },
           title: {
-            text: 'Sertifikasi Dosen'
+            text: 'Status Pegawai'
           },
           xaxis: {
             categories: ["Production & Manufacturing System", "Engineering Management System", "Cyberkinetics", "EINS"],
@@ -340,7 +340,7 @@ const inpassingdosen = {
             colors: ['#fff']
           },
           title: {
-            text: 'Sertifikasi Dosen'
+            text: 'Inpassing Dosen'
           },
           xaxis: {
             categories: ["Production & Manufacturing System", "Engineering Management System", "Cyberkinetics", "EINS"],
@@ -588,7 +588,7 @@ const dbps = {
             text: 'Dosen Berdasarkan Kelompok Keahlian'
           },
           xaxis: {
-            categories: ["PM", "EMS", "C", "E"],
+            categories: ["Production & Manufacturing System", "Engineering Management System", "Cyberkinetics", "EINS"],
     
           },
           yaxis: {
@@ -614,37 +614,6 @@ const dbps = {
           }};
     
 
-
-const chartOptions = {
-    series: [{
-        name: 'Online Customers',
-        data: [40,70,20,90,36,80,30,91,60]
-    }, {
-        name: 'Store Customers',
-        data: [40, 30, 70, 80, 40, 16, 40, 20, 51, 10]
-    }],
-    options: {
-        color: ['#6ab04c', '#2980b9'],
-        chart: {
-            background: 'transparent'
-        },
-        dataLabels: {
-            enabled: false
-        },
-        stroke: {
-            curve: 'smooth'
-        },
-        xaxis: {
-            categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep']
-        },
-        legend: {
-            position: 'top'
-        },
-        grid: {
-            show: false
-        }
-    }
-}
 
 var spm = 0
 var sems = 0
@@ -792,23 +761,7 @@ const renderOrderBody = (item, index) => (
                         }
                     </div>
                 </div> */}
-                <div className="col-6">
-                    <div className="card full-height min-height-500">
-                        {/* chart */}
-                        <Chart
-                            options={themeReducer === 'theme-mode-dark' ? {
-                                ...chartOptions.options,
-                                theme: { mode: 'dark'}
-                            } : {
-                                ...chartOptions.options,
-                                theme: { mode: 'light'}
-                            }}
-                            series={chartOptions.series}
-                            type='bar'
-                            height='100%'
-                        />
-                    </div>
-                </div>
+
                 {dataList.length!=0 &&
                 <div className="col-6">
                     <div className="card full-height min-height-500">

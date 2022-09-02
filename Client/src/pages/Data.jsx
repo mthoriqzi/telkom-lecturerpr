@@ -167,7 +167,7 @@ function Data({token}) {
     <div>
       <div className='row'>
         <div className='col-3'>
-          <h3>MASTER DATA {jumlah}</h3>
+          <h3>MASTER DATA </h3> 
         </div>
         {/* Pilih Periode */}
         <div className='col-3'>
