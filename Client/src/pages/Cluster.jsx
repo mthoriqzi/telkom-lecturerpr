@@ -31,13 +31,24 @@ function Cluster() {
     }, [periode]);
 
     const customerTableHead = [
+        
         'KODE NAMA',
+        'KODE',
+        'NO URUT',
+        'PENDIDIKAN TERAKHIR',
+        'KELOMPOK KEAHLIAN',
+        'INPASSING',
+        'SERTIFIKASI',
         'PROGRAM STUDI',
         'STATUS KEPEGAWAIAN',
         'JFA',
-        'DHARMA 1',
-        'DHARMA 2',
-        'DHARMA 3'
+        'DIK DIAKUI',
+        'LIT DIAKUI',
+        'ABDIMAS DIAKUI',
+        'PENUNJANG',
+        'PROF DIAKUI',
+        'TOTAL SKS',
+
       ]
 
     const renderHead = (item, index) => <th key={index}>{item}</th>
@@ -47,12 +58,22 @@ function Cluster() {
             <Link to={"User/"+item.kode_nama} key={index}>
               <td>{item.kode_nama}</td>
             </Link>
-            <td>{item.program_studi}</td>
-            <td>{item.status_kepegawaian}</td>
-            <td>{item.jfa}</td>
-            <td>{item.dik_diakui.toFixed(2)}</td>
-            <td>{item.lit_diakui.toFixed(2)}</td>
-            <td>{item.abdimas_diakui.toFixed(2)}</td>
+          <td>{item.kode}</td>
+          <td>{item.no_urut}</td>
+          <td>{item.pendidikan_terakhir}</td>
+          <td>{item.kelompok_keahlian}</td>
+          <td>{item.inpassing}</td>
+          <td>{item.sertifikasi}</td>
+          <td>{item.program_studi}</td>
+          <td>{item.status_kepegawaian}</td>
+          <td>{item.jfa}</td>
+          <td>{item.dik_diakui.toFixed(2)}</td>
+          <td>{item.lit_diakui.toFixed(2)}</td>
+          <td>{item.abdimas_diakui.toFixed(2)}</td>
+          <td>{item.penunjang.toFixed(2)}</td>
+          <td>{item.prof_diakui}</td>
+          <td>{item.total_sks.toFixed(2)}</td>
+       
         </tr>
     )
 
