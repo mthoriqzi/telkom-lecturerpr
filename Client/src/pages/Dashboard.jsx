@@ -24,7 +24,7 @@ import ReactApexChart from 'react-apexcharts';
 function Dashboard () {
 
 const [dataList, setDataList] = useState([])
-const [periode, setPeriode] = useState("Ganjil_2021")
+const [periode, setPeriode] = useState("Ganjil_2020")
 useEffect(() => {
     Axios.get('http://34.101.42.148:3001/api/get/'+periode).then((response) => {
       setDataList(response.data);
@@ -73,52 +73,52 @@ var pptei = 0
 if (dataList.length!=0){
     for (var i in dataList){
         // console.log(dataList["status_kepegawaian"])
-        if (dataList[i]["status_kepegawaian"]=="DOSEN PEGAWAI TETAP")
-          if (dataList[i]["kelompok_keahlian"]=="PRODUCTION AND MANUFACTURING SYSTEM")
-          tetappm = tetappm + 1
-          if (dataList[i]["kelompok_keahlian"]=="ENGINEERING MANAGEMENT SYSTEM")
-          tetapems = tetapems + 1
-          if (dataList[i]["kelompok_keahlian"]=="CYBERNETICS")
-          tetapc = tetapc + 1
-          if (dataList[i]["kelompok_keahlian"]=="ENTERPRISE AND INDUSTRIAL SYSTEM")
-          tetapei = tetapei + 1
-        if (dataList[i]["status_kepegawaian"]=="DOSEN CALON PEGAWAI TETAP")
-          if (dataList[i]["kelompok_keahlian"]=="PRODUCTION AND MANUFACTURING SYSTEM")
-          ctetappm = ctetappm + 1
-          if (dataList[i]["kelompok_keahlian"]=="ENGINEERING MANAGEMENT SYSTEM")
-          ctetapems = ctetapems + 1
-          if (dataList[i]["kelompok_keahlian"]=="CYBERNETICS")
-          ctetapc = ctetapc + 1
-          if (dataList[i]["kelompok_keahlian"]=="ENTERPRISE AND INDUSTRIAL SYSTEM")
-          ctetapei = ctetapei + 1
-        if (dataList[i]["status_kepegawaian"]=="DOSEN PROFESIONAL FULL TIME")
-          if (dataList[i]["kelompok_keahlian"]=="PRODUCTION AND MANUFACTURING SYSTEM")
-          pftpm = pftpm + 1
-          if (dataList[i]["kelompok_keahlian"]=="ENGINEERING MANAGEMENT SYSTEM")
-          pftems = pftems + 1
-          if (dataList[i]["kelompok_keahlian"]=="CYBERNETICS")
-          pftc = pftc + 1
-          if (dataList[i]["kelompok_keahlian"]=="ENTERPRISE AND INDUSTRIAL SYSTEM")
-          pftei = pftei + 1
-        if (dataList[i]["status_kepegawaian"]=="DOSEN PROFESIONAL PART TIME")
+        if (dataList[i]["status_kepegawaian"]=="DOSEN PEGAWAI TETAP"){
+          if (dataList[i]["kelompok_keahlian"]=="PRODUCTION AND MANUFACTURING SYSTEM"){
+          tetappm = tetappm + 1}
+          if (dataList[i]["kelompok_keahlian"]=="ENGINEERING MANAGEMENT SYSTEM"){
+          tetapems = tetapems + 1}
+          if (dataList[i]["kelompok_keahlian"]=="CYBERNETICS"){
+          tetapc = tetapc + 1}
+          if (dataList[i]["kelompok_keahlian"]=="ENTERPRISE AND INDUSTRIAL SYSTEM"){
+          tetapei = tetapei + 1}}
+        if (dataList[i]["status_kepegawaian"]=="DOSEN CALON PEGAWAI TETAP"){
+          if (dataList[i]["kelompok_keahlian"]=="PRODUCTION AND MANUFACTURING SYSTEM"){
+          ctetappm = ctetappm + 1}
+          if (dataList[i]["kelompok_keahlian"]=="ENGINEERING MANAGEMENT SYSTEM"){
+          ctetapems = ctetapems + 1}
+          if (dataList[i]["kelompok_keahlian"]=="CYBERNETICS"){
+          ctetapc = ctetapc + 1}
+          if (dataList[i]["kelompok_keahlian"]=="ENTERPRISE AND INDUSTRIAL SYSTEM"){
+          ctetapei = ctetapei + 1}}
+        if (dataList[i]["status_kepegawaian"]=="DOSEN PROFESIONAL FULL TIME"){
+          if (dataList[i]["kelompok_keahlian"]=="PRODUCTION AND MANUFACTURING SYSTEM"){
+          pftpm = pftpm + 1}
+          if (dataList[i]["kelompok_keahlian"]=="ENGINEERING MANAGEMENT SYSTEM"){
+          pftems = pftems + 1}
+          if (dataList[i]["kelompok_keahlian"]=="CYBERNETICS"){
+          pftc = pftc + 1}
+          if (dataList[i]["kelompok_keahlian"]=="ENTERPRISE AND INDUSTRIAL SYSTEM"){
+          pftei = pftei + 1}}
+        if (dataList[i]["status_kepegawaian"]=="DOSEN PROFESIONAL PART TIME"){
         // console.log("mashok2")
-          if (dataList[i]["kelompok_keahlian"]=="PRODUCTION AND MANUFACTURING SYSTEM")
-          pptpm = pptpm + 1
-          if (dataList[i]["kelompok_keahlian"]=="ENGINEERING MANAGEMENT SYSTEM")
-          pptems = pptems + 1
-          if (dataList[i]["kelompok_keahlian"]=="CYBERNETICS")
-          pptc = pptc + 1
-          if (dataList[i]["kelompok_keahlian"]=="ENTERPRISE AND INDUSTRIAL SYSTEM")
-          pptei = pptei + 1
-
+          if (dataList[i]["kelompok_keahlian"]=="PRODUCTION AND MANUFACTURING SYSTEM"){
+          pptpm = pptpm + 1}
+          if (dataList[i]["kelompok_keahlian"]=="ENGINEERING MANAGEMENT SYSTEM"){
+          pptems = pptems + 1}
+          if (dataList[i]["kelompok_keahlian"]=="CYBERNETICS"){
+          pptc = pptc + 1}
+          if (dataList[i]["kelompok_keahlian"]=="ENTERPRISE AND INDUSTRIAL SYSTEM"){
+          pptei = pptei + 1}
+          }
 
     }
 
 }
-// console.log(pegawai_tetap)
-// console.log(pegawai_profulltime)
-// console.log(pegawai_proparttime)
-// console.log(pegawai_calonpegawaitetap)
+console.log(tetapc)
+console.log(tetapei)
+console.log(tetapems)
+console.log(tetappm)
 
 const statusPegawai = {
         series: [{
