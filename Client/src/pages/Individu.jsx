@@ -261,8 +261,8 @@ const Individu = (props) => {
                                         <td>2020 (Ganjil)</td>
                                         <td>{data20201[0].dik_diakui.toFixed(1)}</td>
                                         <td>{data20201[0].lit_diakui.toFixed(1)}</td>
-                                        <td>{data20202[0].abdimas_diakui.toFixed(1)}</td>
-                                        <td>{data20202[0].penunjang.toFixed(1)}</td>
+                                        <td>{data20201[0].abdimas_diakui.toFixed(1)}</td>
+                                        <td>{data20201[0].penunjang.toFixed(1)}</td>
                                     </tr>
 }
                                     {data20202.length!=0 &&
