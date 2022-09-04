@@ -14,6 +14,9 @@ function Cluster() {
     const [dataList1, setDataList1] = useState([])
     const [dataList2, setDataList2] = useState([])
     const [periode, setPeriode] = useState("Genap_2019")
+    const [kelompok_keahlian, setkelompokKeahlian] = useState('All')
+    const [program_studi, setProgramStudi] = useState('All')
+    const [jfa, setJFA] = useState('All')
 
     useEffect(() => {
         Axios.get('http://34.101.42.148:3001/api/get-cluster/'+periode).then((response) => {
@@ -213,7 +216,87 @@ var c2p = 0
 //         c2d3 = c0d3 + dataList1[i]["abdimas_diakui"]
 //         c2p = c0p + dataList1[i]["penunjang"]
 
+const handleRemoveItem = name => {
+    setDataList0(dataList0.filter(item => item.kode_nama !== name))
+    setkelompokKeahlian("c")
+    console.log(dataList0[0].kode_nama)
+}
 
+
+function filterby(cluster){
+    let data=dataList0
+    if(cluster==1){
+        data=dataList1
+    }else if(cluster==2){
+        data=dataList2
+    }
+    if(kelompok_keahlian!='All'){
+        data = data.filter(item => item.kelompok_keahlian === kelompok_keahlian)
+    }
+    if(program_studi!='All'){
+        data = data.filter(item => item.program_studi === program_studi)
+    }
+    if(jfa!='All'){
+        data = data.filter(item => item.jfa === jfa)
+    }
+    return(
+        <div>
+            <div class="input-group">
+                <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">Kelompok Keahlian: {kelompok_keahlian}</button>
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" onClick={() => setkelompokKeahlian("All")}>All</a></li>
+                    <li><a class="dropdown-item" onClick={() => setkelompokKeahlian("ENGINEERING MANAGEMENT SYSTEM")}>ENGINEERING MANAGEMENT SYSTEM</a></li>
+                    <li><a class="dropdown-item" onClick={() => setkelompokKeahlian("ENTERPRISE AND INDUSTRIAL SYSTEM")}>ENTERPRISE AND INDUSTRIAL SYSTEM</a></li>
+                    <li><a class="dropdown-item" onClick={() => setkelompokKeahlian("CYBERNETICS")}>CYBERNETICS</a></li>
+                    <li><a class="dropdown-item" onClick={() => setkelompokKeahlian("PRODUCTION AND MANUFACTURING SYSTEM")}>PRODUCTION AND MANUFACTURING SYSTEM</a></li>
+                </ul>
+                <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">Program Studi: {program_studi}</button>
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" onClick={() => setProgramStudi("All")}>All</a></li>
+                    <li><a class="dropdown-item" onClick={() => setProgramStudi("PRODI S2 TEKNIK INDUSTRI (FRI) (2019)")}>PRODI S2 TEKNIK INDUSTRI (FRI) (2019)</a></li>
+                    <li><a class="dropdown-item" onClick={() => setProgramStudi("PRODI S1 TEKNIK INDUSTRI (FRI) (2019)")}>PRODI S1 TEKNIK INDUSTRI (FRI) (2019)</a></li>
+                    <li><a class="dropdown-item" onClick={() => setProgramStudi("PRODI S1 SISTEM INFORMASI (FRI) (2019)")}>PRODI S1 SISTEM INFORMASI (FRI) (2019)</a></li>
+                    <li><a class="dropdown-item" onClick={() => setProgramStudi("PRODI S1 TEKNIK LOGISTIK (FRI) (2019)")}>PRODI S1 TEKNIK LOGISTIK (FRI) (2019)</a></li>
+                </ul>
+                <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">JFA: {jfa}</button>
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" onClick={() => setJFA("All")}>All</a></li>
+                    <li><a class="dropdown-item" onClick={() => setJFA("LK")}>LK</a></li>
+                    <li><a class="dropdown-item" onClick={() => setJFA("L")}>L</a></li>
+                    <li><a class="dropdown-item" onClick={() => setJFA("AA")}>AA</a></li>
+                    <li><a class="dropdown-item" onClick={() => setJFA("NJFA")}>NJFA</a></li>
+                </ul>
+                <button class="btn btn-primary" data-bs-target="#filterb" data-bs-toggle="modal" type="submit">Filter</button> 
+            </div>
+
+            
+            <div class="modal fade" id="filterb" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
+                <div class="modal-dialog modal-lg modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h3>Filter Cluster 0</h3>
+                        </div>
+                        <div class="modal-body">
+                            {data[0].kode_nama}
+                        </div>
+                        <div class="modal-footer">
+                            <button class="btn btn-primary" data-bs-target="#hasilfilter" data-bs-toggle="modal" data-bs-dismiss="modal" type="submit">Cari</button>
+                        </div>
+                    </div>
+                </div>
+                {/* <div class="modal fade" id="hasilfilter" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
+                <div class="modal-dialog modal-lg modal-dialog-centered">
+                    <div class="modal-content">
+                        hasilfilter
+                    </div>
+                </div>
+            </div> */}
+            </div>
+            
+        </div>
+    )
+
+}
 
 function rata_rata(data, dharma) {
     let jumlah = 0
@@ -343,6 +426,7 @@ return (
                 {dataList0.length!=0 &&
                 <div>
                     <h1>Cluster 0</h1>
+                    {filterby(0)}
                     <div className="row">
                         <div className="col-12">
                             <div className="card">

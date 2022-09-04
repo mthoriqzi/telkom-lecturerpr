@@ -98,7 +98,7 @@ function Data({token}) {
           
   const renderBody = (item, index) => (
   
-        <tr key={index} onChange={handleChange}>
+        <tr key={index}>
           <td>{item.no}</td>
           <Link to={"User/"+item.kode_nama} key={index}>
             <td>{item.kode_nama}</td>
@@ -121,7 +121,6 @@ function Data({token}) {
           <td>{item.pemenuhan_tridarma}</td>
           <td>Edit</td>
           <td><button value={item.kode_nama} onClick={() => handleRemoveItem(item.kode_nama)}>Delete</button></td>
-          {/* <td><button value={item.kode_nama} onChange={handleChange} >Delete</button></td> */}
       </tr>
   )
 
@@ -137,26 +136,13 @@ function Data({token}) {
     sendToDBindividu(inputs,periode);
   }
 
-  function deleteData(kode_nama) {
-    const data = dataList.filter(person => person.kode_nama != kode_nama)
-    // setDataList({data
-    // });
+  // function handleChange(e) {
+  //   console.log(dataList.length)
+  //   setJumlah(jumlah+1)
+  //   // setDataList(dataList.filter(item => item.kode_nama !== e.target.value));
     
-    
-    // if()
-
-    console.log()
-  }
-
-  function handleChange(e) {
-    console.log(dataList.length)
-    setJumlah(jumlah+1)
-    // setDataList(dataList.filter(item => item.kode_nama !== e.target.value));
-    
-  }
+  // }
   const handleRemoveItem = name => {
-    // setDataList(dataList.filter(item => item.kode_nama !== name))
-    // console.log(dataList.length)
     Axios.post("http://34.101.42.148:3001/api/delete", {
       "data": name,
       "periode":periode});
