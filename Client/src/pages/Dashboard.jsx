@@ -24,7 +24,7 @@ import ReactApexChart from 'react-apexcharts';
 function Dashboard () {
 
 const [dataList, setDataList] = useState([])
-const [periode, setPeriode] = useState("Ganjil_2019")
+const [periode, setPeriode] = useState("Ganjil_2021")
 useEffect(() => {
     Axios.get('http://34.101.42.148:3001/api/get/'+periode).then((response) => {
       setDataList(response.data);
@@ -525,7 +525,7 @@ const dbps = {
         colors: ['#fff']
       },
       title: {
-        text: 'Dosen Berdasarkan Kelompok Keahlian'
+        text: 'Dosen Berdasarkan Program Studi'
       },
       xaxis: {
         categories: ["S1 TI", "S2 TI", "S1 SI", "S2 SI", "S1 TL"],
