@@ -119,6 +119,7 @@ function Cluster() {
                 type: 'xy'
               }
             },
+            colors: ['#324B4F','#79B5BE','#BEB4D4'],
             xaxis: {
               tickAmount: 10,
               labels: {
@@ -176,6 +177,7 @@ const cluster = {
           type: 'bar',
           height: 100
         },
+        
         plotOptions: {
           bar: {
             borderRadius: 4,
@@ -185,12 +187,14 @@ const cluster = {
               }
           }
         },
+        colors: ['#79B5BE','#BEB4D4'],
         dataLabels: {
           enabled: true
         },
         xaxis: {
           categories: ['cluster0', 'cluster1', 'cluster2'
           ],
+          colors: ['#324B4F','#79B5BE','#BEB4D4'],
         },
         tooltip: {
             x: {
@@ -356,6 +360,31 @@ function rata_rata(data, dharma) {
     return jumlah/data.length
 }
 
+function mindharma(data, dharma) {
+    let minvalue = 999
+    for (var item of data){
+        if(dharma==1){
+            if(minvalue>item.dik_diakui){
+                minvalue=item.dik_diakui
+            }
+        }else if(dharma==2){
+            if(minvalue>item.lit_diakui){
+                minvalue=item.lit_diakui
+            }
+        }else if(dharma==3){
+            if(minvalue>item.abdimas_diakui){
+                minvalue=item.abdimas_diakui
+            }
+        }else if(dharma==4){
+            if(minvalue>item.penunjang){
+                minvalue=item.penunjang
+            }
+        }
+    }
+    return minvalue
+}
+
+
 return (
     <div>
         <div className='row'>
@@ -406,7 +435,7 @@ return (
             <div>
             {dataList.length!=0 &&
                 <div className='row'>
-                    <div className="col-5">
+                    <div className="col-6">
                         <h2>Jumlah Dosen Tiap Cluster</h2>
                             <div className="card">
                                 <div className="card__body">
@@ -425,7 +454,7 @@ return (
                             </div>
                         </div>
                     </div>
-                    <div className="col-7">
+                    <div className="col-6">
                         <h2>Analisis Cluster</h2>
                         <div className="card">
                             <div className="card__body">
@@ -435,7 +464,7 @@ return (
                                         <td></td>
                                         <td>Dharma 1</td>
                                         <td>Dharma 2</td>
-                                        <td>Dharma 2</td>
+                                        <td>Dharma 3</td>
                                         <td>Penunjang</td>
                                     </tr>
                                     <tr>
@@ -458,6 +487,44 @@ return (
                                         <td>{rata_rata(dataList2, 2).toFixed(2)}</td>
                                         <td>{rata_rata(dataList2, 3).toFixed(2)}</td>
                                         <td>{rata_rata(dataList2, 4).toFixed(2)}</td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="col-6">
+                        <h2>Minimal Nilai</h2>
+                        <div className="card">
+                            <div className="card__body">
+                            <p>Berikut merupakan atribut rata-rata dari setiap cluster. Hal ini membantu mendeskripsikan setiap cluster yang terbentuk.</p>
+                                <table>
+                                    <tr>
+                                        <td></td>
+                                        <td>Dharma 1</td>
+                                        <td>Dharma 2</td>
+                                        <td>Dharma 3</td>
+                                        <td>Penunjang</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Cluster 0</td>
+                                        <td>{mindharma(dataList0, 1).toFixed(2)}</td>
+                                        <td>{mindharma(dataList0, 2).toFixed(2)}</td>
+                                        <td>{mindharma(dataList0, 3).toFixed(2)}</td>
+                                        <td>{mindharma(dataList0, 4).toFixed(2)}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Cluster 1</td>
+                                        <td>{mindharma(dataList1, 1).toFixed(2)}</td>
+                                        <td>{mindharma(dataList1, 2).toFixed(2)}</td>
+                                        <td>{mindharma(dataList1, 3).toFixed(2)}</td>
+                                        <td>{mindharma(dataList1, 4).toFixed(2)}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Cluster 2</td>
+                                        <td>{mindharma(dataList2, 1).toFixed(2)}</td>
+                                        <td>{mindharma(dataList2, 2).toFixed(2)}</td>
+                                        <td>{mindharma(dataList2, 3).toFixed(2)}</td>
+                                        <td>{mindharma(dataList2, 4).toFixed(2)}</td>
                                     </tr>
                                 </table>
                             </div>
