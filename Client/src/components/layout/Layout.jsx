@@ -82,7 +82,7 @@ const Layout = () => {
                 <div className={`layout ${themeReducer.mode} ${themeReducer.color}`}>
                     <Sidebar {...props}/>
                     <div className="layout__content">
-                        <TopNav/>
+                        <TopNav token={token}/>
                         <div className="layout__content-main">
                             <Routes token={token}/>
                         </div>

@@ -14,17 +14,19 @@ import user_image from '../../assets/images/tuat.png'
 
 import user_menu from '../../assets/JsonData/user_menus.json'
 
+
+
 const curr_user = {
     display_name: 'Tuat Tran',
     image: user_image
 }
 
-const renderNotificationItem = (item, index) => (
-    <div className="notification-item" key={index}>
-        <i className={item.icon}></i>
-        <span>{item.content}</span>
-    </div>
-)
+// const renderNotificationItem = (item, index) => (
+//     <div className="notification-item" key={index}>
+//         <i className={item.icon}></i>
+//         <span>{item.content}</span>
+//     </div>
+// )
 
 const renderUserToggle = (user) => (
     <div className="topnav__right-user">
@@ -46,7 +48,14 @@ const renderUserMenu =(item, index) => (
     </Link>
 )
 
-const Topnav = () => {
+const Topnav = ({token}) => {
+    if (token.token == "test12"){
+        console.log("masuk token12")
+        curr_user.display_name="Direktorat"}
+    if (token.token == "test123"){
+    console.log("masuk token123")
+        curr_user.display_name="Dosen"}
+
     return (
         <div className='topnav'>
             <div className="topnav__search">
@@ -62,16 +71,7 @@ const Topnav = () => {
                         renderItems={(item, index) => renderUserMenu(item, index)}
                     />
                 </div>
-                <div className="topnav__right-item">
-                    <Dropdown
-                        icon='bx bx-bell'
-                        badge='12'
-                        contentData={notifications}
-                        renderItems={(item, index) => renderNotificationItem(item, index)}
-                        renderFooter={() => <Link to='/'>View All</Link>}
-                    />
-                    {/* dropdown here */}
-                </div>
+
                 <div className="topnav__right-item">
                     <ThemeMenu/>
                 </div>

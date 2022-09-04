@@ -17,6 +17,7 @@ function Cluster() {
     const [kelompok_keahlian, setkelompokKeahlian] = useState('All')
     const [program_studi, setProgramStudi] = useState('All')
     const [jfa, setJFA] = useState('All')
+    const [dataFilter, setDataFilter] = useState()
 
     useEffect(() => {
         Axios.get('http://34.101.42.148:3001/api/get-cluster/'+periode).then((response) => {
@@ -31,17 +32,26 @@ function Cluster() {
         Axios.get('http://34.101.42.148:3001/api/get-cluster/'+periode+'/2').then((response) => {
             setDataList2(response.data);
         });
-    }, [periode]);
+    }, [periode, dataList0]);
 
     const customerTableHead = [
         'KODE NAMA',
+        'KODE',
+        'NO URUT',
+        'PENDIDIKAN TERAKHIR',
+        'KELOMPOK KEAHLIAN',
+        'INPASSING',
+        'SERTIFIKASI',
         'PROGRAM STUDI',
         'STATUS KEPEGAWAIAN',
         'JFA',
-        'DHARMA 1',
-        'DHARMA 2',
-        'DHARMA 3'
-      ]
+        'DIK DIAKUI',
+        'LIT DIAKUI',
+        'ABDIMAS DIAKUI',
+        'PENUNJANG',
+        'PROF DIAKUI',
+        'TOTAL SKS',
+    ]
 
     const renderHead = (item, index) => <th key={index}>{item}</th>
           
@@ -50,12 +60,22 @@ function Cluster() {
             <Link to={"User/"+item.kode_nama} key={index}>
               <td>{item.kode_nama}</td>
             </Link>
-            <td>{item.program_studi}</td>
-            <td>{item.status_kepegawaian}</td>
-            <td>{item.jfa}</td>
-            <td>{item.dik_diakui.toFixed(2)}</td>
-            <td>{item.lit_diakui.toFixed(2)}</td>
-            <td>{item.abdimas_diakui.toFixed(2)}</td>
+          <td>{item.kode}</td>
+          <td>{item.no_urut}</td>
+          <td>{item.pendidikan_terakhir}</td>
+          <td>{item.kelompok_keahlian}</td>
+          <td>{item.inpassing}</td>
+          <td>{item.sertifikasi}</td>
+          <td>{item.program_studi}</td>
+          <td>{item.status_kepegawaian}</td>
+          <td>{item.jfa}</td>
+          <td>{item.dik_diakui.toFixed(2)}</td>
+          <td>{item.lit_diakui.toFixed(2)}</td>
+          <td>{item.abdimas_diakui.toFixed(2)}</td>
+          <td>{item.penunjang.toFixed(2)}</td>
+          <td>{item.prof_diakui}</td>
+          <td>{item.total_sks.toFixed(2)}</td>
+       
         </tr>
     )
 
@@ -216,29 +236,44 @@ var c2p = 0
 //         c2d3 = c0d3 + dataList1[i]["abdimas_diakui"]
 //         c2p = c0p + dataList1[i]["penunjang"]
 
-const handleRemoveItem = name => {
-    setDataList0(dataList0.filter(item => item.kode_nama !== name))
-    setkelompokKeahlian("c")
-    console.log(dataList0[0].kode_nama)
+//     const handleRemoveItem = name => {
+//         setDataList0(dataList0.filter(item => item.kode_nama !== name))
+//         setkelompokKeahlian("c")
+//         console.log(dataList0[0].kode_nama)
+//     }
+
+function filterData(data){
+    var i=0
+    for (i; i<data.length; i++){
+        <div>{data[i].kode_nama}</div>
+        
+    }
 }
-
-
+// const renderfilterBody = (item) => (
+//     <tr>
+//         <td>KODE DOSEN</td>
+//         <td>KODE</td>
+//         </tr>
+// )
 function filterby(cluster){
     let data=dataList0
-    if(cluster==1){
-        data=dataList1
-    }else if(cluster==2){
-        data=dataList2
-    }
+    // setDataList0(dataList0)
+    // if(cluster==1){
+    //     setDataFilter(dataList1)
+    // }else if(cluster==2){
+    //     setDataFilter(dataList2)
+    // }
     if(kelompok_keahlian!='All'){
-        data = data.filter(item => item.kelompok_keahlian === kelompok_keahlian)
+        // setDataList0(dataList0.filter(item => {return item.kelompok_keahlian === kelompok_keahlian}))
+        // setDataList0(dataList1)
     }
-    if(program_studi!='All'){
-        data = data.filter(item => item.program_studi === program_studi)
-    }
-    if(jfa!='All'){
-        data = data.filter(item => item.jfa === jfa)
-    }
+    // if(program_studi!='All'){
+    //     setDataFilter(dataFilter.filter(item => item.program_studi === program_studi))
+    // }
+    // if(jfa!='All'){
+    //     setDataFilter(dataFilter.filter(item => item.jfa === jfa))
+    // }
+    // setDataFilter(dataFilter)
     return(
         <div>
             <div class="input-group">
@@ -277,7 +312,14 @@ function filterby(cluster){
                             <h3>Filter Cluster 0</h3>
                         </div>
                         <div class="modal-body">
-                            {data[0].kode_nama}
+                            {filterData(data)}
+                            {/* {data[0].kode_nama} */}
+        <table>
+            <tr>
+                <td>KODE DOSEN</td>
+                <td>KODE</td>
+            </tr>
+        </table>
                         </div>
                         <div class="modal-footer">
                             <button class="btn btn-primary" data-bs-target="#hasilfilter" data-bs-toggle="modal" data-bs-dismiss="modal" type="submit">Cari</button>
@@ -365,7 +407,7 @@ return (
             {dataList.length!=0 &&
                 <div className='row'>
                     <div className="col-5">
-                        <h1>Jumlah Dosen Tiap Cluster</h1>
+                        <h2>Jumlah Dosen Tiap Cluster</h2>
                             <div className="card">
                                 <div className="card__body">
                                 <ReactApexChart
@@ -384,7 +426,7 @@ return (
                         </div>
                     </div>
                     <div className="col-7">
-                        <h1>Analisis Cluster</h1>
+                        <h2>Analisis Cluster</h2>
                         <div className="card">
                             <div className="card__body">
                             <p>Berikut merupakan atribut rata-rata dari setiap cluster. Hal ini membantu mendeskripsikan setiap cluster yang terbentuk.</p>
@@ -447,7 +489,7 @@ return (
                 }
                 {dataList1.length!=0 &&
                 <div>
-                    <h1>Cluster 1</h1>
+                    <h2>Cluster 1</h2>
                     <div className="row">
                         <div className="col-12">
                             <div className="card">
@@ -468,7 +510,7 @@ return (
                 }
  {dataList2.length!=0 &&
                 <div>
-                    <h1>Cluster 2</h1>
+                    <h2>Cluster 2</h2>
                     <div className="row">
                         <div className="col-12">
                             <div className="card">
