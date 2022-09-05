@@ -51,7 +51,7 @@ const Individu = (props) => {
         });
         
     }, []);
-    console.log(data20191.length)
+    console.log(data20201.length)
     // console.log(data20191[0].lit_diakui)
     var p20191 = 0
     var p20192 = 0
@@ -118,6 +118,7 @@ const Individu = (props) => {
         dp20222 = data20222[0].lit_diakui.toFixed(1)
         hp20222 = data20222[0].abdimas_diakui.toFixed(1)
     }
+    console.log(p20201)
     const performa = {
         series: [          {
             name: "Dharma 1",
@@ -192,7 +193,7 @@ const Individu = (props) => {
     }
     return (
         <div>
-        {data20191.length!=0  &&
+        { data20201.length!=0 & data20202.length!=0 & data20211.length!=0 &data20212.length!=0 &&
             <div>
                 <div className='row'>
                     <div className="col-7">
@@ -202,27 +203,27 @@ const Individu = (props) => {
                                 <table>
                                     <tr>
                                         <td>KODE DOSEN</td>
-                                        <td>: {data20191[0].kode_nama}</td>
+                                        <td>: {data20201[0].kode_nama}</td>
                                     </tr>
                                     <tr>
                                         <td>KODE</td>
-                                        <td>: {data20191[0].kode}</td>
+                                        <td>: {data20201[0].kode}</td>
                                     </tr>
                                     <tr>
                                         <td>JFA</td>
-                                        <td>: {data20191[0].jfa}</td>
+                                        <td>: {data20201[0].jfa}</td>
                                     </tr>
                                     <tr>
                                         <td>PENDIDIKAN</td>
-                                        <td>: {data20191[0].pendidikan_terakhir}</td>
+                                        <td>: {data20201[0].pendidikan_terakhir}</td>
                                     </tr>
                                     <tr>
                                         <td>KELOMPOK KEAHLIAN</td>
-                                        <td>: {data20191[0].kelompok_keahlian}</td>
+                                        <td>: {data20201[0].kelompok_keahlian}</td>
                                     </tr>
                                     <tr>
                                         <td>PROGRAM STUDI</td>
-                                        <td>: {data20191[0].program_studi}</td>
+                                        <td>: {data20201[0].program_studi}</td>
                                     </tr>
                                 </table>
 
@@ -240,6 +241,7 @@ const Individu = (props) => {
                                         <td>Dharma </td>
                                         <td>Penunjang</td>
                                     </tr>
+                                    {data20192.length!=0 &&
                                     <tr>
                                         <td>2019 (Ganjil)</td>
                                         <td>{data20191[0].dik_diakui.toFixed(1)}</td>
@@ -247,6 +249,7 @@ const Individu = (props) => {
                                         <td>{data20191[0].abdimas_diakui.toFixed(1)}</td>
                                         <td>{data20191[0].penunjang.toFixed(1)}</td>
                                     </tr>
+}
                                     {data20192.length!=0 &&
                                     <tr>
                                         <td>2019 (Genap)</td>
