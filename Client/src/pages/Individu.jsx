@@ -193,7 +193,7 @@ const Individu = (props) => {
     }
     return (
         <div>
-        { data20201.length!=0 & data20202.length!=0 & data20211.length!=0 &data20212.length!=0 &&
+        { data20201.length!=0 &&
             <div>
                 <div className='row'>
                     <div className="col-7">
@@ -241,7 +241,7 @@ const Individu = (props) => {
                                         <td>Dharma </td>
                                         <td>Penunjang</td>
                                     </tr>
-                                    {data20192.length!=0 &&
+                                    {data20191.length!=0 &&
                                     <tr>
                                         <td>2019 (Ganjil)</td>
                                         <td>{data20191[0].dik_diakui.toFixed(1)}</td>
