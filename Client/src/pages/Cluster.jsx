@@ -70,7 +70,7 @@ function Cluster() {
         setData20222(response.data);
 });
 
-    }, [periode, dataList0]);
+    }, [periode]);
 
     const customerTableHead = [
         'KODE NAMA',
