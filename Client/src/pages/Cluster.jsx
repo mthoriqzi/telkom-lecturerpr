@@ -525,7 +525,7 @@ return (
                         <h2>Analisis Cluster</h2>
                         <div className="card">
                             <div className="card__body">
-                            <p>Berikut merupakan atribut rata-rata dari setiap cluster. Hal ini membantu mendeskripsikan setiap cluster yang terbentuk.</p>
+                            <p>Berikut merupakan rata-rata atributdari setiap cluster. Hal ini membantu mendeskripsikan setiap cluster yang terbentuk.</p>
                                 <table>
                                     <tr>
                                         <td></td>
@@ -563,7 +563,7 @@ return (
                         <h2>Minimal Nilai</h2>
                         <div className="card">
                             <div className="card__body">
-                            <p>Berikut merupakan atribut rata-rata dari setiap cluster. Hal ini membantu mendeskripsikan setiap cluster yang terbentuk.</p>
+                            <p>Berikut meripakan nilai minimal atribut dari setiap cluster.</p>
                                 <table>
                                     <tr>
                                         <td></td>
@@ -601,7 +601,7 @@ return (
                         <h2>Maksimal Nilai</h2>
                         <div className="card">
                             <div className="card__body">
-                            <p>Berikut merupakan atribut rata-rata dari setiap cluster. Hal ini membantu mendeskripsikan setiap cluster yang terbentuk.</p>
+                            <p>Berikut merupakan nilai maksimal atribut dari setiap cluster.</p>
                                 <table>
                                     <tr>
                                         <td></td>
