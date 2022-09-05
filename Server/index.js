@@ -65,6 +65,16 @@ app.get('/api/get-cluster/:periode/:cluster', (req, res) => {
     });
 });
 
+app.get('/api/get-cluster/:periode/:cluster/kk/:kk', (req, res) => {
+    res.set('Access-Control-Allow-Origin', '*');
+    const sqlSelect = "select * from hasil_cluster_"+req.params.periode+" where cluster="+req.params.cluster +" and kelompok_keahlian='"+req.params.kk+"'";
+    // console.log(sqlSelect)
+    db.query(sqlSelect, (err, result) => {
+        // console.log(result);
+        res.send(result);
+    });
+});
+
 app.get('/api/get-user/:periode/:kode_nama', (req, res) => {
     // console.log(req.query.kode_nama)
     res.set('Access-Control-Allow-Origin', '*');
@@ -74,6 +84,8 @@ app.get('/api/get-user/:periode/:kode_nama', (req, res) => {
         res.send(result);
     });
 });
+
+
 
 app.post('/api/insert/individu', (req, res) => {
     res.set('Access-Control-Allow-Origin', '*');

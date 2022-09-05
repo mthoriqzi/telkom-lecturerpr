@@ -3,7 +3,6 @@ import Table from '../components/table/Table'
 import { Link } from 'react-router-dom'
 import Axios from 'axios';
 import ReactApexChart from 'react-apexcharts';
-import ReactDOM from 'react-dom'
 import { useSelector } from 'react-redux'
 
 function Cluster() {
@@ -17,7 +16,9 @@ function Cluster() {
     const [kelompok_keahlian, setkelompokKeahlian] = useState('All')
     const [program_studi, setProgramStudi] = useState('All')
     const [jfa, setJFA] = useState('All')
-    const [dataFilter, setDataFilter] = useState()
+    // let [dataFilter, setDataFilter] = useState()
+    // let [dataKK, setDataKK0] = useState([])
+    const [hasilSearch, setSearch] = useState([])
 
     useEffect(() => {
         Axios.get('http://34.101.42.148:3001/api/get-cluster/'+periode).then((response) => {
@@ -32,7 +33,10 @@ function Cluster() {
         Axios.get('http://34.101.42.148:3001/api/get-cluster/'+periode+'/2').then((response) => {
             setDataList2(response.data);
         });
-    }, [periode, dataList0]);
+        // Axios.get('http://localhost:3001/api/get-cluster/'+periode+'/0/kk/'+kelompok_keahlian).then((response) => {
+        //     setDataKK0(response.data);
+        // });
+    }, [periode, kelompok_keahlian]);
 
     const customerTableHead = [
         'KODE NAMA',
@@ -56,7 +60,7 @@ function Cluster() {
     const renderHead = (item, index) => <th key={index}>{item}</th>
           
     const renderBody = (item, index) => (
-          <tr key={index}>
+        <tr key={index}>
             <Link to={"User/"+item.kode_nama} key={index}>
               <td>{item.kode_nama}</td>
             </Link>
@@ -75,7 +79,6 @@ function Cluster() {
           <td>{item.penunjang.toFixed(2)}</td>
           <td>{item.prof_diakui}</td>
           <td>{item.total_sks.toFixed(2)}</td>
-       
         </tr>
     )
 
@@ -141,31 +144,18 @@ var cluster0 = 0
 var cluster1 = 0
 var cluster2 = 0
 
-
 if (dataList.length!=0){
     for (var i in dataList){
-        // console.log(dataList["status_kepegawaian"])
         if (dataList[i]["cluster"]=="0")
-        // console.log("mashok")
         cluster0 = cluster0 + 1
 
         if (dataList[i]["cluster"]=="1")
-        // console.log("mashok2")
         cluster1 = cluster1 + 1
 
         if (dataList[i]["cluster"]=="2")
-        // console.log("mashok1")
         cluster2 = cluster2 + 1
-
-
-
     }
-
 }
-// console.log(pegawai_tetap)
-// console.log(pegawai_profulltime)
-// console.log(pegawai_proparttime)
-// console.log(pegawai_calonpegawaitetap)
 
 const cluster = {
     series: [{
@@ -215,65 +205,7 @@ var c2d2 = 0
 var c2d3 = 0
 var c2p = 0
 
-
-
-// if (dataList.length!=0){
-//     for (var i in dataList){
-//         // console.log(dataList["status_kepegawaian"])
-//         if (dataList1[i]["cluster"]==0)
-//         c0d1 = c0d1 + dataList1[i]["dik_diakui"]
-//         c0d2 = c0d2 + dataList1[i]["lit_diakui"]
-//         c0d3 = c0d3 + dataList1[i]["abdimas_diakui"]
-//         c0p = c0p + dataList1[i]["penunjang"]
-//         if (dataList1[i]["cluster"]==1)
-//         c1d1 = c0d1 + dataList1[i]["dik_diakui"]
-//         c1d2 = c0d2 + dataList1[i]["lit_diakui"]
-//         c1d3 = c0d3 + dataList1[i]["abdimas_diakui"]
-//         c1p = c0p + dataList1[i]["penunjang"]
-//         if (dataList1[i]["cluster"]==2)
-//         c2d1 = c0d1 + dataList1[i]["dik_diakui"]
-//         c2d2 = c0d2 + dataList1[i]["lit_diakui"]
-//         c2d3 = c0d3 + dataList1[i]["abdimas_diakui"]
-//         c2p = c0p + dataList1[i]["penunjang"]
-
-//     const handleRemoveItem = name => {
-//         setDataList0(dataList0.filter(item => item.kode_nama !== name))
-//         setkelompokKeahlian("c")
-//         console.log(dataList0[0].kode_nama)
-//     }
-
-function filterData(data){
-    var i=0
-    for (i; i<data.length; i++){
-        <div>{data[i].kode_nama}</div>
-        
-    }
-}
-// const renderfilterBody = (item) => (
-//     <tr>
-//         <td>KODE DOSEN</td>
-//         <td>KODE</td>
-//         </tr>
-// )
 function filterby(cluster){
-    let data=dataList0
-    // setDataList0(dataList0)
-    // if(cluster==1){
-    //     setDataFilter(dataList1)
-    // }else if(cluster==2){
-    //     setDataFilter(dataList2)
-    // }
-    if(kelompok_keahlian!='All'){
-        // setDataList0(dataList0.filter(item => {return item.kelompok_keahlian === kelompok_keahlian}))
-        // setDataList0(dataList1)
-    }
-    // if(program_studi!='All'){
-    //     setDataFilter(dataFilter.filter(item => item.program_studi === program_studi))
-    // }
-    // if(jfa!='All'){
-    //     setDataFilter(dataFilter.filter(item => item.jfa === jfa))
-    // }
-    // setDataFilter(dataFilter)
     return(
         <div>
             <div class="input-group">
@@ -312,32 +244,96 @@ function filterby(cluster){
                             <h3>Filter Cluster 0</h3>
                         </div>
                         <div class="modal-body">
-                            {filterData(data)}
-                            {/* {data[0].kode_nama} */}
-        <table>
-            <tr>
-                <td>KODE DOSEN</td>
-                <td>KODE</td>
-            </tr>
-        </table>
+                            {/* {filterData(data)} */}
+                            {/* dataKK[0].kode_nama */}
+                            {/* {dataKK.length!=0 && 
+                            
+                            <Table
+                          limit='9999'
+                          headData={customerTableHead}
+                          renderHead={(item, index) => renderHead(item, index)}
+                         
+                          bodyData = {dataKK}
+                          renderBody={(item, index) => renderBody(item, index)}
+                             
+                       />
+                            } */}
                         </div>
                         <div class="modal-footer">
                             <button class="btn btn-primary" data-bs-target="#hasilfilter" data-bs-toggle="modal" data-bs-dismiss="modal" type="submit">Cari</button>
                         </div>
                     </div>
                 </div>
-                {/* <div class="modal fade" id="hasilfilter" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
-                <div class="modal-dialog modal-lg modal-dialog-centered">
-                    <div class="modal-content">
-                        hasilfilter
-                    </div>
-                </div>
-            </div> */}
             </div>
-            
         </div>
     )
+}
 
+function search(){
+    const hasil = dataList.findIndex(item => item.kode_nama === hasilSearch)
+    return(
+        <div>
+            <div class="input-group mb-3">
+                <input 
+                    type="text"
+                    class="form-control"
+                    placeholder="Kode Nama"
+                    name="kode_nama"
+                    value={hasilSearch}
+                    onChange={(e) => setSearch(e.target.value)}
+                    aria-label="Username"
+                    aria-describedby="basic-addon1"/>
+                <button class="btn btn-outline-secondary" type="button" id="button-addon1" data-bs-target="#search" data-bs-toggle="modal">Search</button>
+            </div>
+            <div class="modal fade" id="search" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
+                <div class="modal-dialog modal-lg modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h3>Hasil Pencarian:</h3>
+                        </div>
+                        <div class="modal-body">
+                            {hasil!=-1 &&
+                            <table>
+                                <tr>
+                                    <td>Kode Nama:</td>
+                                    <td>{dataList[hasil].kode_nama}</td>
+                                </tr>
+                                <tr>
+                                    <td>Pendidikan Terakhir:</td>
+                                    <td>{dataList[hasil].pendidikan_terakhir}</td>
+                                </tr>
+                                <tr>
+                                    <td>Kelompok Keahlian:</td>
+                                    <td>{dataList[hasil].kelompok_keahlian}</td>
+                                </tr>
+                                <tr>
+                                    <td>Inpassing:</td>
+                                    <td>{dataList[hasil].inpassing}</td>
+                                </tr>
+                                <tr>
+                                    <td>Sertifikasi:</td>
+                                    <td>{dataList[hasil].sertifikasi}</td>
+                                </tr>
+                                <tr>
+                                    <td>Program Studi:</td>
+                                    <td>{dataList[hasil].program_studi}</td>
+                                </tr>
+                                <tr>
+                                    <td>Status Kepegawaian:</td>
+                                    <td>{dataList[hasil].status_kepegawaian}</td>
+                                </tr>
+                                <tr>
+                                    <td>JFA:</td>
+                                    <td>{dataList[hasil].jfa}</td>
+                                </tr>
+                            </table>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    )
 }
 
 function rata_rata(data, dharma) {
@@ -469,6 +465,7 @@ return (
                 <div>
                     <h1>Cluster 0</h1>
                     {filterby(0)}
+                    {search()}
                     <div className="row">
                         <div className="col-12">
                             <div className="card">
@@ -490,6 +487,7 @@ return (
                 {dataList1.length!=0 &&
                 <div>
                     <h2>Cluster 1</h2>
+                    {search()}
                     <div className="row">
                         <div className="col-12">
                             <div className="card">
@@ -508,9 +506,10 @@ return (
                     </div>
                 </div>
                 }
- {dataList2.length!=0 &&
+                {dataList2.length!=0 &&
                 <div>
                     <h2>Cluster 2</h2>
+                    {search()}
                     <div className="row">
                         <div className="col-12">
                             <div className="card">
@@ -530,11 +529,8 @@ return (
                 </div>
                 }
             </div>
-            {/* } */}
         </div>
-        
     );
-
 }
 
 export default Cluster

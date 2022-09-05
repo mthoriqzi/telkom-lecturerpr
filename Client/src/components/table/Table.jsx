@@ -4,9 +4,9 @@ import './table.css'
 
 const Table = props => {
 
-    const initDataShow = props.limit && props.bodyData ? props.bodyData.slice(0, Number(props.limit)) : props.bodyData
+    // const initDataShow = props.limit && props.bodyData ? props.bodyData.slice(0, Number(props.limit)) : props.bodyData
     
-    const [dataShow, setDataShow] = useState(initDataShow)
+    const [dataShow, setDataShow] = useState(props.bodyData)
 
     let pages = 1
 
@@ -15,7 +15,7 @@ const Table = props => {
     if (props.limit !== undefined) {
         let page = Math.floor(props.bodyData.length / Number(props.limit))
         pages = props.bodyData.length % Number(props.limit) === 0 ? page : page + 1
-        range = [...Array(pages).keys()]
+        // range = [...Array(pages).keys()]
     }
 
     const [currPage, setCurrPage] = useState(0)
@@ -24,8 +24,10 @@ const Table = props => {
         const start = Number(props.limit) * page
         const end = start + Number(props.limit)
 
-        setDataShow(props.bodyData.slice(start, end))
-
+        setDataShow(props.bodyData)
+    //     let data = props.bodyData
+    //     console.log(props.bodyData[0])
+    // console.log(props.bodyData.length)
         setCurrPage(page)
     }
     // console.log(index)
@@ -57,7 +59,7 @@ const Table = props => {
                     }
                 </table>
             </div>
-            {
+            {/* {
                 pages > 1 ? (
                     <div className="table__pagination">
                         {
@@ -69,7 +71,7 @@ const Table = props => {
                         }
                     </div>
                 ) : null
-            }
+            } */}
         </div>
     )
 }
