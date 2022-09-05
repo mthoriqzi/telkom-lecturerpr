@@ -24,7 +24,7 @@ import ReactApexChart from 'react-apexcharts';
 function Dashboard () {
 
 const [dataList, setDataList] = useState([])
-const [periode, setPeriode] = useState("Ganjil_2019")
+const [periode, setPeriode] = useState("Ganjil_2020")
 useEffect(() => {
     Axios.get('http://34.101.42.148:3001/api/get/'+periode).then((response) => {
       setDataList(response.data);
@@ -73,52 +73,52 @@ var pptei = 0
 if (dataList.length!=0){
     for (var i in dataList){
         // console.log(dataList["status_kepegawaian"])
-        if (dataList[i]["status_kepegawaian"]=="DOSEN PEGAWAI TETAP")
-          if (dataList[i]["kelompok_keahlian"]=="PRODUCTION AND MANUFACTURING SYSTEM")
-          tetappm = tetappm + 1
-          if (dataList[i]["kelompok_keahlian"]=="ENGINEERING MANAGEMENT SYSTEM")
-          tetapems = tetapems + 1
-          if (dataList[i]["kelompok_keahlian"]=="CYBERNETICS")
-          tetapc = tetapc + 1
-          if (dataList[i]["kelompok_keahlian"]=="ENTERPRISE AND INDUSTRIAL SYSTEM")
-          tetapei = tetapei + 1
-        if (dataList[i]["status_kepegawaian"]=="DOSEN CALON PEGAWAI TETAP")
-          if (dataList[i]["kelompok_keahlian"]=="PRODUCTION AND MANUFACTURING SYSTEM")
-          ctetappm = ctetappm + 1
-          if (dataList[i]["kelompok_keahlian"]=="ENGINEERING MANAGEMENT SYSTEM")
-          ctetapems = ctetapems + 1
-          if (dataList[i]["kelompok_keahlian"]=="CYBERNETICS")
-          ctetapc = ctetapc + 1
-          if (dataList[i]["kelompok_keahlian"]=="ENTERPRISE AND INDUSTRIAL SYSTEM")
-          ctetapei = ctetapei + 1
-        if (dataList[i]["status_kepegawaian"]=="DOSEN PROFESIONAL FULL TIME")
-          if (dataList[i]["kelompok_keahlian"]=="PRODUCTION AND MANUFACTURING SYSTEM")
-          pftpm = pftpm + 1
-          if (dataList[i]["kelompok_keahlian"]=="ENGINEERING MANAGEMENT SYSTEM")
-          pftems = pftems + 1
-          if (dataList[i]["kelompok_keahlian"]=="CYBERNETICS")
-          pftc = pftc + 1
-          if (dataList[i]["kelompok_keahlian"]=="ENTERPRISE AND INDUSTRIAL SYSTEM")
-          pftei = pftei + 1
-        if (dataList[i]["status_kepegawaian"]=="DOSEN PROFESIONAL PART TIME")
+        if (dataList[i]["status_kepegawaian"]=="DOSEN PEGAWAI TETAP"){
+          if (dataList[i]["kelompok_keahlian"]=="PRODUCTION AND MANUFACTURING SYSTEM"){
+          tetappm = tetappm + 1}
+          if (dataList[i]["kelompok_keahlian"]=="ENGINEERING MANAGEMENT SYSTEM"){
+          tetapems = tetapems + 1}
+          if (dataList[i]["kelompok_keahlian"]=="CYBERNETICS"){
+          tetapc = tetapc + 1}
+          if (dataList[i]["kelompok_keahlian"]=="ENTERPRISE AND INDUSTRIAL SYSTEM"){
+          tetapei = tetapei + 1}}
+        if (dataList[i]["status_kepegawaian"]=="DOSEN CALON PEGAWAI TETAP"){
+          if (dataList[i]["kelompok_keahlian"]=="PRODUCTION AND MANUFACTURING SYSTEM"){
+          ctetappm = ctetappm + 1}
+          if (dataList[i]["kelompok_keahlian"]=="ENGINEERING MANAGEMENT SYSTEM"){
+          ctetapems = ctetapems + 1}
+          if (dataList[i]["kelompok_keahlian"]=="CYBERNETICS"){
+          ctetapc = ctetapc + 1}
+          if (dataList[i]["kelompok_keahlian"]=="ENTERPRISE AND INDUSTRIAL SYSTEM"){
+          ctetapei = ctetapei + 1}}
+        if (dataList[i]["status_kepegawaian"]=="DOSEN PROFESIONAL FULL TIME"){
+          if (dataList[i]["kelompok_keahlian"]=="PRODUCTION AND MANUFACTURING SYSTEM"){
+          pftpm = pftpm + 1}
+          if (dataList[i]["kelompok_keahlian"]=="ENGINEERING MANAGEMENT SYSTEM"){
+          pftems = pftems + 1}
+          if (dataList[i]["kelompok_keahlian"]=="CYBERNETICS"){
+          pftc = pftc + 1}
+          if (dataList[i]["kelompok_keahlian"]=="ENTERPRISE AND INDUSTRIAL SYSTEM"){
+          pftei = pftei + 1}}
+        if (dataList[i]["status_kepegawaian"]=="DOSEN PROFESIONAL PART TIME"){
         // console.log("mashok2")
-          if (dataList[i]["kelompok_keahlian"]=="PRODUCTION AND MANUFACTURING SYSTEM")
-          pptpm = pptpm + 1
-          if (dataList[i]["kelompok_keahlian"]=="ENGINEERING MANAGEMENT SYSTEM")
-          pptems = pptems + 1
-          if (dataList[i]["kelompok_keahlian"]=="CYBERNETICS")
-          pptc = pptc + 1
-          if (dataList[i]["kelompok_keahlian"]=="ENTERPRISE AND INDUSTRIAL SYSTEM")
-          pptei = pptei + 1
-
+          if (dataList[i]["kelompok_keahlian"]=="PRODUCTION AND MANUFACTURING SYSTEM"){
+          pptpm = pptpm + 1}
+          if (dataList[i]["kelompok_keahlian"]=="ENGINEERING MANAGEMENT SYSTEM"){
+          pptems = pptems + 1}
+          if (dataList[i]["kelompok_keahlian"]=="CYBERNETICS"){
+          pptc = pptc + 1}
+          if (dataList[i]["kelompok_keahlian"]=="ENTERPRISE AND INDUSTRIAL SYSTEM"){
+          pptei = pptei + 1}
+          }
 
     }
 
 }
-// console.log(pegawai_tetap)
-// console.log(pegawai_profulltime)
-// console.log(pegawai_proparttime)
-// console.log(pegawai_calonpegawaitetap)
+console.log(tetapc)
+console.log(tetapei)
+console.log(tetapems)
+console.log(tetappm)
 
 const statusPegawai = {
         series: [{
@@ -215,90 +215,90 @@ var PeUEI = 0
 if (dataList.length!=0){
     for (var i in dataList){
         console.log(dataList["status_kepegawaian"])
-        if (dataList[i]["inpassing_dosen"]=="PENATA MUDA TK 1")
+        if (dataList[i]["inpassing"]=="PENATA MUDA TK 1"){
 
-          if (dataList[i]["kelompok_keahlian"]=="PRODUCTION AND MANUFACTURING SYSTEM")
-          PMTk1PM = PMTk1PM + 1
-          if (dataList[i]["kelompok_keahlian"]=="ENGINEERING MANAGEMENT SYSTEM")
-          PMTk1EMS = PMTk1EMS + 1
-          if (dataList[i]["kelompok_keahlian"]=="CYBERNETICS")
-          PMTk1C = PMTk1C + 1
-          if (dataList[i]["kelompok_keahlian"]=="ENTERPRISE AND INDUSTRIAL SYSTEM")
-          PMTk1EI = PMTk1EI + 1
-
-        if (dataList[i]["inpassing_dosen"]=="PENATA")
-          if (dataList[i]["kelompok_keahlian"]=="PRODUCTION AND MANUFACTURING SYSTEM")
-          PtPM = PtPM + 1
-          if (dataList[i]["kelompok_keahlian"]=="ENGINEERING MANAGEMENT SYSTEM")
-          PtEMS = PtEMS + 1
-          if (dataList[i]["kelompok_keahlian"]=="CYBERNETICS")
-          PtC = PtC + 1
-          if (dataList[i]["kelompok_keahlian"]=="ENTERPRISE AND INDUSTRIAL SYSTEM")
-          PtEI = PtEI + 1
+          if (dataList[i]["kelompok_keahlian"]=="PRODUCTION AND MANUFACTURING SYSTEM"){
+          PMTk1PM = PMTk1PM + 1}
+          if (dataList[i]["kelompok_keahlian"]=="ENGINEERING MANAGEMENT SYSTEM"){
+          PMTk1EMS = PMTk1EMS + 1}
+          if (dataList[i]["kelompok_keahlian"]=="CYBERNETICS"){
+          PMTk1C = PMTk1C + 1}
+          if (dataList[i]["kelompok_keahlian"]=="ENTERPRISE AND INDUSTRIAL SYSTEM"){
+          PMTk1EI = PMTk1EI + 1}
+          }
+        if (dataList[i]["inpassing"]=="PENATA"){
+          if (dataList[i]["kelompok_keahlian"]=="PRODUCTION AND MANUFACTURING SYSTEM"){
+          PtPM = PtPM + 1}
+          if (dataList[i]["kelompok_keahlian"]=="ENGINEERING MANAGEMENT SYSTEM"){
+          PtEMS = PtEMS + 1}
+          if (dataList[i]["kelompok_keahlian"]=="CYBERNETICS"){
+          PtC = PtC + 1}
+          if (dataList[i]["kelompok_keahlian"]=="ENTERPRISE AND INDUSTRIAL SYSTEM"){
+          PtEI = PtEI + 1}}
         
-        if (dataList[i]["inpassing_dosen"]=="PENATA TK 1")
-          if (dataList[i]["kelompok_keahlian"]=="PRODUCTION AND MANUFACTURING SYSTEM")
-          PtTk1PM = PtTk1PM + 1
-          if (dataList[i]["kelompok_keahlian"]=="ENGINEERING MANAGEMENT SYSTEM")
-          PtTk1EMS = PtTk1EMS + 1
-          if (dataList[i]["kelompok_keahlian"]=="CYBERNETICS")
-          PtTk1C = PtTk1C + 1
-          if (dataList[i]["kelompok_keahlian"]=="ENTERPRISE AND INDUSTRIAL SYSTEM")
-          PtTk1EI = PtTk1EI + 1
-
-        if (dataList[i]["inpassing_dosen"]=="PEMBINA")
-          if (dataList[i]["kelompok_keahlian"]=="PRODUCTION AND MANUFACTURING SYSTEM")
-          PePM = PePM + 1
-          if (dataList[i]["kelompok_keahlian"]=="ENGINEERING MANAGEMENT SYSTEM")
-          PeEMS = PeEMS + 1
-          if (dataList[i]["kelompok_keahlian"]=="CYBERNETICS")
-          PeC = PeC + 1
-          if (dataList[i]["kelompok_keahlian"]=="ENTERPRISE AND INDUSTRIAL SYSTEM")
-          PeEI = PeEI + 1
-
-        if (dataList[i]["inpassing_dosen"]=="PEMBINA TK 1")
-          if (dataList[i]["kelompok_keahlian"]=="PRODUCTION AND MANUFACTURING SYSTEM")
-          PeTk1PM = PeTk1PM + 1
-          if (dataList[i]["kelompok_keahlian"]=="ENGINEERING MANAGEMENT SYSTEM")
-          PeTk1EMS = PeTk1EMS + 1
-          if (dataList[i]["kelompok_keahlian"]=="CYBERNETICS")
-          PeTk1C = PeTk1C + 1
-          if (dataList[i]["kelompok_keahlian"]=="ENTERPRISE AND INDUSTRIAL SYSTEM")
-          PeTk1EI = PeTk1EI + 1
-
-        if (dataList[i]["inpassing_dosen"]=="PEMBINA UTAMA MUDA")
-          if (dataList[i]["kelompok_keahlian"]=="PRODUCTION AND MANUFACTURING SYSTEM")
-          PeUMPM = PeUMPM + 1
-          if (dataList[i]["kelompok_keahlian"]=="ENGINEERING MANAGEMENT SYSTEM")
-          PeUMEMS = PeUMEMS + 1
-          if (dataList[i]["kelompok_keahlian"]=="CYBERNETICS")
-          PeUMC = PeUMC + 1
-          if (dataList[i]["kelompok_keahlian"]=="ENTERPRISE AND INDUSTRIAL SYSTEM")
-          PeUMEI = PeUMEI + 1
-
-        if (dataList[i]["inpassing_dosen"]=="PEMBINA UTAMA MADYA")
-          if (dataList[i]["kelompok_keahlian"]=="PRODUCTION AND MANUFACTURING SYSTEM")
-          PeUMaPM = PeUMaPM + 1
-          if (dataList[i]["kelompok_keahlian"]=="ENGINEERING MANAGEMENT SYSTEM")
-          PeUMaEMS = PeUMaEMS + 1
-          if (dataList[i]["kelompok_keahlian"]=="CYBERNETICS")
-          PeUMaC = PeUMaC + 1
-          if (dataList[i]["kelompok_keahlian"]=="ENTERPRISE AND INDUSTRIAL SYSTEM")
-          PeUMaEI = PeUMaEI + 1
-        if (dataList[i]["inpassing_dosen"]=="PEMBINA UTAMA")
-          if (dataList[i]["kelompok_keahlian"]=="PRODUCTION AND MANUFACTURING SYSTEM")
-          PeUPM = PeUPM + 1
-          if (dataList[i]["kelompok_keahlian"]=="ENGINEERING MANAGEMENT SYSTEM")
-          PeUEMS = PeUEMS + 1
-          if (dataList[i]["kelompok_keahlian"]=="CYBERNETICS")
-          PeUC = PeUC + 1
-          if (dataList[i]["kelompok_keahlian"]=="ENTERPRISE AND INDUSTRIAL SYSTEM")
-          PeUEI = PeUEI + 1
+        if (dataList[i]["inpassing"]=="PENATA TK 1"){
+          if (dataList[i]["kelompok_keahlian"]=="PRODUCTION AND MANUFACTURING SYSTEM"){
+          PtTk1PM = PtTk1PM + 1}
+          if (dataList[i]["kelompok_keahlian"]=="ENGINEERING MANAGEMENT SYSTEM"){
+          PtTk1EMS = PtTk1EMS + 1}
+          if (dataList[i]["kelompok_keahlian"]=="CYBERNETICS"){
+          PtTk1C = PtTk1C + 1}
+          if (dataList[i]["kelompok_keahlian"]=="ENTERPRISE AND INDUSTRIAL SYSTEM"){
+          PtTk1EI = PtTk1EI + 1}
+          }
+        if (dataList[i]["inpassing"]=="PEMBINA"){
+          if (dataList[i]["kelompok_keahlian"]=="PRODUCTION AND MANUFACTURING SYSTEM"){
+          PePM = PePM + 1}
+          if (dataList[i]["kelompok_keahlian"]=="ENGINEERING MANAGEMENT SYSTEM"){
+          PeEMS = PeEMS + 1}
+          if (dataList[i]["kelompok_keahlian"]=="CYBERNETICS"){
+          PeC = PeC + 1}
+          if (dataList[i]["kelompok_keahlian"]=="ENTERPRISE AND INDUSTRIAL SYSTEM"){
+          PeEI = PeEI + 1}
+          }
+        if (dataList[i]["inpassing"]=="PEMBINA TK 1"){
+          if (dataList[i]["kelompok_keahlian"]=="PRODUCTION AND MANUFACTURING SYSTEM"){
+          PeTk1PM = PeTk1PM + 1}
+          if (dataList[i]["kelom{pok_keahlian"]=="ENGINEERING MANAGEMENT SYSTEM"){
+          PeTk1EMS = PeTk1EMS + 1}
+          if (dataList[i]["kelompok_keahlian"]=="CYBERNETICS"){
+          PeTk1C = PeTk1C + 1}
+          if (dataList[i]["kelompok_keahlian"]=="ENTERPRISE AND INDUSTRIAL SYSTEM"){
+          PeTk1EI = PeTk1EI + 1}
+          }
+        if (dataList[i]["inpassing"]=="PEMBINA UTAMA MUDA"){
+          if (dataList[i]["kelompok_keahlian"]=="PRODUCTION AND MANUFACTURING SYSTEM"){
+          PeUMPM = PeUMPM + 1}
+          if (dataList[i]["kelompok_keahlian"]=="ENGINEERING MANAGEMENT SYSTEM"){
+          PeUMEMS = PeUMEMS + 1}
+          if (dataList[i]["kelompok_keahlian"]=="CYBERNETICS"){
+          PeUMC = PeUMC + 1}
+          if (dataList[i]["kelompok_keahlian"]=="ENTERPRISE AND INDUSTRIAL SYSTEM"){
+          PeUMEI = PeUMEI + 1}
+          }
+        if (dataList[i]["inpassing"]=="PEMBINA UTAMA MADYA"){
+          if (dataList[i]["kelompok_keahlian"]=="PRODUCTION AND MANUFACTURING SYSTEM"){
+          PeUMaPM = PeUMaPM + 1}
+          if (dataList[i]["kelompok_keahlian"]=="ENGINEERING MANAGEMENT SYSTEM"){
+          PeUMaEMS = PeUMaEMS + 1}
+          if (dataList[i]["kelompok_keahlian"]=="CYBERNETICS"){
+          PeUMaC = PeUMaC + 1}
+          if (dataList[i]["kelompok_keahlian"]=="ENTERPRISE AND INDUSTRIAL SYSTEM"){
+          PeUMaEI = PeUMaEI + 1}}
+        if (dataList[i]["inpassing"]=="PEMBINA UTAMA"){
+          if (dataList[i]["kelompok_keahlian"]=="PRODUCTION AND MANUFACTURING SYSTEM"){
+          PeUPM = PeUPM + 1}
+          if (dataList[i]["kelompok_keahlian"]=="ENGINEERING MANAGEMENT SYSTEM"){
+          PeUEMS = PeUEMS + 1}
+          if (dataList[i]["kelompok_keahlian"]=="CYBERNETICS"){
+          PeUC = PeUC + 1}
+          if (dataList[i]["kelompok_keahlian"]=="ENTERPRISE AND INDUSTRIAL SYSTEM"){
+          PeUEI = PeUEI + 1}}
 
     }
 
 }
-
+console.log(PMTk1C)
 const inpassingdosen = {
         series: [{
             name: 'PENATA MUDA TK 1',
@@ -394,51 +394,51 @@ var NJE = 0
 if (dataList.length!=0){
     for (var i in dataList){
         console.log(dataList["status_kepegawaian"])
-        if (dataList[i]["jfa"]=="GB")
-            if (dataList[i]["kelompok_keahlian"]=="PRODUCTION AND MANUFACTURING SYSTEM")
-            GBPM = GBPM + 1
-            if (dataList[i]["kelompok_keahlian"]=="ENGINEERING MANAGEMENT SYSTEM")
-            GBEMS = GBEMS + 1
-            if (dataList[i]["kelompok_keahlian"]=="CYBERNETICS")
-            GBC = GBC + 1
-            if (dataList[i]["kelompok_keahlian"]=="ENTERPRISE AND INDUSTRIAL SYSTEM")
-            GBE = GBE + 1
-        if (dataList[i]["jfa"]=="LK")
-            if (dataList[i]["kelompok_keahlian"]=="PRODUCTION AND MANUFACTURING SYSTEM")
-            LKPM = LKPM + 1
-            if (dataList[i]["kelompok_keahlian"]=="ENGINEERING MANAGEMENT SYSTEM")
-            LKEMS = LKEMS + 1
-            if (dataList[i]["kelompok_keahlian"]=="CYBERNETICS")
-            LKC = LKC + 1
-            if (dataList[i]["kelompok_keahlian"]=="ENTERPRISE AND INDUSTRIAL SYSTEM")
-            LKE = LKE + 1
-        if (dataList[i]["jfa"]=="L")
-            if (dataList[i]["kelompok_keahlian"]=="PRODUCTION AND MANUFACTURING SYSTEM")
-            LPM = LPM + 1
-            if (dataList[i]["kelompok_keahlian"]=="ENGINEERING MANAGEMENT SYSTEM")
-            LEMS = LEMS + 1
-            if (dataList[i]["kelompok_keahlian"]=="CYBERNETICS")
-            LC = LC + 1
-            if (dataList[i]["kelompok_keahlian"]=="ENTERPRISE AND INDUSTRIAL SYSTEM")
-            LE = LE + 1
-        if (dataList[i]["jfa"]=="AA")
-            if (dataList[i]["kelompok_keahlian"]=="PRODUCTION AND MANUFACTURING SYSTEM")
-            AAPM = AAPM + 1
-            if (dataList[i]["kelompok_keahlian"]=="ENGINEERING MANAGEMENT SYSTEM")
-            AAEMS = AAEMS + 1
-            if (dataList[i]["kelompok_keahlian"]=="CYBERNETICS")
-            AAC = AAC + 1
-            if (dataList[i]["kelompok_keahlian"]=="ENTERPRISE AND INDUSTRIAL SYSTEM")
-            AAE = AAE + 1
-        if (dataList[i]["jfa"]=="NJ")
-            if (dataList[i]["kelompok_keahlian"]=="PRODUCTION AND MANUFACTURING SYSTEM")
-            NJPM = NJPM + 1
-            if (dataList[i]["kelompok_keahlian"]=="ENGINEERING MANAGEMENT SYSTEM")
-            NJEMS = NJEMS + 1
-            if (dataList[i]["kelompok_keahlian"]=="CYBERNETICS")
-            NJC = NJC + 1
-            if (dataList[i]["kelompok_keahlian"]=="ENTERPRISE AND INDUSTRIAL SYSTEM")
-            NJE = NJE + 1
+        if (dataList[i]["jfa"]=="GB"){
+            if (dataList[i]["kelompok_keahlian"]=="PRODUCTION AND MANUFACTURING SYSTEM"){
+            GBPM = GBPM + 1}
+            if (dataList[i]["kelompok_keahlian"]=="ENGINEERING MANAGEMENT SYSTEM"){
+            GBEMS = GBEMS + 1}
+            if (dataList[i]["kelompok_keahlian"]=="CYBERNETICS"){
+            GBC = GBC + 1}
+            if (dataList[i]["kelompok_keahlian"]=="ENTERPRISE AND INDUSTRIAL SYSTEM"){
+            GBE = GBE + 1}}
+        if (dataList[i]["jfa"]=="LK"){
+            if (dataList[i]["kelompok_keahlian"]=="PRODUCTION AND MANUFACTURING SYSTEM"){
+            LKPM = LKPM + 1}
+            if (dataList[i]["kelompok_keahlian"]=="ENGINEERING MANAGEMENT SYSTEM"){
+            LKEMS = LKEMS + 1}
+            if (dataList[i]["kelompok_keahlian"]=="CYBERNETICS"){
+            LKC = LKC + 1}
+            if (dataList[i]["kelompok_keahlian"]=="ENTERPRISE AND INDUSTRIAL SYSTEM"){
+            LKE = LKE + 1}}
+        if (dataList[i]["jfa"]=="L"){
+            if (dataList[i]["kelompok_keahlian"]=="PRODUCTION AND MANUFACTURING SYSTEM"){
+            LPM = LPM + 1}
+            if (dataList[i]["kelompok_keahlian"]=="ENGINEERING MANAGEMENT SYSTEM"){
+            LEMS = LEMS + 1}
+            if (dataList[i]["kelompok_keahlian"]=="CYBERNETICS"){
+            LC = LC + 1}
+            if (dataList[i]["kelompok_keahlian"]=="ENTERPRISE AND INDUSTRIAL SYSTEM"){
+            LE = LE + 1}}
+        if (dataList[i]["jfa"]=="AA"){
+            if (dataList[i]["kelompok_keahlian"]=="PRODUCTION AND MANUFACTURING SYSTEM"){
+            AAPM = AAPM + 1}
+            if (dataList[i]["kelompok_keahlian"]=="ENGINEERING MANAGEMENT SYSTEM"){
+            AAEMS = AAEMS + 1}
+            if (dataList[i]["kelompok_keahlian"]=="CYBERNETICS"){
+            AAC = AAC + 1}
+            if (dataList[i]["kelompok_keahlian"]=="ENTERPRISE AND INDUSTRIAL SYSTEM"){
+            AAE = AAE + 1}}
+        if (dataList[i]["jfa"]=="NJ"){
+            if (dataList[i]["kelompok_keahlian"]=="PRODUCTION AND MANUFACTURING SYSTEM"){
+            NJPM = NJPM + 1}
+            if (dataList[i]["kelompok_keahlian"]=="ENGINEERING MANAGEMENT SYSTEM"){
+            NJEMS = NJEMS + 1}
+            if (dataList[i]["kelompok_keahlian"]=="CYBERNETICS"){
+            NJC = NJC + 1}
+            if (dataList[i]["kelompok_keahlian"]=="ENTERPRISE AND INDUSTRIAL SYSTEM"){
+            NJE = NJE + 1}}
         
 
     }
@@ -463,39 +463,39 @@ var s3s1tl = 0
 
 if (dataList.length!=0){
     for (var i in dataList){
-        if (dataList[i]["pendidikan_terakhir"]=="S1")
-            if (dataList[i]["kode"]=="S1TI")
-            s1s1ti = s1s1ti + 1
-            if (dataList[i]["kode"]=="S2TI")
-            s1s2ti = s1s2ti + 1
-            if (dataList[i]["kode"]=="S1SI")
-            s1s1si = s1s1si + 1
-            if (dataList[i]["kode"]=="S2SI")
-            s1s2si = s1s2si + 1
-            if (dataList[i]["kode"]=="S1TL")
-            s1s1tl = s1s1tl + 1
-        if (dataList[i]["pendidikan_terakhir"]=="S2")
-            if (dataList[i]["kode"]=="S1TI")
-            s2s1ti = s2s1ti + 1
-            if (dataList[i]["kode"]=="S2TI")
-            s2s2ti = s2s2ti + 1
-            if (dataList[i]["kode"]=="S1SI")
-            s2s1si = s2s1si + 1
-            if (dataList[i]["kode"]=="S2SI")
-            s2s2si = s2s2si + 1
-            if (dataList[i]["kode"]=="S1TL")
-            s2s1tl = s2s1tl + 1
-        if (dataList[i]["pendidikan_terakhir"]=="S3")
-            if (dataList[i]["kode"]=="S1TI")
-            s3s1ti = s3s1ti + 1
-            if (dataList[i]["kode"]=="S2TI")
-            s3s2ti = s3s2ti + 1
-            if (dataList[i]["kode"]=="S1SI")
-            s3s1si = s3s1si + 1
-            if (dataList[i]["kode"]=="S2SI")
-            s3s2si = s3s2si + 1
-            if (dataList[i]["kode"]=="S1TL")
-            s3s1tl = s3s1tl + 1
+        if (dataList[i]["pendidikan_terakhir"]=="S1"){
+            if (dataList[i]["kode"]=="S1TI"){
+            s1s1ti = s1s1ti + 1}
+            if (dataList[i]["kode"]=="S2TI"){
+            s1s2ti = s1s2ti + 1}
+            if (dataList[i]["kode"]=="S1SI"){
+            s1s1si = s1s1si + 1}
+            if (dataList[i]["kode"]=="S2SI"){
+            s1s2si = s1s2si + 1}
+            if (dataList[i]["kode"]=="S1TL"){
+            s1s1tl = s1s1tl + 1}}
+        if (dataList[i]["pendidikan_terakhir"]=="S2"){
+            if (dataList[i]["kode"]=="S1TI"){
+            s2s1ti = s2s1ti + 1}
+            if (dataList[i]["kode"]=="S2TI"){
+            s2s2ti = s2s2ti + 1}
+            if (dataList[i]["kode"]=="S1SI"){
+            s2s1si = s2s1si + 1}
+            if (dataList[i]["kode"]=="S2SI"){
+            s2s2si = s2s2si + 1}
+            if (dataList[i]["kode"]=="S1TL"){
+            s2s1tl = s2s1tl + 1}}
+        if (dataList[i]["pendidikan_terakhir"]=="S3"){
+            if (dataList[i]["kode"]=="S1TI"){
+            s3s1ti = s3s1ti + 1}
+            if (dataList[i]["kode"]=="S2TI"){
+            s3s2ti = s3s2ti + 1}
+            if (dataList[i]["kode"]=="S1SI"){
+            s3s1si = s3s1si + 1}
+            if (dataList[i]["kode"]=="S2SI"){
+            s3s2si = s3s2si + 1}
+            if (dataList[i]["kode"]=="S1TL"){
+            s3s1tl = s3s1tl + 1}}
     }}
         
 const dbps = {
@@ -525,7 +525,7 @@ const dbps = {
         colors: ['#fff']
       },
       title: {
-        text: 'Dosen Berdasarkan Kelompok Keahlian'
+        text: 'Dosen Berdasarkan Program Studi'
       },
       xaxis: {
         categories: ["S1 TI", "S2 TI", "S1 SI", "S2 SI", "S1 TL"],
@@ -627,24 +627,24 @@ var bei = 0
 
 if (dataList.length!=0){
     for (var i in dataList){
-        if (dataList[i]["sertifikasi"]=="SUDAH")
-          if (dataList[i]["kelompok_keahlian"]=="PRODUCTION AND MANUFACTURING SYSTEM")
-          spm = spm + 1
-          if (dataList[i]["kelompok_keahlian"]=="ENGINEERING MANAGEMENT SYSTEM")
-          sems = sems + 1
-          if (dataList[i]["kelompok_keahlian"]=="CYBERNETICS")
-          scy = scy + 1
-          if (dataList[i]["kelompok_keahlian"]=="ENTERPRISE AND INDUSTRIAL SYSTEM")
-          sei = sei + 1
-        if (dataList[i]["sertifikasi"]=="BELUM")
-          if (dataList[i]["kelompok_keahlian"]=="PRODUCTION AND MANUFACTURING SYSTEM")
-          bpm = bpm + 1
-          if (dataList[i]["kelompok_keahlian"]=="ENGINEERING MANAGEMENT SYSTEM")
-          bems = bems + 1
-          if (dataList[i]["kelompok_keahlian"]=="CYBERNETICS")
-          bcy = bcy + 1
-          if (dataList[i]["kelompok_keahlian"]=="ENTERPRISE AND INDUSTRIAL SYSTEM")
-          bei = bei + 1
+        if (dataList[i]["sertifikasi"]=="SUDAH"){
+          if (dataList[i]["kelompok_keahlian"]=="PRODUCTION AND MANUFACTURING SYSTEM"){
+          spm = spm + 1}
+          if (dataList[i]["kelompok_keahlian"]=="ENGINEERING MANAGEMENT SYSTEM"){
+          sems = sems + 1}
+          if (dataList[i]["kelompok_keahlian"]=="CYBERNETICS"){
+          scy = scy + 1}
+          if (dataList[i]["kelompok_keahlian"]=="ENTERPRISE AND INDUSTRIAL SYSTEM"){
+          sei = sei + 1}}
+        if (dataList[i]["sertifikasi"]=="BELUM"){
+          if (dataList[i]["kelompok_keahlian"]=="PRODUCTION AND MANUFACTURING SYSTEM"){
+          bpm = bpm + 1}
+          if (dataList[i]["kelompok_keahlian"]=="ENGINEERING MANAGEMENT SYSTEM"){
+          bems = bems + 1}
+          if (dataList[i]["kelompok_keahlian"]=="CYBERNETICS"){
+          bcy = bcy + 1}
+          if (dataList[i]["kelompok_keahlian"]=="ENTERPRISE AND INDUSTRIAL SYSTEM"){
+          bei = bei + 1}}
    
     }}
     const sertif = {

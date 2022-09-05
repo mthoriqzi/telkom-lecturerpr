@@ -12,7 +12,15 @@ function Cluster() {
     const [dataList0, setDataList0] = useState([])
     const [dataList1, setDataList1] = useState([])
     const [dataList2, setDataList2] = useState([])
-    const [periode, setPeriode] = useState("Genap_2019")
+    const [data20191, setData20191] = useState([])
+    const [data20192, setData20192] = useState([])
+    const [data20201, setData20201] = useState([])
+    const [data20202, setData20202] = useState([])
+    const [data20211, setData20211] = useState([])
+    const [data20212, setData20212] = useState([])
+    const [data20221, setData20221] = useState([])
+    const [data20222, setData20222] = useState([])
+    const [periode, setPeriode] = useState("Ganjil_2020")
     const [kelompok_keahlian, setkelompokKeahlian] = useState('All')
     const [program_studi, setProgramStudi] = useState('All')
     const [jfa, setJFA] = useState('All')
@@ -33,10 +41,36 @@ function Cluster() {
         Axios.get('http://34.101.42.148:3001/api/get-cluster/'+periode+'/2').then((response) => {
             setDataList2(response.data);
         });
-        // Axios.get('http://localhost:3001/api/get-cluster/'+periode+'/0/kk/'+kelompok_keahlian).then((response) => {
-        //     setDataKK0(response.data);
-        // });
-    }, [periode, kelompok_keahlian]);
+    
+    Axios.get("http://34.101.42.148:3001/api/get/Genap_2019/").then((response) => {
+        setData20192(response.data);
+
+    });
+    Axios.get("http://34.101.42.148:3001/api/get/Ganjil_2020/").then((response) => {
+        setData20201(response.data);
+
+    });
+    Axios.get("http://34.101.42.148:3001/api/get/Genap_2020/").then((response) => {
+        setData20202(response.data);
+
+    });
+    Axios.get("http://34.101.42.148:3001/api/get/Ganjil_2021/").then((response) => {
+        setData20211(response.data);
+
+    });
+    Axios.get("http://34.101.42.148:3001/api/get/Genap_2021/").then((response) => {
+        setData20212(response.data);
+
+    });
+    Axios.get("http://34.101.42.148:3001/api/get/Ganjil_2022/").then((response) => {
+        setData20221(response.data);
+
+    });
+    Axios.get("http://34.101.42.148:3001/api/get/Genap_2022/").then((response) => {
+        setData20222(response.data);
+});
+
+    }, [periode, dataList0]);
 
     const customerTableHead = [
         'KODE NAMA',
@@ -122,6 +156,7 @@ function Cluster() {
                 type: 'xy'
               }
             },
+            colors: ['#324B4F','#79B5BE','#BEB4D4'],
             xaxis: {
               tickAmount: 10,
               labels: {
@@ -166,6 +201,7 @@ const cluster = {
           type: 'bar',
           height: 100
         },
+        
         plotOptions: {
           bar: {
             borderRadius: 4,
@@ -175,12 +211,14 @@ const cluster = {
               }
           }
         },
+        colors: ['#79B5BE','#BEB4D4'],
         dataLabels: {
           enabled: true
         },
         xaxis: {
           categories: ['cluster0', 'cluster1', 'cluster2'
           ],
+          colors: ['#324B4F','#79B5BE','#BEB4D4'],
         },
         tooltip: {
             x: {
@@ -352,6 +390,54 @@ function rata_rata(data, dharma) {
     return jumlah/data.length
 }
 
+function mindharma(data, dharma) {
+    let minvalue = 999
+    for (var item of data){
+        if(dharma==1){
+            if(minvalue>item.dik_diakui){
+                minvalue=item.dik_diakui
+            }
+        }else if(dharma==2){
+            if(minvalue>item.lit_diakui){
+                minvalue=item.lit_diakui
+            }
+        }else if(dharma==3){
+            if(minvalue>item.abdimas_diakui){
+                minvalue=item.abdimas_diakui
+            }
+        }else if(dharma==4){
+            if(minvalue>item.penunjang){
+                minvalue=item.penunjang
+            }
+        }
+    }
+    return minvalue
+}
+function maxdharma(data, dharma) {
+    let maxvalue = 0
+    for (var item of data){
+        if(dharma==1){
+            if(maxvalue<item.dik_diakui){
+                maxvalue=item.dik_diakui
+            }
+        }else if(dharma==2){
+            if(maxvalue<item.lit_diakui){
+                maxvalue=item.lit_diakui
+            }
+        }else if(dharma==3){
+            if(maxvalue<item.abdimas_diakui){
+                maxvalue=item.abdimas_diakui
+            }
+        }else if(dharma==4){
+            if(maxvalue<item.penunjang){
+                maxvalue=item.penunjang
+            }
+        }
+    }
+    return maxvalue
+}
+
+
 return (
     <div>
         <div className='row'>
@@ -364,12 +450,19 @@ return (
                         {periode}
                     </button>
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
-                        <li><button class="dropdown-item" type="button" onClick={() => setPeriode("Genap_2021")}>2021 - Genap</button></li>
-                        <li><button class="dropdown-item" type="button" onClick={() => setPeriode("Ganjil_2021")}>2021 - Ganjil</button></li>
-                        <li><button class="dropdown-item" type="button" onClick={() => setPeriode("Genap_2020")}>2020 - Genap</button></li>
-                        <li><button class="dropdown-item" type="button" onClick={() => setPeriode("Ganjil_2020")}>2020 - Ganjil</button></li>
-                        <li><button class="dropdown-item" type="button" onClick={() => setPeriode("Genap_2019")}>2019 - Genap</button></li>
-                        <li><button class="dropdown-item" type="button" onClick={() => setPeriode("Ganjil_2019")}>2019 - Ganjil</button></li>
+                    {data20212.length!=0  &&
+                <li><button class="dropdown-item" type="button" onClick={() => setPeriode("Genap_2021")}>2021 - Genap</button></li>
+            }
+            {data20211.length!=0  &&
+                <li><button class="dropdown-item" type="button" onClick={() => setPeriode("Ganjil_2021")}>2021 - Ganjil</button></li>
+            }{data20202.length!=0  &&
+                <li><button class="dropdown-item" type="button" onClick={() => setPeriode("Genap_2020")}>2020 - Genap</button></li>
+            }{data20201.length!=0  &&
+                <li><button class="dropdown-item" type="button" onClick={() => setPeriode("Ganjil_2020")}>2020 - Ganjil</button></li>
+            }{data20192.length!=0  &&
+                <li><button class="dropdown-item" type="button" onClick={() => setPeriode("Genap_2019")}>2019 - Genap</button></li>
+            }{data20191.length!=0  &&
+                <li><button class="dropdown-item" type="button" onClick={() => setPeriode("Ganjil_2019")}>2019 - Ganjil</button></li>}
                     </ul>
                 </div>
             </div>
@@ -402,7 +495,7 @@ return (
             <div>
             {dataList.length!=0 &&
                 <div className='row'>
-                    <div className="col-5">
+                    <div className="col-6">
                         <h2>Jumlah Dosen Tiap Cluster</h2>
                             <div className="card">
                                 <div className="card__body">
@@ -416,22 +509,22 @@ return (
                                     }}
                                     series={cluster.series}
                                     type='bar'
-                                    height='350'
+                                    height='270'
                                 />
                             </div>
                         </div>
                     </div>
-                    <div className="col-7">
+                    <div className="col-6">
                         <h2>Analisis Cluster</h2>
                         <div className="card">
                             <div className="card__body">
-                            <p>Berikut merupakan atribut rata-rata dari setiap cluster. Hal ini membantu mendeskripsikan setiap cluster yang terbentuk.</p>
+                            <p>Berikut merupakan rata-rata atributdari setiap cluster. Hal ini membantu mendeskripsikan setiap cluster yang terbentuk.</p>
                                 <table>
                                     <tr>
                                         <td></td>
                                         <td>Dharma 1</td>
                                         <td>Dharma 2</td>
-                                        <td>Dharma 2</td>
+                                        <td>Dharma 3</td>
                                         <td>Penunjang</td>
                                     </tr>
                                     <tr>
@@ -454,6 +547,82 @@ return (
                                         <td>{rata_rata(dataList2, 2).toFixed(2)}</td>
                                         <td>{rata_rata(dataList2, 3).toFixed(2)}</td>
                                         <td>{rata_rata(dataList2, 4).toFixed(2)}</td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="col-6">
+                        <h2>Minimal Nilai</h2>
+                        <div className="card">
+                            <div className="card__body">
+                            <p>Berikut meripakan nilai minimal atribut dari setiap cluster.</p>
+                                <table>
+                                    <tr>
+                                        <td></td>
+                                        <td>Dharma 1</td>
+                                        <td>Dharma 2</td>
+                                        <td>Dharma 3</td>
+                                        <td>Penunjang</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Cluster 0</td>
+                                        <td>{mindharma(dataList0, 1).toFixed(2)}</td>
+                                        <td>{mindharma(dataList0, 2).toFixed(2)}</td>
+                                        <td>{mindharma(dataList0, 3).toFixed(2)}</td>
+                                        <td>{mindharma(dataList0, 4).toFixed(2)}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Cluster 1</td>
+                                        <td>{mindharma(dataList1, 1).toFixed(2)}</td>
+                                        <td>{mindharma(dataList1, 2).toFixed(2)}</td>
+                                        <td>{mindharma(dataList1, 3).toFixed(2)}</td>
+                                        <td>{mindharma(dataList1, 4).toFixed(2)}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Cluster 2</td>
+                                        <td>{mindharma(dataList2, 1).toFixed(2)}</td>
+                                        <td>{mindharma(dataList2, 2).toFixed(2)}</td>
+                                        <td>{mindharma(dataList2, 3).toFixed(2)}</td>
+                                        <td>{mindharma(dataList2, 4).toFixed(2)}</td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="col-6">
+                        <h2>Maksimal Nilai</h2>
+                        <div className="card">
+                            <div className="card__body">
+                            <p>Berikut merupakan nilai maksimal atribut dari setiap cluster.</p>
+                                <table>
+                                    <tr>
+                                        <td></td>
+                                        <td>Dharma 1</td>
+                                        <td>Dharma 2</td>
+                                        <td>Dharma 3</td>
+                                        <td>Penunjang</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Cluster 0</td>
+                                        <td>{maxdharma(dataList0, 1).toFixed(2)}</td>
+                                        <td>{maxdharma(dataList0, 2).toFixed(2)}</td>
+                                        <td>{maxdharma(dataList0, 3).toFixed(2)}</td>
+                                        <td>{maxdharma(dataList0, 4).toFixed(2)}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Cluster 1</td>
+                                        <td>{maxdharma(dataList1, 1).toFixed(2)}</td>
+                                        <td>{maxdharma(dataList1, 2).toFixed(2)}</td>
+                                        <td>{maxdharma(dataList1, 3).toFixed(2)}</td>
+                                        <td>{maxdharma(dataList1, 4).toFixed(2)}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Cluster 2</td>
+                                        <td>{maxdharma(dataList2, 1).toFixed(2)}</td>
+                                        <td>{maxdharma(dataList2, 2).toFixed(2)}</td>
+                                        <td>{maxdharma(dataList2, 3).toFixed(2)}</td>
+                                        <td>{maxdharma(dataList2, 4).toFixed(2)}</td>
                                     </tr>
                                 </table>
                             </div>
