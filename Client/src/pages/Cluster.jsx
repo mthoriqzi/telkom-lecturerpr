@@ -1,5 +1,6 @@
 import React, { useState, useEffect} from 'react'
 import Table from '../components/table/Table'
+import NewTable from '../components/table/NewTable'
 import { Link } from 'react-router-dom'
 import Axios from 'axios';
 import ReactApexChart from 'react-apexcharts';
@@ -22,6 +23,9 @@ function Cluster() {
     const [kelompok_keahlian, setkelompokKeahlian] = useState('All')
     const [program_studi, setProgramStudi] = useState('All')
     const [jfa, setJFA] = useState('All')
+    const [data0, setData0] = useState([])
+    const [data1, setData1] = useState([])
+    const [data2, setData2] = useState([])
     // let [dataFilter, setDataFilter] = useState()
     // let [dataKK, setDataKK0] = useState([])
     const [hasilSearch, setSearch] = useState([])
@@ -39,13 +43,25 @@ function Cluster() {
             setDataList(response.data);
         });
         Axios.get('http://34.101.42.148:3001/api/get-cluster/'+periode+'/0').then((response) => {
-            setDataList0(response.data);
+            var data = response.data
+            data.sort((a, b) => a.kode_nama > b.kode_nama)
+            setDataList0(data);
+            setData0(data)
+            // setDataList(response.data);
         });
         Axios.get('http://34.101.42.148:3001/api/get-cluster/'+periode+'/1').then((response) => {
-            setDataList1(response.data);
+            var data = response.data
+            data.sort((a, b) => a.kode_nama > b.kode_nama)
+            setDataList1(data);
+            setData1(data)
+            // setDataList1(response.data);
         });
         Axios.get('http://34.101.42.148:3001/api/get-cluster/'+periode+'/2').then((response) => {
-            setDataList2(response.data);
+            var data = response.data
+            data.sort((a, b) => a.kode_nama > b.kode_nama)
+            setDataList2(data);
+            setData2(data)
+            // setDataList2(response.data);
         });
     
     Axios.get("http://34.101.42.148:3001/api/get/Genap_2019/").then((response) => {
@@ -96,6 +112,30 @@ function Cluster() {
         'PROF DIAKUI',
         'TOTAL SKS',
     ]
+
+    const filterPerTable = (el) => {
+        if (kelompok_keahlian != 'All') {
+            if (el.kelompok_keahlian != kelompok_keahlian) return false  
+        }
+        if (program_studi != 'All') {
+            if (el.program_studi != program_studi) return false
+        }
+        if (jfa != 'All') {
+            if (el.jfa != jfa) return false
+        }
+
+        return true
+    }
+
+    const filterTable = () => {
+        setData0(dataList0.filter(filterPerTable))
+        setData1(dataList1.filter(filterPerTable))
+        setData2(dataList2.filter(filterPerTable))
+    }
+
+    const searchTable = (stringSearch) => {
+        setData0(data0.filter(el => (el.kode_nama.toLowerCase()).includes(stringSearch.toLowerCase())));
+    }
 
     const renderHead = (item, index) => <th key={index}>{item}</th>
       
@@ -277,7 +317,8 @@ function filterby(cluster){
                     <li><a class="dropdown-item" onClick={() => setJFA("AA")}>AA</a></li>
                     <li><a class="dropdown-item" onClick={() => setJFA("NJFA")}>NJFA</a></li>
                 </ul>
-                <button class="btn btn-primary" data-bs-target="#filterb" data-bs-toggle="modal" type="submit">Filter</button> 
+                {/* <button class="btn btn-primary" data-bs-target="#filterb" data-bs-toggle="modal" type="submit">Filter</button>  */}
+                <button class="btn btn-primary" type="submit" onClick={filterTable}>Filter</button> 
             </div>
 
             
@@ -324,12 +365,15 @@ function search(){
                     placeholder="Kode Nama"
                     name="kode_nama"
                     value={hasilSearch}
-                    onChange={(e) => setSearch(e.target.value)}
+                    onChange={(e) => searchTable(e.target.value)}
+                    // onChange={(e) => setSearch(e.target.value)}
                     aria-label="Username"
                     aria-describedby="basic-addon1"/>
-                <button class="btn btn-outline-secondary" type="button" id="button-addon1" data-bs-target="#search" data-bs-toggle="modal">Search</button>
+                {/* <button class="btn btn-outline-secondary" type="button" id="button-addon1" data-bs-target="#search" data-bs-toggle="modal">Search</button> */}
+                {/* <button class="btn btn-outline-secondary" onClick={searchTable(hasilSearch)}>Search</button> */}
             </div>
-            <div class="modal fade" id="search" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
+
+            {/* <div class="modal fade" id="search" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
                 <div class="modal-dialog modal-lg modal-dialog-centered">
                     <div class="modal-content">
                         <div class="modal-header">
@@ -375,7 +419,7 @@ function search(){
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> */}
         </div>
     )
 }
@@ -645,12 +689,12 @@ return (
                         <div className="col-12">
                             <div className="card">
                                 <div className="card__body height-300">
-                                    <Table
+                                    <NewTable
                                         limit='9999'
                                         headData={customerTableHead}
                                         renderHead={(item, index) => renderHead(item, index)}
 
-                                        bodyData={dataList0}
+                                        bodyData={data0}
                                         renderBody={(item, index) => renderBody(item, index)} />
                                         
 
@@ -668,12 +712,12 @@ return (
                         <div className="col-12">
                             <div className="card">
                                 <div className="card__body height-300">
-                                    <Table
+                                    <NewTable
                                         limit='9999'
                                         headData={customerTableHead}
                                         renderHead={(item, index) => renderHead(item, index)}
 
-                                        bodyData={dataList1}
+                                        bodyData={data1}
                                         renderBody={(item, index) => renderBody(item, index)} />
 
                                 </div>
@@ -690,12 +734,12 @@ return (
                         <div className="col-12">
                             <div className="card">
                                 <div className="card__body height-300">
-                                    <Table
+                                    <NewTable
                                         limit='9999'
                                         headData={customerTableHead}
                                         renderHead={(item, index) => renderHead(item, index)}
 
-                                        bodyData={dataList2}
+                                        bodyData={data2}
                                         renderBody={(item, index) => renderBody(item, index)} />
 
                                 </div>
