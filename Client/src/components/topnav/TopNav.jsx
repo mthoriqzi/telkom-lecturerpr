@@ -40,12 +40,12 @@ const renderUserToggle = (user) => (
 )
 
 const renderUserMenu =(item, index) => (
-    <Link to='/' key={index}>
+    <button type="button" onClick={() => window.location.reload()} key={index}>
         <div className="notification-item">
-            <i className={item.icon}></i>
+            <i  className={item.icon} ></i>
             <span>{item.content}</span>
         </div>
-    </Link>
+    </button>
 )
 
 const Topnav = ({token}) => {

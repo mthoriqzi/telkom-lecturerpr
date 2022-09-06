@@ -6,7 +6,7 @@ import Sidebar from '../sidebar/Sidebar'
 import TopNav from '../topnav/TopNav'
 import Routes from '../Routes'
 
-import { BrowserRouter, Route } from 'react-router-dom'
+import { BrowserRouter, Route, useLocation } from 'react-router-dom'
 
 import { useSelector, useDispatch } from 'react-redux'
 
@@ -78,8 +78,10 @@ const Layout = () => {
 
     return (
         <BrowserRouter>
+        <Route path='/Login' exact component={Login}/>
             <Route render={(props) => (
                 <div className={`layout ${themeReducer.mode} ${themeReducer.color}`}>
+                    
                     <Sidebar {...props}/>
                     <div className="layout__content">
                         <TopNav token={token}/>

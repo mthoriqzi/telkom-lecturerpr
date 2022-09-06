@@ -135,6 +135,9 @@ function Cluster() {
 
     const searchTable = (stringSearch) => {
         setData0(data0.filter(el => (el.kode_nama.toLowerCase()).includes(stringSearch.toLowerCase())));
+        setData1(data1.filter(el => (el.kode_nama.toLowerCase()).includes(stringSearch.toLowerCase())));
+        setData2(data2.filter(el => (el.kode_nama.toLowerCase()).includes(stringSearch.toLowerCase())));
+
     }
 
     const renderHead = (item, index) => <th key={index}>{item}</th>
