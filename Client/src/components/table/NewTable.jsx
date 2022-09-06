@@ -2,38 +2,32 @@ import React, {useState} from 'react'
 
 import './table.css'
 
-const Table = props => {
+const NewTable = props => {
 
-    // const initDataShow = props.limit && props.bodyData ? props.bodyData.slice(0, Number(props.limit)) : props.bodyData
-    
-    // const [dataShow, setDataShow] = useState(initDataShow)
-    const [dataShow, setDataShow] = useState(props.bodyData)
+    // const [dataShow, setDataShow] = useState(props.bodyData)
+    var dataShow = props.bodyData
 
     console.log("here's from table component")
     console.log(dataShow)
 
-    let pages = 1
+    // if (props.limit !== undefined) {
+    //     let page = Math.floor(props.bodyData.length / Number(props.limit))
+    //     pages = props.bodyData.length % Number(props.limit) === 0 ? page : page + 1
+    //     range = [...Array(pages).keys()]
+    // }
 
-    let range = []
+    // const [currPage, setCurrPage] = useState(0)
 
-    if (props.limit !== undefined) {
-        let page = Math.floor(props.bodyData.length / Number(props.limit))
-        pages = props.bodyData.length % Number(props.limit) === 0 ? page : page + 1
-        range = [...Array(pages).keys()]
-    }
-
-    const [currPage, setCurrPage] = useState(0)
-
-    const selectPage = page => {
-        const start = Number(props.limit) * page
-        const end = start + Number(props.limit)
-        setDataShow(props.bodyData.slice(start, end))
-        // setDataShow(props.bodyData)
-    //     let data = props.bodyData
-    //     console.log(props.bodyData[0])
-    // console.log(props.bodyData.length)
-        setCurrPage(page)
-    }
+    // const selectPage = page => {
+    //     const start = Number(props.limit) * page
+    //     const end = start + Number(props.limit)
+    //     setDataShow(props.bodyData.slice(start, end))
+    //     // setDataShow(props.bodyData)
+    // //     let data = props.bodyData
+    // //     console.log(props.bodyData[0])
+    // // console.log(props.bodyData.length)
+    //     setCurrPage(page)
+    // }
     // console.log(index)
     // console.log(dataShow.map((item, index) => props.renderBody(item, index)))
     return (
@@ -56,7 +50,6 @@ const Table = props => {
                             <tbody>
                                 {
                                     dataShow.map((item, index) => props.renderBody(item, index))
-                                    
                                 }
                             </tbody>
                         ) : null
@@ -80,4 +73,4 @@ const Table = props => {
     )
 }
 
-export default Table
+export default NewTable

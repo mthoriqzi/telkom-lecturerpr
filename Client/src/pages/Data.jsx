@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import * as XLSX from 'xlsx';
 import Table from '../components/table/Table'
+import NewTable from '../components/table/NewTable'
 import Axios from 'axios';
 import { Link } from 'react-router-dom'
 // import Login from "../pages/Login"
@@ -17,7 +18,7 @@ function Data({token}) {
   const [data20222, setData20222] = useState([])
   const [dataList, setDataList] = useState([])
   const [jumlah, setJumlah] = useState(0)
-  const [periode, setPeriode] = useState("Ganjil_2020")
+  const [periode, setPeriode] = useState("Genap_2020")
   const [inputs, setInputs] = useState({
     no: "",
     kode_nama: "",
@@ -41,39 +42,42 @@ function Data({token}) {
 
   useEffect(() => {
     Axios.get('http://34.101.42.148:3001/api/get/'+periode).then((response) => {
-      setDataList(response.data);
-
-        Axios.get("http://34.101.42.148:3001/api/get/Ganjil_2019/").then((response) => {
-            setData20191(response.data);
-});
-        });
-        Axios.get("http://34.101.42.148:3001/api/get/Genap_2019/").then((response) => {
-            setData20192(response.data);
-
-        });
-        Axios.get("http://34.101.42.148:3001/api/get/Ganjil_2020/").then((response) => {
-            setData20201(response.data);
-
-        });
-        Axios.get("http://34.101.42.148:3001/api/get/Genap_2020/").then((response) => {
-            setData20202(response.data);
-
-        });
-        Axios.get("http://34.101.42.148:3001/api/get/Ganjil_2021/").then((response) => {
-            setData20211(response.data);
-
-        });
-        Axios.get("http://34.101.42.148:3001/api/get/Genap_2021/").then((response) => {
-            setData20212(response.data);
-
-        });
-        Axios.get("http://34.101.42.148:3001/api/get/Ganjil_2022/").then((response) => {
-            setData20221(response.data);
-
-        });
-        Axios.get("http://34.101.42.148:3001/api/get/Genap_2022/").then((response) => {
-            setData20222(response.data);
+      var data = response.data
+      data.sort((a, b) => a.no > b.no)
+      setDataList(data);
     });
+
+        // Axios.get("http://34.101.42.148:3001/api/get/Ganjil_2019/").then((response) => {
+        //     setData20191(response.data);
+
+        // });
+        // Axios.get("http://34.101.42.148:3001/api/get/Genap_2019/").then((response) => {
+        //     setData20192(response.data);
+
+        // });
+        // Axios.get("http://34.101.42.148:3001/api/get/Ganjil_2020/").then((response) => {
+        //     setData20201(response.data);
+
+        // });
+        // Axios.get("http://34.101.42.148:3001/api/get/Genap_2020/").then((response) => {
+        //     setData20202(response.data);
+
+        // });
+        // Axios.get("http://34.101.42.148:3001/api/get/Ganjil_2021/").then((response) => {
+        //     setData20211(response.data);
+
+        // });
+        // Axios.get("http://34.101.42.148:3001/api/get/Genap_2021/").then((response) => {
+        //     setData20212(response.data);
+
+        // });
+        // Axios.get("http://34.101.42.148:3001/api/get/Ganjil_2022/").then((response) => {
+        //     setData20221(response.data);
+
+        // });
+        // Axios.get("http://34.101.42.148:3001/api/get/Genap_2022/").then((response) => {
+        //     setData20222(response.data);
+    // });
   }, [periode]);
   // console.log(dataList.length)
   const customerTableHead = [
@@ -119,6 +123,8 @@ function Data({token}) {
     delay(1000).then(() => Axios.get(flask, 'GET') );
   }
 
+  console.log(periode)
+  console.log(dataList)
   // handle file upload
   const handleFileUpload = e => {
     const file = e.target.files[0];
@@ -162,7 +168,7 @@ function Data({token}) {
           <td><button value={item.kode_nama} onClick={() => handleRemoveItem(item.kode_nama)}>Delete</button></td>
       </tr>
   )
-
+  
   const changeHandle = e => {
     setInputs({
       ...inputs,
@@ -186,7 +192,7 @@ function Data({token}) {
       "data": name,
       "periode":periode});
 }
-//  console.log(token)
+//  console.log(dataList[1]["kode_nama"])
   return (
     
     <div>
@@ -201,7 +207,7 @@ function Data({token}) {
                 {periode}
             </button>
             <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
-            {data20212.length!=0  &&
+            {/* {data20212.length!=0  &&
                 <li><button class="dropdown-item" type="button" onClick={() => setPeriode("Genap_2021")}>2021 - Genap</button></li>
             }
             {data20211.length!=0  &&
@@ -214,7 +220,11 @@ function Data({token}) {
                 <li><button class="dropdown-item" type="button" onClick={() => setPeriode("Genap_2019")}>2019 - Genap</button></li>
             }{data20191.length!=0  &&
                 <li><button class="dropdown-item" type="button" onClick={() => setPeriode("Ganjil_2019")}>2019 - Ganjil</button></li>
-}
+} */}
+                <li><button class="dropdown-item" type="button" onClick={() => setPeriode("Genap_2021")}>2021 - Genap</button></li>
+                <li><button class="dropdown-item" type="button" onClick={() => setPeriode("Genap_2020")}>2020 - Genap</button></li>
+                <li><button class="dropdown-item" type="button" onClick={() => setPeriode("Ganjil_2020")}>2020 - Ganjil</button></li>
+
                 </ul>
           </div>
         </div>
@@ -379,7 +389,7 @@ function Data({token}) {
                     <label for="colFormLabel" class="col-sm-4 col-form-label">Dik Diakui</label>
                     <div class="col-sm-8">
                       <input
-                        type="text"
+                        type="number"
                         class="form-control"
                         id="colFormLabel"
                         name="dik_diakui"
@@ -392,7 +402,7 @@ function Data({token}) {
                     <label for="colFormLabel" class="col-sm-4 col-form-label">Lit Diakui</label>
                     <div class="col-sm-8">
                       <input
-                        type="Text"
+                        type="number"
                         class="form-control"
                         id="colFormLabel"
                         name="lit_diakui"
@@ -405,7 +415,7 @@ function Data({token}) {
                     <label for="colFormLabel" class="col-sm-4 col-form-label">Abdimas Diakui</label>
                     <div class="col-sm-8">
                       <input
-                        type="text"
+                        type="number"
                         class="form-control"
                         id="colFormLabel"
                         name="abdimas_diakui"
@@ -418,7 +428,7 @@ function Data({token}) {
                     <label for="colFormLabel" class="col-sm-4 col-form-label">Penunjang</label>
                     <div class="col-sm-8">
                       <input
-                        type="text"
+                        type="number"
                         class="form-control"
                         id="colFormLabel"
                         name="penunjang"
@@ -431,7 +441,7 @@ function Data({token}) {
                     <label for="colFormLabel" class="col-sm-4 col-form-label">Total SKS</label>
                     <div class="col-sm-8">
                       <input
-                        type="text" 
+                        type="number" 
                         class="form-control"
                         id="colFormLabel"
                         name="total_sks"
@@ -475,16 +485,17 @@ function Data({token}) {
           <div className="col-12">
               <div className="card">
                   <div className="card__body height-600">
-                      <Table
+                      <NewTable
                           limit='9999'
                           headData={customerTableHead}
                           renderHead={(item, index) => renderHead(item, index)}
                          
-                          bodyData = {dataList}
+                          // bodyData = {[{no: 67, kode_nama: "S1SI-060", kode: "S1SI", no_urut: 60, pendidikan_terakhir: "S2"}, 
+                          // {no: 67, kode_nama: "S1SI-060", kode: "S1SI", no_urut: 60, pendidikan_terakhir: "S2"},
+                          // {no: 67, kode_nama: "S1SI-060", kode: "S1SI", no_urut: 60, pendidikan_terakhir: "S2"}]}
+                          bodyData={dataList}
                           renderBody={(item, index) => renderBody(item, index)}
-                          
                        />
-                    
                   </div>
               </div>
           </div>

@@ -18,7 +18,7 @@ import Badge from '../components/badge/Badge'
 import statusCards from '../assets/JsonData/status-card-data.json'
 import './Pages.css'
 import ReactApexChart from 'react-apexcharts';
-
+import periode from '../pages/Data'
 
 
 function Dashboard () {
@@ -68,7 +68,7 @@ var pptpm = 0
 var pptems = 0
 var pptc = 0
 var pptei = 0
-
+console.log(periode)
 
 if (dataList.length!=0){
     for (var i in dataList){

@@ -18,8 +18,6 @@ function Cluster() {
     const [data20202, setData20202] = useState([])
     const [data20211, setData20211] = useState([])
     const [data20212, setData20212] = useState([])
-    const [data20221, setData20221] = useState([])
-    const [data20222, setData20222] = useState([])
     const [periode, setPeriode] = useState("Ganjil_2020")
     const [kelompok_keahlian, setkelompokKeahlian] = useState('All')
     const [program_studi, setProgramStudi] = useState('All')
@@ -28,7 +26,15 @@ function Cluster() {
     // let [dataKK, setDataKK0] = useState([])
     const [hasilSearch, setSearch] = useState([])
 
+    const fetchData = (url, setData) => {
+        Axios.get(url).then((response) => {
+            setData(response.data);
+        });
+    }
+
     useEffect(() => {
+        // fetchData('http://34.101.42.148:3001/api/get-cluster/'+periode, setDataList)
+
         Axios.get('http://34.101.42.148:3001/api/get-cluster/'+periode).then((response) => {
             setDataList(response.data);
         });
@@ -62,13 +68,13 @@ function Cluster() {
         setData20212(response.data);
 
     });
-    Axios.get("http://34.101.42.148:3001/api/get/Ganjil_2022/").then((response) => {
-        setData20221(response.data);
+//     Axios.get("http://34.101.42.148:3001/api/get/Ganjil_2022/").then((response) => {
+//         setData20221(response.data);
 
-    });
-    Axios.get("http://34.101.42.148:3001/api/get/Genap_2022/").then((response) => {
-        setData20222(response.data);
-});
+//     });
+//     Axios.get("http://34.101.42.148:3001/api/get/Genap_2022/").then((response) => {
+//         setData20222(response.data);
+// });
 
     }, [periode]);
 
@@ -92,7 +98,7 @@ function Cluster() {
     ]
 
     const renderHead = (item, index) => <th key={index}>{item}</th>
-          
+      
     const renderBody = (item, index) => (
         <tr key={index}>
             <Link to={"User/"+item.kode_nama} key={index}>
@@ -646,6 +652,7 @@ return (
 
                                         bodyData={dataList0}
                                         renderBody={(item, index) => renderBody(item, index)} />
+                                        
 
                                 </div>
                             </div>
