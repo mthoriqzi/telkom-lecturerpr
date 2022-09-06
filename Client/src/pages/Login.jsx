@@ -15,9 +15,11 @@ async function loginUser(credentials) {
       .then(data => data.json())
    }
 
-const Login = ({ setToken }) => {
+const Login = ({ setToken,token1 }) => {
     const [username, setUserName] = useState();
     const [password, setPassword] = useState();
+    const [tokentemp, setTokentemp] = useState("test123");
+    
     const handleSubmit = async e => {
         e.preventDefault();
         const token = await loginUser({
@@ -28,8 +30,11 @@ const Login = ({ setToken }) => {
             setToken(token);
 
         }
+        else{
+          console.log("mashok")
+          setTokentemp("test1234")}
       }
-      
+      console.log(tokentemp)
     return (
       <div className="row vh-100 m-0">
         <div className="col-6 bg-hijau my-auto h-100 d-flex align-items-center justify-content-center text-center text-white">
@@ -46,7 +51,8 @@ const Login = ({ setToken }) => {
           </div>
           <div>
             <div className="login-wrapper">
-              <h1>Log In</h1>
+              <h1 align="left">Log In</h1>
+              <br></br>
                 <form onSubmit={handleSubmit}>
                   <label>
                     <p>Username</p>
@@ -58,7 +64,10 @@ const Login = ({ setToken }) => {
                     <input type="password" onChange={e => setPassword(e.target.value)}/>
                   </label>
                   <div>
+                    {tokentemp=="test1234" &&
+                  <label style={{color:  'red' }}>username or password is incorrect</label>}
                   <br/>
+                  <br></br>
                     <button type="submit" className='btn btn-success'>Log In</button>
                   </div>
                 </form>

@@ -177,7 +177,7 @@ function Data({token}) {
       <td>{item.total_sks.toFixed(2)}</td>
       <td>{item.pemenuhan_tridarma}</td>
       <td>{editItem(item.kode_nama)}</td>
-      <td><button value={item.kode_nama} onClick={() => handleRemoveItem(item.kode_nama)}>Delete</button></td>
+      <td><button class="btn btn-outline-secondary" type="button" value={item.kode_nama} onClick={() => handleRemoveItem(item.kode_nama)}>Delete</button></td>
     </tr>
   )
   

@@ -180,7 +180,7 @@ const Individu = (props) => {
                   text: 'Dharma'
                 },
                 min: 0,
-                max: 3
+                max: 30
               },
               legend: {
                 position: 'top',

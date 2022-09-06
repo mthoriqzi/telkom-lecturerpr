@@ -33,7 +33,7 @@ const Layout = () => {
     }, [dispatch])
 
     if(!token) {
-        return <Login setToken={setToken} />
+        return <Login setToken={setToken} token1={token}/>
       }
     console.log(token)
 
