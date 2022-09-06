@@ -135,10 +135,29 @@ app.post('/api/insert', (req, res) => {
     });
     // const sqlInsert = "insert into data (no, kode_nama, kode, no_urut, program_studi, status_kepegawaian, jfa, dik_diakui, lit_diakui, abdimas_diakui, penunjang, prof_diakui, total_sks, pemenuhan_tridarma) values (1, 'a', 'a', 1, 'a', 'a', 'a', 1,1,1,1,1,1,'c');";
 });
-// const cors = require('cors');
-// app.use(cors({
-//     origin: '*'
-// })); 
+
+app.post('/api/edit', (req, res) => {
+    const sqlDelete = `update ${req.body.periode} set 
+                        pendidikan_terakhir="${req.body.data.pendidikan_terakhir}", 
+                        kelompok_keahlian="${req.body.data.kelompok_keahlian}", 
+                        inpassing="${req.body.data.inpassing}", 
+                        sertifikasi="${req.body.data.sertifikasi}", 
+                        program_studi="${req.body.data.program_studi}", 
+                        status_kepegawaian="${req.body.data.status_kepegawaian}", 
+                        jfa="${req.body.data.jfa}", 
+                        dik_diakui=${req.body.data.dik_diakui}, 
+                        lit_diakui=${req.body.data.lit_diakui}, 
+                        abdimas_diakui=${req.body.data.abdimas_diakui}, 
+                        penunjang=${req.body.data.penunjang}, 
+                        prof_diakui=${req.body.data.prof_diakui}, 
+                        total_sks=${req.body.data.total_sks}, 
+                        pemenuhan_tridarma="${req.body.data.pemenuhan_tridarma}" 
+                        where kode_nama="${req.body.data.kode_nama}"`;
+    db.query(sqlDelete, (err, result) => {
+        res.send(result);
+    });
+});
+
 app.post('/api/delete', (req, res) => {
     // console.log(req.query.kode_nama)
     const sqlDelete = `delete from ${req.body.periode} where kode_nama="${req.body.data}"`;

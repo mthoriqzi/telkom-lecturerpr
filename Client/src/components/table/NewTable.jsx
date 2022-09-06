@@ -7,8 +7,8 @@ const NewTable = props => {
     // const [dataShow, setDataShow] = useState(props.bodyData)
     var dataShow = props.bodyData
 
-    console.log("here's from table component")
-    console.log(dataShow)
+    // console.log("here's from table component")
+    // console.log(dataShow)
 
     // if (props.limit !== undefined) {
     //     let page = Math.floor(props.bodyData.length / Number(props.limit))

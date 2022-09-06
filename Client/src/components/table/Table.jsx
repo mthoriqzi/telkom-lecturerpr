@@ -9,8 +9,8 @@ const Table = props => {
     // const [dataShow, setDataShow] = useState(initDataShow)
     const [dataShow, setDataShow] = useState(props.bodyData)
 
-    console.log("here's from table component")
-    console.log(dataShow)
+    // console.log("here's from table component")
+    // console.log(dataShow)
 
     let pages = 1
 
