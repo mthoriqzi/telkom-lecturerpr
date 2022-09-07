@@ -40,21 +40,21 @@ const renderUserToggle = (user) => (
 )
 
 const renderUserMenu =(item, index) => (
-    <Link to='/' key={index}>
+    <button type="button" onClick={() => window.location.reload()} key={index}>
         <div className="notification-item">
-            <i className={item.icon}></i>
+            <i  className={item.icon} ></i>
             <span>{item.content}</span>
         </div>
-    </Link>
+    </button>
 )
 
 const Topnav = ({token}) => {
     if (token.token == "test12"){
         console.log("masuk token12")
-        curr_user.display_name="Direktorat"}
+        curr_user.display_name="Dekanat"}
     if (token.token == "test123"){
     console.log("masuk token123")
-        curr_user.display_name="Dosen"}
+        curr_user.display_name="SDM"}
 
     return (
         <div className='topnav'>

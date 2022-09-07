@@ -135,6 +135,9 @@ function Cluster() {
 
     const searchTable = (stringSearch) => {
         setData0(data0.filter(el => (el.kode_nama.toLowerCase()).includes(stringSearch.toLowerCase())));
+        setData1(data1.filter(el => (el.kode_nama.toLowerCase()).includes(stringSearch.toLowerCase())));
+        setData2(data2.filter(el => (el.kode_nama.toLowerCase()).includes(stringSearch.toLowerCase())));
+
     }
 
     const renderHead = (item, index) => <th key={index}>{item}</th>
@@ -495,8 +498,8 @@ return (
                 <h2>Hasil Cluster Periode:</h2>
             </div>
             <div className="col-6">
-                <div class="dropdown">
-                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-bs-toggle="dropdown" aria-expanded="false">
+                <div class="dropdown" style={{ display: "flex" }}>
+                    <button class="btn btn-secondary dropdown-toggle" style={{ marginLeft: "auto" }} type="button" id="dropdownMenu2" data-bs-toggle="dropdown" aria-expanded="false">
                         {periode}
                     </button>
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
@@ -679,12 +682,15 @@ return (
                         </div>
                     </div>
                 </div>
+                
                 }
+                    {filterby(0)}
+                    {search()}
                 {dataList0.length!=0 &&
                 <div>
                     <h1>Cluster 0</h1>
-                    {filterby(0)}
-                    {search()}
+                    {/* {filterby(0)} */}
+                    {/* {search()} */}
                     <div className="row">
                         <div className="col-12">
                             <div className="card">
@@ -707,7 +713,7 @@ return (
                 {dataList1.length!=0 &&
                 <div>
                     <h2>Cluster 1</h2>
-                    {search()}
+                    {/* {search()} */}
                     <div className="row">
                         <div className="col-12">
                             <div className="card">
@@ -729,7 +735,7 @@ return (
                 {dataList2.length!=0 &&
                 <div>
                     <h2>Cluster 2</h2>
-                    {search()}
+                    {/* {search()} */}
                     <div className="row">
                         <div className="col-12">
                             <div className="card">

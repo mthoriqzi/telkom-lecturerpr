@@ -35,6 +35,38 @@ function Data({token}) {
       data.sort((a, b) => a.no > b.no)
       setDataList(data);
     });
+
+        // Axios.get("http://34.101.42.148:3001/api/get/Ganjil_2019/").then((response) => {
+        //     setData20191(response.data);
+
+        // });
+        // Axios.get("http://34.101.42.148:3001/api/get/Genap_2019/").then((response) => {
+        //     setData20192(response.data);
+
+        // });
+        Axios.get("http://34.101.42.148:3001/api/get/Ganjil_2020/").then((response) => {
+            setData20201(response.data);
+
+        });
+        Axios.get("http://34.101.42.148:3001/api/get/Genap_2020/").then((response) => {
+            setData20202(response.data);
+
+        });
+        Axios.get("http://34.101.42.148:3001/api/get/Ganjil_2021/").then((response) => {
+            setData20211(response.data);
+
+        });
+        Axios.get("http://34.101.42.148:3001/api/get/Genap_2021/").then((response) => {
+            setData20212(response.data);
+
+        });
+        Axios.get("http://34.101.42.148:3001/api/get/Ganjil_2022/").then((response) => {
+            setData20221(response.data);
+
+        });
+        Axios.get("http://34.101.42.148:3001/api/get/Genap_2022/").then((response) => {
+            setData20222(response.data);
+    });
   }, [periode]);
 
   const customerTableHead = [
@@ -148,7 +180,7 @@ function Data({token}) {
       <td>{item.total_sks.toFixed(2)}</td>
       <td>{item.pemenuhan_tridarma}</td>
       <td>{editItem(item.kode_nama)}</td>
-      <td><button value={item.kode_nama} onClick={() => handleRemoveItem(item.kode_nama)}>Delete</button></td>
+      <td><button class="btn btn-outline-secondary" type="button" value={item.kode_nama} onClick={() => handleRemoveItem(item.kode_nama)}>Delete</button></td>
     </tr>
   )
   
@@ -276,7 +308,7 @@ function Data({token}) {
                 {periode}
             </button>
             <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
-            {/* {data20212.length!=0  &&
+            {data20212.length!=0  &&
                 <li><button class="dropdown-item" type="button" onClick={() => setPeriode("Genap_2021")}>2021 - Genap</button></li>
             }
             {data20211.length!=0  &&
@@ -285,14 +317,15 @@ function Data({token}) {
                 <li><button class="dropdown-item" type="button" onClick={() => setPeriode("Genap_2020")}>2020 - Genap</button></li>
             }{data20201.length!=0  &&
                 <li><button class="dropdown-item" type="button" onClick={() => setPeriode("Ganjil_2020")}>2020 - Ganjil</button></li>
-            }{data20192.length!=0  &&
+            }
+            {/* {data20192.length!=0  &&
                 <li><button class="dropdown-item" type="button" onClick={() => setPeriode("Genap_2019")}>2019 - Genap</button></li>
             }{data20191.length!=0  &&
                 <li><button class="dropdown-item" type="button" onClick={() => setPeriode("Ganjil_2019")}>2019 - Ganjil</button></li>
 } */}
-                <li><button class="dropdown-item" type="button" onClick={() => setPeriode("Genap_2021")}>2021 - Genap</button></li>
+                {/* <li><button class="dropdown-item" type="button" onClick={() => setPeriode("Genap_2021")}>2021 - Genap</button></li>
                 <li><button class="dropdown-item" type="button" onClick={() => setPeriode("Genap_2020")}>2020 - Genap</button></li>
-                <li><button class="dropdown-item" type="button" onClick={() => setPeriode("Ganjil_2020")}>2020 - Ganjil</button></li>
+                <li><button class="dropdown-item" type="button" onClick={() => setPeriode("Ganjil_2020")}>2020 - Ganjil</button></li> */}
 
                 </ul>
           </div>

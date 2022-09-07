@@ -23,12 +23,43 @@ import periode from '../pages/Data'
 
 function Dashboard () {
 
+
+
+const [data20201, setData20201] = useState([])
+const [data20202, setData20202] = useState([])
+const [data20211, setData20211] = useState([])
+const [data20212, setData20212] = useState([])
+const [data20221, setData20221] = useState([])
+const [data20222, setData20222] = useState([])
 const [dataList, setDataList] = useState([])
 const [periode, setPeriode] = useState("Ganjil_2020")
 useEffect(() => {
     Axios.get('http://34.101.42.148:3001/api/get/'+periode).then((response) => {
       setDataList(response.data);
     });
+    Axios.get("http://34.101.42.148:3001/api/get/Ganjil_2020/").then((response) => {
+        setData20201(response.data);
+
+    });
+    Axios.get("http://34.101.42.148:3001/api/get/Genap_2020/").then((response) => {
+        setData20202(response.data);
+
+    });
+    Axios.get("http://34.101.42.148:3001/api/get/Ganjil_2021/").then((response) => {
+        setData20211(response.data);
+
+    });
+    Axios.get("http://34.101.42.148:3001/api/get/Genap_2021/").then((response) => {
+        setData20212(response.data);
+
+    });
+    Axios.get("http://34.101.42.148:3001/api/get/Ganjil_2022/").then((response) => {
+        setData20221(response.data);
+
+    });
+    Axios.get("http://34.101.42.148:3001/api/get/Genap_2022/").then((response) => {
+        setData20222(response.data);
+});
   }, [periode]);
 
 // const piechart = {
@@ -753,10 +784,34 @@ const renderOrderBody = (item, index) => (
 
 
     return (
-        <div>
+      
+        <div><div className="row"><div className='col-6'>
             <h2 className="page-header">Selamat Datang di Dashboard Evaluasi Kinerja</h2>
-            <h6 className='margin-bottom'>Hi , Selamat datang kembali</h6>
+            <h6 className='margin-bottom'>Hi , Selamat datang kembali</h6></div>
+            <div className='col-6'>
+            <div class="dropdown" style={{ display: "flex" }}>
+                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" style={{ marginLeft: "auto" }} data-bs-toggle="dropdown" aria-expanded="false">
+                        {periode}
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                    {data20212.length!=0  &&
+                <li><button class="dropdown-item" type="button" onClick={() => setPeriode("Genap_2021")}>2021 - Genap</button></li>
+            }
+            {data20211.length!=0  &&
+                <li><button class="dropdown-item" type="button" onClick={() => setPeriode("Ganjil_2021")}>2021 - Ganjil</button></li>
+            }{data20202.length!=0  &&
+                <li><button class="dropdown-item" type="button" onClick={() => setPeriode("Genap_2020")}>2020 - Genap</button></li>
+            }{data20201.length!=0  &&
+                <li><button class="dropdown-item" type="button" onClick={() => setPeriode("Ganjil_2020")}>2020 - Ganjil</button></li>
+            }
+            {/* {data20192.length!=0  &&
+                <li><button class="dropdown-item" type="button" onClick={() => setPeriode("Genap_2019")}>2019 - Genap</button></li>
+            }{data20191.length!=0  &&
+                <li><button class="dropdown-item" type="button" onClick={() => setPeriode("Ganjil_2019")}>2019 - Ganjil</button></li>} */}
+                    </ul>
+                </div></div></div>
             <div className="row">
+              
                 {/* <div className="col-6">
                     <div className="row">
                         {

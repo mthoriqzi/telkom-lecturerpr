@@ -12,7 +12,7 @@ const Routes = ({token}) => {
     return (
         <Switch>
             <Route path='/' exact component={Dashboard}/>
-            <Route path='/Login' exact component={Login}/>
+            {/* <Route path='/Login' exact component={Login}/> */}
             <Route path='/Data' render={props => <Data token={token} />}/>
             <Route path='/cluster' component={Cluster}/>
             <Route path='/User/:id' component={Individu}/>
