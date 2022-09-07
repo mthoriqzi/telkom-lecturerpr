@@ -50,10 +50,10 @@ const renderUserMenu =(item, index) => (
 
 const Topnav = ({token}) => {
     if (token.token == "test12"){
-        console.log("masuk token12")
+        // console.log("masuk token12")
         curr_user.display_name="Dekanat"}
     if (token.token == "test123"){
-    console.log("masuk token123")
+    // console.log("masuk token123")
         curr_user.display_name="SDM"}
 
     return (

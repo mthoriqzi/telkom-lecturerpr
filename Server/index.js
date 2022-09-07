@@ -19,7 +19,7 @@ app.use(bodyParser.urlencoded({extended:true}));
 
 // app.use(cors());
 app.post('/login', (req, res) => {
-    console.log(req)
+    // console.log(req)
     res.set('Access-Control-Allow-Origin', '*');
     if(req.body.username=="sdm" && req.body.password=="sdm"){
         res.send({
@@ -80,7 +80,7 @@ app.get('/api/get-user/:periode/:kode_nama', (req, res) => {
     res.set('Access-Control-Allow-Origin', '*');
     const sqlSelect = "select * from "+req.params.periode +" where kode_nama='"+req.params.kode_nama+"'";
     db.query(sqlSelect, (err, result) => {
-        console.log(sqlSelect);
+        // console.log(sqlSelect);
         res.send(result);
     });
 });
@@ -161,7 +161,7 @@ app.post('/api/edit', (req, res) => {
 app.post('/api/delete', (req, res) => {
     // console.log(req.query.kode_nama)
     const sqlDelete = `delete from ${req.body.periode} where kode_nama="${req.body.data}"`;
-    console.log(sqlDelete)
+    // console.log(sqlDelete)
     db.query(sqlDelete, (err, result) => {
         // console.log(result);
         res.send(result);

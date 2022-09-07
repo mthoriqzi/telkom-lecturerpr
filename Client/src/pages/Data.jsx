@@ -8,6 +8,14 @@ import { Link } from 'react-router-dom'
 function Data({token}) {
   const [dataList, setDataList] = useState([])
   const [periode, setPeriode] = useState("Genap_2020")
+  const [data20201, setData20201] = useState([])
+  const [data20202, setData20202] = useState([])
+  const [data20211, setData20211] = useState([])
+  const [data20212, setData20212] = useState([])
+  const [data20221, setData20221] = useState([])
+  const [data20222, setData20222] = useState([])
+  
+
   const [inputs, setInputs] = useState({
     no: "",
     kode_nama: "",
@@ -229,7 +237,7 @@ function Data({token}) {
     // if(data[key]!=""){
       // defaultIsi = data[key]
     // }
-    console.log(defaultIsi)
+    // console.log(defaultIsi)
     return (
       <>
         {/* <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">{inputs[key]}</button> */}

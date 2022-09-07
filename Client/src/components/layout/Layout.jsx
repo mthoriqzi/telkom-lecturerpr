@@ -35,7 +35,7 @@ const Layout = () => {
     if(!token) {
         return <Login setToken={setToken} token={token}/>
       }
-    console.log(token)
+    // console.log(token)
 
     // if(token.token =="test12") {
     //     console.log("mashok")

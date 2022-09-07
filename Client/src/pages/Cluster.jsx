@@ -28,7 +28,7 @@ function Cluster() {
     const [data2, setData2] = useState([])
     // let [dataFilter, setDataFilter] = useState()
     // let [dataKK, setDataKK0] = useState([])
-    const [hasilSearch, setSearch] = useState([])
+    const [hasilSearch, setSearch] = useState('')
 
     const fetchData = (url, setData) => {
         Axios.get(url).then((response) => {
@@ -132,12 +132,23 @@ function Cluster() {
         setData1(dataList1.filter(filterPerTable))
         setData2(dataList2.filter(filterPerTable))
     }
-
-    const searchTable = (stringSearch) => {
-        setData0(data0.filter(el => (el.kode_nama.toLowerCase()).includes(stringSearch.toLowerCase())));
-        setData1(data1.filter(el => (el.kode_nama.toLowerCase()).includes(stringSearch.toLowerCase())));
-        setData2(data2.filter(el => (el.kode_nama.toLowerCase()).includes(stringSearch.toLowerCase())));
-
+ 
+    const searchTable = () => {
+        if (hasilSearch == "") {
+            setData0(dataList0)
+            setData1(dataList1)
+            setData2(dataList2)
+        }else {
+            if (kelompok_keahlian == 'All' && program_studi == 'All' && jfa == 'All') {
+                setData0(dataList0.filter(el => (el.kode_nama.toLowerCase()).includes(hasilSearch.toLowerCase())));
+                setData1(dataList1.filter(el => (el.kode_nama.toLowerCase()).includes(hasilSearch.toLowerCase())));
+                setData2(dataList2.filter(el => (el.kode_nama.toLowerCase()).includes(hasilSearch.toLowerCase())));
+            } else {
+                setData0(data0.filter(el => (el.kode_nama.toLowerCase()).includes(hasilSearch.toLowerCase())));
+                setData1(data1.filter(el => (el.kode_nama.toLowerCase()).includes(hasilSearch.toLowerCase())));
+                setData2(data2.filter(el => (el.kode_nama.toLowerCase()).includes(hasilSearch.toLowerCase())));
+            }
+        }
     }
 
     const renderHead = (item, index) => <th key={index}>{item}</th>
@@ -368,12 +379,12 @@ function search(){
                     placeholder="Kode Nama"
                     name="kode_nama"
                     value={hasilSearch}
-                    onChange={(e) => searchTable(e.target.value)}
-                    // onChange={(e) => setSearch(e.target.value)}
+                    // onChange={(e) => searchTable(e.target.value)}
+                    onChange={(e) => setSearch(e.target.value)}
                     aria-label="Username"
                     aria-describedby="basic-addon1"/>
                 {/* <button class="btn btn-outline-secondary" type="button" id="button-addon1" data-bs-target="#search" data-bs-toggle="modal">Search</button> */}
-                {/* <button class="btn btn-outline-secondary" onClick={searchTable(hasilSearch)}>Search</button> */}
+                <button class="btn btn-outline-secondary" onClick={searchTable}>Search</button>
             </div>
 
             {/* <div class="modal fade" id="search" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">

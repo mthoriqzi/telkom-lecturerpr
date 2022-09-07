@@ -31,10 +31,10 @@ const Login = ({ setToken,token1 }) => {
 
         }
         else{
-          console.log("mashok")
+          // console.log("mashok")
           setTokentemp("test1234")}
       }
-      console.log(tokentemp)
+      // console.log(tokentemp)
     return (
       <div className="row vh-100 m-0">
         <div className="col-6 bg-hijau my-auto h-100 d-flex align-items-center justify-content-center text-center text-white">
