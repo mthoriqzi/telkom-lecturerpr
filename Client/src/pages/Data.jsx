@@ -3,7 +3,9 @@ import * as XLSX from 'xlsx';
 import NewTable from '../components/table/NewTable'
 import Axios from 'axios';
 import { Link } from 'react-router-dom'
+import EditModal from '../components/ModalEdit/EditModal.jsx'
 // import Login from "../pages/Login"
+
 
 function Data({token}) {
   const [dataList, setDataList] = useState([])
@@ -14,7 +16,12 @@ function Data({token}) {
   const [data20212, setData20212] = useState([])
   const [data20221, setData20221] = useState([])
   const [data20222, setData20222] = useState([])
+  const [cariNama, setCariNama] = useState([])
+
+  const [openModal, setOpenModal] = useState(false)
   
+  // var selectedData = {}
+  const [selected, setSelected] = useState({})
 
   const [inputs, setInputs] = useState({
     no: "",
@@ -36,7 +43,7 @@ function Data({token}) {
     total_sks: "",
     pemenuhan_tridarma: ""
   })
-  console.log(inputs.pendidikan_terakhir)
+  // console.log(inputs.pendidikan_terakhir)
   useEffect(() => {
     Axios.get('http://34.101.42.148:3001/api/get/'+periode).then((response) => {
       var data = response.data
@@ -166,6 +173,15 @@ function Data({token}) {
     reader.readAsBinaryString(file);
   }
 
+  const setSelectedData = (data) => {
+    setOpenModal(true)
+    // console.log('data di selected item', data)
+    // setIsEditing(!isEditing)
+    // selectedData = data
+    setSelected(data)
+    console.log(openModal)
+  }
+
   const renderHead = (item, index) => <th key={index}>{item}</th>
           
   const renderBody = (item, index) => (
@@ -190,7 +206,12 @@ function Data({token}) {
       <td>{item.prof_diakui}</td>
       <td>{item.total_sks.toFixed(2)}</td>
       <td>{item.pemenuhan_tridarma}</td>
-      <td>{editItem(item.kode_nama)}</td>
+      {/* <td ><button class="btn btn-outline-secondary" type="button" onClick={()=> editItem(item.kode_nama)} id="bukaEdit">Edit</button></td> */}
+      {/* <td onClick={() => editItem(item.kode_nama)} data-bs-target="#edit" data-bs-toggle="modal">Edit</td> */}
+      {/* <td data-bs-target="#edit" data-bs-toggle="modal">Edit</td> */}
+      <td><button class="btn btn-outline-secondary" type="button" onClick={() => setSelectedData(item)}>Edit</button></td>
+      {/* <td onClick={() => setIsEditing(true)} >Edit</td> */}
+      {/* <td >{editItem(item.kode_nama)}</td>  */}
       <td><button class="btn btn-outline-secondary" type="button" value={item.kode_nama} onClick={() => handleRemoveItem(item.kode_nama)}>Delete</button></td>
     </tr>
   )
@@ -229,18 +250,34 @@ function Data({token}) {
       <label for="colFormLabel" class="col-sm-4 col-form-label">{nama}</label>
       <div class="col-sm-8">
         {dropdown(key, jumlah)}
+        {/* {generateDropdown(key, jumlah, defaultValue)} */}
       </div>
     </div>
     )
   }
+
+  const generateDropdown = (item) => {
+    var result = []
+    Object.keys(dataDropdown).map(category => {
+      var nama = category.split("_").join(" ").toUpperCase()
+      result.push(
+        <div class="row mb-3">
+          <label for="colFormLabel" class="col-sm-4 col-form-label">{nama}</label>
+          <div class="col-sm-8">
+            <select class="form-select" onClick={(e) => setInputs({...inputs,[category]:e.target.value})}>
+              {
+                dataDropdown[category].map(el => (item[category].toLowerCase()).includes(el.toLowerCase()) ? <option value={el} selected>{el}</option> : <option value={el}>{el}</option>)
+                // () => console.log(typeof item.category)
+              }
+            </select>
+          </div>
+        </div>
+      )
+    })
+    return result
+  }
+
   const dropdown = (key, jumlah) => {
-    // var parameter 
-    // var defaultIsi =""
-    // console.log(data[key])
-    // if(data[key]!=""){
-      // defaultIsi = data[key]
-    // }
-    // console.log(defaultIsi)
     return (
       <>
         {/* <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">{inputs[key]}</button> */}
@@ -266,12 +303,21 @@ function Data({token}) {
       </>
     )
   }
+  
+  async function cari(nama){
+    return dataList.find(i => i.kode_nama === nama)
+  }
 
-  const editItem = (nama) => {
+  const editItem = async(nama) => {
+    // setCariNama(nama)
     var dosen = dataList.find(item => item.kode_nama === nama)
+    // let dosen = await cari(nama)
+    console.log(dosen)
     return(
-      <>
-        <button class="btn btn-outline-secondary" type="button" data-bs-target="#edit" data-bs-toggle="modal">Edit</button>
+      <div>
+        <button class="btn btn-outline-secondary" type="button" data-bs-target="#edit" data-bs-toggle="modal" >Edit2</button>
+        {/* <div class="modal fade" id="edit" aria-labelledby="staticBackdropLabel" tabindex="-1"> */}
+        {/* <div class="modal" aria-labelledby="staticBackdropLabel"> */}
         <div class="modal fade" id="edit" aria-hidden="true" aria-labelledby="staticBackdropLabel" tabindex="-1">
           <div class="modal-dialog modal-lg">
             <div class="modal-content">
@@ -280,20 +326,21 @@ function Data({token}) {
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
               </div>
               <div class="modal-body">
-                {inputDropdown("pendidikan_terakhir","Pendidikan terakhir",3)}
+                {/* {inputDropdown("pendidikan_terakhir","Pendidikan terakhir",3)}
                 {inputDropdown("kelompok_keahlian","Kelompok Keahlian",4)}
                 {inputDropdown("inpassing","Inpassing",8)}
                 {inputDropdown("sertifikasi","Sertifikasi",2)}
                 {inputDropdown("program_studi","Program Studi",4)}
                 {inputDropdown("status_kepegawaian","Status Kepegawaian",4)}
-                {inputDropdown("jfa","JFA",4)}
+                {inputDropdown("jfa","JFA",4)} */}
+                generateDropdown(dosen)
                 {inputManual("number","dik_diakui","Dik Diakui",dosen.dik_diakui)}
                 {inputManual("number","lit_diakui","Lit Diakui",dosen.lit_diakui)}
                 {inputManual("number","abdimas_diakui","Abdimas Diakui",dosen.abdimas_diakui)}
                 {inputManual("number","penunjang","Penunjang",dosen.penunjang)}
                 {inputManual("number","prof_diakui","Prof Diakui",dosen.prof_diakui)}
                 {inputManual("number","total_sks","Total SKS",dosen.total_sks)}
-                {inputDropdown("pemenuhan_tridarma","Pemenuhan Tridharma",2)}
+                {/* {inputDropdown("pemenuhan_tridarma","Pemenuhan Tridharma",2)} */}
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-primary" onClick={() => editDB(dosen)} data-bs-dismiss="modal">Save changes</button>
@@ -301,7 +348,7 @@ function Data({token}) {
             </div>
           </div>
         </div>
-      </>
+      </div>
     )
   }
 
@@ -410,6 +457,9 @@ function Data({token}) {
               </div>
           </div>
       </div>
+      }
+      {
+       openModal && <EditModal data={selected} inputDropdown={inputDropdown} inputManual={inputManual} editDB={editDB} generateDropdown={generateDropdown} setOpenModal={setOpenModal}/>
       }
     </div>
   );
