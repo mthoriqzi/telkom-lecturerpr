@@ -6,14 +6,6 @@ import { Link } from 'react-router-dom'
 // import Login from "../pages/Login"
 
 function Data({token}) {
-  const [data20191, setData20191] = useState([])
-  const [data20192, setData20192] = useState([])
-  const [data20201, setData20201] = useState([])
-  const [data20202, setData20202] = useState([])
-  const [data20211, setData20211] = useState([])
-  const [data20212, setData20212] = useState([])
-  const [data20221, setData20221] = useState([])
-  const [data20222, setData20222] = useState([])
   const [dataList, setDataList] = useState([])
   const [periode, setPeriode] = useState("Genap_2020")
   const [inputs, setInputs] = useState({
@@ -43,38 +35,6 @@ function Data({token}) {
       data.sort((a, b) => a.no > b.no)
       setDataList(data);
     });
-
-        // Axios.get("http://34.101.42.148:3001/api/get/Ganjil_2019/").then((response) => {
-        //     setData20191(response.data);
-
-        // });
-        // Axios.get("http://34.101.42.148:3001/api/get/Genap_2019/").then((response) => {
-        //     setData20192(response.data);
-
-        // });
-        // Axios.get("http://34.101.42.148:3001/api/get/Ganjil_2020/").then((response) => {
-        //     setData20201(response.data);
-
-        // });
-        // Axios.get("http://34.101.42.148:3001/api/get/Genap_2020/").then((response) => {
-        //     setData20202(response.data);
-
-        // });
-        // Axios.get("http://34.101.42.148:3001/api/get/Ganjil_2021/").then((response) => {
-        //     setData20211(response.data);
-
-        // });
-        // Axios.get("http://34.101.42.148:3001/api/get/Genap_2021/").then((response) => {
-        //     setData20212(response.data);
-
-        // });
-        // Axios.get("http://34.101.42.148:3001/api/get/Ganjil_2022/").then((response) => {
-        //     setData20221(response.data);
-
-        // });
-        // Axios.get("http://34.101.42.148:3001/api/get/Genap_2022/").then((response) => {
-        //     setData20222(response.data);
-    // });
   }, [periode]);
 
   const customerTableHead = [
@@ -97,6 +57,17 @@ function Data({token}) {
     'TOTAL SKS',
     'PEMENUHAN TRIDHARMA'
   ]
+
+  const dataDropdown = {
+    pendidikan_terakhir: ["S1","S2","S3"],
+    kelompok_keahlian: ["ENGINEERING MANAGEMENT SYSTEM","ENTERPRISE AND INDUSTRIAL SYSTEM", "CYBERNETICS", "PRODUCTION AND MANUFACTURING SYSTEM"],
+    inpassing: ["Pembina","Pembina TK 1","Pembina Utama","Pembina Utama Madya","Pembina Utama Muda","Penata","Penata Muda TK 1","Penata TK 1"],
+    sertifikasi: ["SUDAH","BELUM"],
+    program_studi: ["PRODI S2 TEKNIK INDUSTRI (FRI) (2019)","PRODI S1 TEKNIK INDUSTRI (FRI) (2019)","PRODI S1 SISTEM INFORMASI (FRI) (2019)","PRODI S1 TEKNIK LOGISTIK (FRI) (2019)"],
+    status_kepegawaian: ["DOSEN PEGAWAI TETAP","DOSEN PROFESIONAL FULL TIME","DOSEN CALON PEGAWAI TETAP","DOSEN PROFESIONAL PART TIME"],
+    jfa: ["AA","L","LK","NJFA"],
+    pemenuhan_tridarma: ["MEMENUHI","TDK MEMENUHI"]
+  }
   // if(!token) {
   //   return <Login setToken={setToken} />
   // }
@@ -122,7 +93,7 @@ function Data({token}) {
 
   const editDB = (data) => {
     for (var item of Object.keys(inputs)){
-      if (inputs[item]==""){
+      if (inputs[item]===""){
         inputs[item]=data[item]
       }
     }
@@ -192,6 +163,67 @@ function Data({token}) {
     sendToDBindividu(inputs,periode);
   }
 
+  const inputManual = (type,key, nama, placeholder) => {
+    return(
+      <div class="row mb-3">
+        <label for="colFormLabel" class="col-sm-4 col-form-label">{nama}</label>
+        <div class="col-sm-8">
+          <input
+            type={type} 
+            class="form-control"
+            id="colFormLabel"
+            name={key}
+            value={inputs[key]}
+            onChange={changeHandle}
+            placeholder={placeholder}/>
+        </div>
+      </div>
+    )
+  }
+  const inputDropdown = (key, nama, jumlah) => {
+    return (
+    <div class="row mb-3">
+      <label for="colFormLabel" class="col-sm-4 col-form-label">{nama}</label>
+      <div class="col-sm-8">
+        {dropdown(key, jumlah)}
+      </div>
+    </div>
+    )
+  }
+  const dropdown = (key, jumlah) => {
+    // var parameter 
+    var defaultIsi =""
+    // console.log(data[key])
+    // if(data[key]!=""){
+      // defaultIsi = data[key]
+    // }
+    console.log(defaultIsi)
+    return (
+      <>
+        {/* <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">{inputs[key]}</button> */}
+        <select class="form-select" >
+          {/* <option class="" selected>{defaultIsi}</option> */}
+          <option class="" value ={dataDropdown[key][0]} selected>{dataDropdown[key][0]}</option>
+          <option class="" value ={dataDropdown[key][1]}>{dataDropdown[key][1]}</option>
+          {jumlah>=3 &&
+            <option class="" value ={dataDropdown[key][2]}>{dataDropdown[key][2]}</option>
+          }
+          {jumlah>=4 &&
+            <option class="" value ={dataDropdown[key][3]}>{dataDropdown[key][3]}</option>
+          }
+          {jumlah===8 &&
+            <>
+              <option class="" value ={dataDropdown[key][4]}>{dataDropdown[key][4]}</option>
+              <option class="" value ={dataDropdown[key][5]}>{dataDropdown[key][5]}</option>
+              <option class="" value ={dataDropdown[key][6]}>{dataDropdown[key][6]}</option>
+              <option class="" value ={dataDropdown[key][7]}>{dataDropdown[key][7]}</option>
+            </>
+          }
+        </select>
+      </>
+    )
+  }
+
   const editItem = (nama) => {
     var dosen = dataList.find(item => item.kode_nama === nama)
     return(
@@ -205,160 +237,20 @@ function Data({token}) {
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
               </div>
               <div class="modal-body">
-                <div class="input-group mb-3">
-                  <span class="input-group-text" id="basic-addon1">Pendidikan Terakhir:</span>
-                  <input 
-                    type="text"
-                    class="form-control"
-                    onChange={changeHandle}
-                    name="pendidikan_terakhir"
-                    placeholder={dosen.pendidikan_terakhir}
-                    value={inputs.pendidikan_terakhir}
-                    aria-describedby="basic-addon1"/>
-                </div>
-                <div class="input-group mb-3">
-                  <span class="input-group-text" id="basic-addon1">Kelompok Keahlian:</span>
-                  <input
-                    type="text"
-                    class="form-control"
-                    onChange={changeHandle}
-                    name="kelompok_keahlian"
-                    placeholder={dosen.kelompok_keahlian}
-                    value={inputs.kelompok_keahlian}
-                    aria-describedby="basic-addon1"/>
-                </div>
-                <div class="input-group mb-3">
-                  <span class="input-group-text" id="basic-addon1">Inpassing:</span>
-                  <input
-                    type="text"
-                    class="form-control"
-                    onChange={changeHandle}
-                    name="inpassing"
-                    placeholder={dosen.inpassing}
-                    value={inputs.inpassing} 
-                    aria-describedby="basic-addon1"/>
-                </div>
-                <div class="input-group mb-3">
-                  <span class="input-group-text" id="basic-addon1">Sertifikasi:</span>
-                  <input 
-                    type="text" 
-                    class="form-control" 
-                    onChange={changeHandle} 
-                    name="sertifikasi" 
-                    placeholder={dosen.sertifikasi} 
-                    value={inputs.sertifikasi}
-                    aria-describedby="basic-addon1"/>
-                </div>
-                <div class="input-group mb-3">
-                  <span class="input-group-text" id="basic-addon1">Program Studi:</span>
-                  <input 
-                    type="text" 
-                    class="form-control" 
-                    onChange={changeHandle} 
-                    name="program_studi" 
-                    placeholder={dosen.program_studi} 
-                    value={inputs.program_studi} 
-                    aria-describedby="basic-addon1"/>
-                </div>
-                <div class="input-group mb-3">
-                  <span class="input-group-text" id="basic-addon1">Status Kepegawaian:</span>
-                  <input 
-                    type="text" 
-                    class="form-control" 
-                    onChange={changeHandle} 
-                    name="status_kepegawaian"
-                    placeholder={dosen.status_kepegawaian} 
-                    value={inputs.status_kepegawaian} 
-                    aria-describedby="basic-addon1"/>
-                </div>
-                <div class="input-group mb-3">
-                  <span class="input-group-text" id="basic-addon1">JFA:</span>
-                  <input 
-                    type="text" 
-                    class="form-control" 
-                    onChange={changeHandle} 
-                    name="jfa" 
-                    placeholder={dosen.jfa} 
-                    value={inputs.jfa} 
-                    aria-describedby="basic-addon1"/>
-                </div>
-                <div class="input-group mb-3">
-                  <span class="input-group-text" id="basic-addon1">Dik Diakui:</span>
-                  <input 
-                    type="number" 
-                    class="form-control" 
-                    onChange={changeHandle} 
-                    name="dik_diakui" 
-                    placeholder={dosen.dik_diakui} 
-                    value={inputs.dik_diakui} 
-                    aria-describedby="basic-addon1"/>
-                </div>
-                <div class="input-group mb-3">
-                  <span class="input-group-text" id="basic-addon1">Lit Diakui:</span>
-                  <input 
-                    type="number" 
-                    class="form-control" 
-                    onChange={changeHandle} 
-                    name="lit_diakui" 
-                    placeholder={dosen.lit_diakui} 
-                    value={inputs.lit_diakui} 
-                    aria-describedby="basic-addon1"/>
-                </div>
-                <div class="input-group mb-3">
-                  <span class="input-group-text" id="basic-addon1">Abdimas Diakui:</span>
-                  <input 
-                    type="number" 
-                    class="form-control" 
-                    onChange={changeHandle} 
-                    name="abdimas_diakui" 
-                    placeholder={dosen.abdimas_diakui} 
-                    value={inputs.abdimas_diakui} 
-                    aria-describedby="basic-addon1"/>
-                </div>
-                <div class="input-group mb-3">
-                  <span class="input-group-text" id="basic-addon1">Penunjang:</span>
-                  <input 
-                    type="number" 
-                    class="form-control" 
-                    onChange={changeHandle} 
-                    name="penunjang" 
-                    placeholder={dosen.penunjang} 
-                    value={inputs.penunjang} 
-                    aria-describedby="basic-addon1"/>
-                </div>
-                <div class="input-group mb-3">
-                  <span class="input-group-text" id="basic-addon1">Prof Diakui:</span>
-                  <input 
-                    type="number" 
-                    class="form-control" 
-                    onChange={changeHandle} 
-                    name="prof_diakui" 
-                    placeholder={dosen.prof_diakui} 
-                    value={inputs.prof_diakui} 
-                    aria-describedby="basic-addon1"/>
-                </div>
-                <div class="input-group mb-3">
-                  <span class="input-group-text" id="basic-addon1">Total SKS:</span>
-                  <input 
-                    type="number" 
-                    class="form-control" 
-                    onChange={changeHandle} 
-                    name="total_sks" 
-                    placeholder={dosen.total_sks} 
-                    value={inputs.total_sks} 
-                    aria-describedby="basic-addon1"/>
-                </div>
-                <div class="input-group mb-3">
-                  <span class="input-group-text" id="basic-addon1">Pemenuhan Tridharma:</span>
-                  <input 
-                    type="text" 
-                    class="form-control" 
-                    onChange={changeHandle} 
-                    name="pemenuhan_tridarma" 
-                    placeholder={dosen.pemenuhan_tridarma} 
-                    value={inputs.pemenuhan_tridarma} 
-                    aria-describedby="basic-addon1"/>
-                </div>
+                {inputDropdown("pendidikan_terakhir","Pendidikan terakhir",3)}
+                {inputDropdown("kelompok_keahlian","Kelompok Keahlian",4)}
+                {inputDropdown("inpassing","Inpassing",8)}
+                {inputDropdown("sertifikasi","Sertifikasi",2)}
+                {inputDropdown("program_studi","Program Studi",4)}
+                {inputDropdown("status_kepegawaian","Status Kepegawaian",4)}
+                {inputDropdown("jfa","JFA",4)}
+                {inputManual("number","dik_diakui","Dik Diakui",dosen.dik_diakui)}
+                {inputManual("number","lit_diakui","Lit Diakui",dosen.lit_diakui)}
+                {inputManual("number","abdimas_diakui","Abdimas Diakui",dosen.abdimas_diakui)}
+                {inputManual("number","penunjang","Penunjang",dosen.penunjang)}
+                {inputManual("number","prof_diakui","Prof Diakui",dosen.prof_diakui)}
+                {inputManual("number","total_sks","Total SKS",dosen.total_sks)}
+                {inputDropdown("pemenuhan_tridarma","Pemenuhan Tridharma",2)}
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-primary" onClick={() => editDB(dosen)} data-bs-dismiss="modal">Save changes</button>
@@ -408,17 +300,14 @@ function Data({token}) {
         {/* Input File */}
         {token.token==="test123" &&
         <div className='col-3'>  
-          {/* <button style="display:block;width:120px; height:30px;" onclick="document.getElementById('getFile').click()">Input Data Periode</button> */}
           <input
-            // id="getFile"
-            // placeholder="Enter a tag"
             type="file"
-            // style="display:none"
             accept=".csv,.xlsx,.xls"
             onChange={handleFileUpload}
           />
         </div>
-}
+        }
+
         {/* Input Data Individu */}
         {token.token==="test123" &&
         <form className='col-3' onSubmit={submitHandle}>
@@ -430,218 +319,22 @@ function Data({token}) {
                   <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                  <div class="row mb-3">
-                    <label for="colFormLabel" class="col-sm-4 col-form-label">Kode Nama</label>
-                    <div class="col-sm-8">
-                      <input 
-                        type="Text"
-                        class="form-control"
-                        id="colFormLabel"
-                        name="kode_nama"
-                        value={inputs.kode_nama}
-                        onChange={changeHandle}
-                        placeholder="Kode Nama"/>
-                    </div>
-                  </div>
-                  <div class="row mb-3">
-                    <label for="colFormLabel" class="col-sm-4 col-form-label">Kode</label>
-                    <div class="col-sm-8">
-                      <input 
-                        type="Text" 
-                        class="form-control" 
-                        id="colFormLabel" 
-                        name="kode"
-                        value={inputs.kode}
-                        onChange={changeHandle}
-                        placeholder="Kode"/>
-                    </div>
-                  </div>
-                  <div class="row mb-3">
-                    <label for="colFormLabel" class="col-sm-4 col-form-label">Pendidikan Terakhir</label>
-                    <div class="col-sm-8">
-                      <input 
-                        type="Text" 
-                        class="form-control" 
-                        id="colFormLabel" 
-                        name="pendidikan_terakhir"
-                        value={inputs.pendidikan_terakhir}
-                        onChange={changeHandle}
-                        placeholder="Pendidikan Terakhir"/>
-                    </div>
-                  </div>
-                  <div class="row mb-3">
-                    <label for="colFormLabel" class="col-sm-4 col-form-label">Kelompok Keahlian</label>
-                    <div class="col-sm-8">
-                      <input 
-                        type="Text" 
-                        class="form-control" 
-                        id="colFormLabel" 
-                        name="kelompok_keahlian"
-                        value={inputs.kelompok_keahlian}
-                        onChange={changeHandle}
-                        placeholder="Kelompok Keahlian"/>
-                    </div>
-                  </div>
-                  <div class="row mb-3">
-                    <label for="colFormLabel" class="col-sm-4 col-form-label">Program Studi</label>
-                    <div class="col-sm-8">
-                      <input 
-                        type="Text" 
-                        class="form-control" 
-                        id="colFormLabel"
-                        name="program_studi"
-                        value={inputs.program_studi}
-                        onChange={changeHandle}
-                        placeholder="Program Studi"/>
-                    </div>
-                  </div>
-                  <div class="row mb-3">
-                    <label for="colFormLabel" class="col-sm-4 col-form-label">Status Kepegawaian</label>
-                    <div class="col-sm-8">
-                      <input 
-                        type="Text"
-                        class="form-control"
-                        id="colFormLabel"
-                        name="status_kepegawaian"
-                        value={inputs.status_kepegawaian}
-                        onChange={changeHandle}
-                        placeholder="Status Kepegawaian"/>
-                    </div>
-                  </div>
-                  <div class="row mb-3">
-                    <label for="colFormLabel" class="col-sm-4 col-form-label">Inpassing</label>
-                    <div class="col-sm-8">
-                      <input
-                        type="Text"
-                        class="form-control"
-                        id="colFormLabel"
-                        name="inpassing"
-                        value={inputs.inpassing}
-                        onChange={changeHandle}
-                        placeholder="Inpassing"/>
-                    </div>
-                  </div>
-                  <div class="row mb-3">
-                    <label for="colFormLabel" class="col-sm-4 col-form-label">Sertifikasi</label>
-                    <div class="col-sm-8">
-                      <input
-                        type="Text"
-                        class="form-control"
-                        id="colFormLabel"
-                        name="sertifikasi"
-                        value={inputs.sertifikasi}
-                        onChange={changeHandle}
-                        placeholder="Sertifikasi"/>
-                    </div>
-                  </div>
-                  <div class="row mb-3">
-                    <label for="colFormLabel" class="col-sm-4 col-form-label">JFA</label>
-                    <div class="col-sm-8">
-                      <input
-                        type="Text"
-                        class="form-control"
-                        id="colFormLabel"
-                        name="jfa"
-                        value={inputs.jfa}
-                        onChange={changeHandle}
-                        placeholder="JFA"/>
-                    </div>
-                  </div>
-                {/* </div>
-                <div class="modal-footer">
-                  <button class="btn btn-primary" data-bs-target="#exampleModalToggle2" data-bs-toggle="modal" data-bs-dismiss="modal">Next</button>
+                  {inputManual("text","kode_nama","Kode Nama","")}
+                  {inputManual("text","kode","Kode","")}
+                  {inputDropdown("pendidikan_terakhir","Pendidikan terakhir",3)}
+                  {inputDropdown("kelompok_keahlian","Kelompok Keahlian",4)}
+                  {inputDropdown("inpassing","Inpassing",8)}
+                  {inputDropdown("sertifikasi","Sertifikasi",2)}
+                  {inputDropdown("program_studi","Program Studi",4)}
+                  {inputDropdown("status_kepegawaian","Status Kepegawaian",4)}
+                  {inputDropdown("jfa","JFA",4)}
+                  {inputManual("number","dik_diakui","Dik Diakui","")}
+                  {inputManual("number","lit_diakui","Lit Diakui","")}
+                  {inputManual("number","abdimas_diakui","Abdimas Diakui","")}
+                  {inputManual("number","penunjang","Penunjang","")}
+                  {inputManual("number","total_sks","Total SKS","")}
+                  {inputDropdown("pemenuhan_tridarma","Pemenuhan Tridharma",2)}
                 </div>
-              </div>
-            </div>
-          </div>
-          <div class="modal fade" id="exampleModalToggle2" aria-hidden="true" aria-labelledby="exampleModalToggleLabel2" tabindex="-1">
-            <div class="modal-dialog modal-lg modal-dialog-centered">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h5 class="modal-title" id="exampleModalToggleLabel2">Input Data Individu</h5>
-                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body"> */}
-                  <div class="row mb-3">
-                    <label for="colFormLabel" class="col-sm-4 col-form-label">Dik Diakui</label>
-                    <div class="col-sm-8">
-                      <input
-                        type="number"
-                        class="form-control"
-                        id="colFormLabel"
-                        name="dik_diakui"
-                        value={inputs.dik_diakui}
-                        onChange={changeHandle}
-                        placeholder="Dik Diakui"/>
-                    </div>
-                  </div>
-                  <div class="row mb-3">
-                    <label for="colFormLabel" class="col-sm-4 col-form-label">Lit Diakui</label>
-                    <div class="col-sm-8">
-                      <input
-                        type="number"
-                        class="form-control"
-                        id="colFormLabel"
-                        name="lit_diakui"
-                        value={inputs.lit_diakui}
-                        onChange={changeHandle}
-                        placeholder="Lit Diakui"/>
-                    </div>
-                  </div>
-                  <div class="row mb-3">
-                    <label for="colFormLabel" class="col-sm-4 col-form-label">Abdimas Diakui</label>
-                    <div class="col-sm-8">
-                      <input
-                        type="number"
-                        class="form-control"
-                        id="colFormLabel"
-                        name="abdimas_diakui"
-                        value={inputs.abdimas_diakui}
-                        onChange={changeHandle}
-                        placeholder="Abdimas Diakui"/>
-                    </div>
-                  </div>
-                  <div class="row mb-3">
-                    <label for="colFormLabel" class="col-sm-4 col-form-label">Penunjang</label>
-                    <div class="col-sm-8">
-                      <input
-                        type="number"
-                        class="form-control"
-                        id="colFormLabel"
-                        name="penunjang"
-                        value={inputs.penunjang}
-                        onChange={changeHandle}
-                        placeholder="Penunjang"/>
-                    </div>
-                  </div>
-                  <div class="row mb-3">
-                    <label for="colFormLabel" class="col-sm-4 col-form-label">Total SKS</label>
-                    <div class="col-sm-8">
-                      <input
-                        type="number" 
-                        class="form-control"
-                        id="colFormLabel"
-                        name="total_sks"
-                        value={inputs.total_sks}
-                        onChange={changeHandle}
-                        placeholder="Total SKS"/>
-                    </div>
-                  </div>
-                  <div class="row mb-3">
-                    <label for="colFormLabel" class="col-sm-4 col-form-label">Pemenuhan Tridharma</label>
-                    <div class="col-sm-8">
-                      <input
-                        type="text"
-                        class="form-control"
-                        id="colFormLabel"
-                        name="pemenuhan_tridarma"
-                        value={inputs.pemenuhan_tridarma}
-                        onChange={changeHandle}
-                        placeholder="Pemenuhan Tridharma"/>
-                    </div>
-                  </div>
-                </div>
-        
         
                 <div class="modal-footer">
                   <button class="btn btn-primary" data-bs-target="#" data-bs-toggle="modal" data-bs-dismiss="modal" type="submit">Submit</button>
@@ -651,12 +344,11 @@ function Data({token}) {
           </div>
             <a class="btn btn-primary" data-bs-toggle="modal" href="#exampleModalToggle" role="button">Input Data Individu</a>
         </form>
-}
-
+        }
       </div>
               
       {/* Tabel */}
-      {dataList.length!=0 &&
+      {dataList.length!==0 &&
       <div className="row">
         {/* {dataList} */}
           <div className="col-12">
@@ -666,10 +358,7 @@ function Data({token}) {
                           limit='9999'
                           headData={customerTableHead}
                           renderHead={(item, index) => renderHead(item, index)}
-                         
-                          // bodyData = {[{no: 67, kode_nama: "S1SI-060", kode: "S1SI", no_urut: 60, pendidikan_terakhir: "S2"}, 
-                          // {no: 67, kode_nama: "S1SI-060", kode: "S1SI", no_urut: 60, pendidikan_terakhir: "S2"},
-                          // {no: 67, kode_nama: "S1SI-060", kode: "S1SI", no_urut: 60, pendidikan_terakhir: "S2"}]}
+
                           bodyData={dataList}
                           renderBody={(item, index) => renderBody(item, index)}
                        />
