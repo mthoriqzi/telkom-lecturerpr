@@ -52,7 +52,7 @@ const EditModal = (props) => {
                 {inputManual("number","penunjang","Penunjang",item.penunjang)}
                 {inputManual("number","prof_diakui","Prof Diakui",item.prof_diakui)}
                 {inputManual("number","total_sks","Total SKS",item.total_sks)}
-                {inputDropdown("pemenuhan_tridarma","Pemenuhan Tridharma",2)}
+                {/* {inputDropdown("pemenuhan_tridarma","Pemenuhan Tridharma",2)} */}
               </div>
               <div class="modal-footer">
                 {/* <button type="button" class="btn btn-primary" onClick={() => editDB(dosen)} data-bs-dismiss="modal">Save changes</button> */}
