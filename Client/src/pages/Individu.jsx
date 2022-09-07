@@ -51,7 +51,7 @@ const Individu = (props) => {
         });
         
     }, []);
-    console.log(data20201.length)
+    // console.log(data20201.length)
     // console.log(data20191[0].lit_diakui)
     var p20191 = 0
     var p20192 = 0
@@ -118,7 +118,7 @@ const Individu = (props) => {
         dp20222 = data20222[0].lit_diakui.toFixed(1)
         hp20222 = data20222[0].abdimas_diakui.toFixed(1)
     }
-    console.log(p20201)
+    // console.log(p20201)
     const performa = {
         series: [          {
             name: "Dharma 1",

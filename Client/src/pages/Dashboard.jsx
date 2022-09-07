@@ -146,10 +146,10 @@ if (dataList.length!=0){
     }
 
 }
-console.log(tetapc)
-console.log(tetapei)
-console.log(tetapems)
-console.log(tetappm)
+// console.log(tetapc)
+// console.log(tetapei)
+// console.log(tetapems)
+// console.log(tetappm)
 
 const statusPegawai = {
         series: [{
@@ -245,7 +245,7 @@ var PeUEI = 0
 
 if (dataList.length!=0){
     for (var i in dataList){
-        console.log(dataList["status_kepegawaian"])
+        // console.log(dataList["status_kepegawaian"])
         if (dataList[i]["inpassing"]=="PENATA MUDA TK 1"){
 
           if (dataList[i]["kelompok_keahlian"]=="PRODUCTION AND MANUFACTURING SYSTEM"){
@@ -329,7 +329,7 @@ if (dataList.length!=0){
     }
 
 }
-console.log(PMTk1C)
+// console.log(PMTk1C)
 const inpassingdosen = {
         series: [{
             name: 'PENATA MUDA TK 1',
@@ -424,7 +424,7 @@ var NJE = 0
 
 if (dataList.length!=0){
     for (var i in dataList){
-        console.log(dataList["status_kepegawaian"])
+        // console.log(dataList["status_kepegawaian"])
         if (dataList[i]["jfa"]=="GB"){
             if (dataList[i]["kelompok_keahlian"]=="PRODUCTION AND MANUFACTURING SYSTEM"){
             GBPM = GBPM + 1}
@@ -739,10 +739,10 @@ const orderStatus = {
     const namauser=({token}) => {
       var pengguna ="admin"
     if (token.token == "test12"){
-        console.log("masuk token12")
+        // console.log("masuk token12")
         pengguna="Direktorat"}
     if (token.token == "test123"){
-    console.log("masuk token123")
+    // console.log("masuk token123")
         pengguna="Dosen"}
     }
 
