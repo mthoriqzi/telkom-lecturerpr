@@ -6,6 +6,10 @@ import { Link } from 'react-router-dom'
 // import Login from "../pages/Login"
 
 function Data({token}) {
+  const [data20201, setData20201] = useState([])
+  const [data20202, setData20202] = useState([])
+  const [data20211, setData20211] = useState([])
+  const [data20212, setData20212] = useState([])
   const [dataList, setDataList] = useState([])
   const [periode, setPeriode] = useState("Genap_2020")
   const [inputs, setInputs] = useState({
@@ -28,7 +32,7 @@ function Data({token}) {
     total_sks: "",
     pemenuhan_tridarma: ""
   })
-
+  console.log(inputs.pendidikan_terakhir)
   useEffect(() => {
     Axios.get('http://34.101.42.148:3001/api/get/'+periode).then((response) => {
       var data = response.data
@@ -44,29 +48,29 @@ function Data({token}) {
         //     setData20192(response.data);
 
         // });
-        Axios.get("http://34.101.42.148:3001/api/get/Ganjil_2020/").then((response) => {
-            setData20201(response.data);
+    //     Axios.get("http://34.101.42.148:3001/api/get/Ganjil_2020/").then((response) => {
+    //         setData20201(response.data);
 
-        });
-        Axios.get("http://34.101.42.148:3001/api/get/Genap_2020/").then((response) => {
-            setData20202(response.data);
+    //     });
+    //     Axios.get("http://34.101.42.148:3001/api/get/Genap_2020/").then((response) => {
+    //         setData20202(response.data);
 
-        });
-        Axios.get("http://34.101.42.148:3001/api/get/Ganjil_2021/").then((response) => {
-            setData20211(response.data);
+    //     });
+    //     Axios.get("http://34.101.42.148:3001/api/get/Ganjil_2021/").then((response) => {
+    //         setData20211(response.data);
 
-        });
-        Axios.get("http://34.101.42.148:3001/api/get/Genap_2021/").then((response) => {
-            setData20212(response.data);
+    //     });
+    //     Axios.get("http://34.101.42.148:3001/api/get/Genap_2021/").then((response) => {
+    //         setData20212(response.data);
 
-        });
-        Axios.get("http://34.101.42.148:3001/api/get/Ganjil_2022/").then((response) => {
-            setData20221(response.data);
+    //     });
+    //     Axios.get("http://34.101.42.148:3001/api/get/Ganjil_2022/").then((response) => {
+    //         setData20221(response.data);
 
-        });
-        Axios.get("http://34.101.42.148:3001/api/get/Genap_2022/").then((response) => {
-            setData20222(response.data);
-    });
+    //     });
+    //     Axios.get("http://34.101.42.148:3001/api/get/Genap_2022/").then((response) => {
+    //         setData20222(response.data);
+    // });
   }, [periode]);
 
   const customerTableHead = [
@@ -119,6 +123,8 @@ function Data({token}) {
     Axios.post("http://34.101.42.148:3001/api/insert/individu", {
       "data": data,
       "periode":periode});
+      // console.log(data.pendidikan_terakhir)
+    // console.log(inputs.pendidikan_terakhir)
     const flask = "http://34.101.42.148:4999/api/"+periode
     delay(1000).then(() => Axios.get(flask, 'GET') );
   }
@@ -129,6 +135,7 @@ function Data({token}) {
         inputs[item]=data[item]
       }
     }
+    // console.log(inputs.pendidikan_terakhir)
     Axios.post("http://34.101.42.148:3001/api/edit", {
       "data": inputs,
       "periode":periode});
@@ -224,31 +231,31 @@ function Data({token}) {
   }
   const dropdown = (key, jumlah) => {
     // var parameter 
-    var defaultIsi =""
+    // var defaultIsi =""
     // console.log(data[key])
     // if(data[key]!=""){
       // defaultIsi = data[key]
     // }
-    console.log(defaultIsi)
+    // console.log(defaultIsi)
     return (
       <>
         {/* <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">{inputs[key]}</button> */}
-        <select class="form-select" >
+        <select class="form-select" onClick={(e) => setInputs({...inputs,[key]:e.target.value})}>
           {/* <option class="" selected>{defaultIsi}</option> */}
-          <option class="" value ={dataDropdown[key][0]} selected>{dataDropdown[key][0]}</option>
-          <option class="" value ={dataDropdown[key][1]}>{dataDropdown[key][1]}</option>
+          <option value ={dataDropdown[key][0]} selected>{dataDropdown[key][0]}</option>
+          <option value ={dataDropdown[key][1]}>{dataDropdown[key][1]}</option>
           {jumlah>=3 &&
-            <option class="" value ={dataDropdown[key][2]}>{dataDropdown[key][2]}</option>
+            <option value ={dataDropdown[key][2]}>{dataDropdown[key][2]}</option>
           }
           {jumlah>=4 &&
-            <option class="" value ={dataDropdown[key][3]}>{dataDropdown[key][3]}</option>
+            <option value ={dataDropdown[key][3]}>{dataDropdown[key][3]}</option>
           }
           {jumlah===8 &&
             <>
-              <option class="" value ={dataDropdown[key][4]}>{dataDropdown[key][4]}</option>
-              <option class="" value ={dataDropdown[key][5]}>{dataDropdown[key][5]}</option>
-              <option class="" value ={dataDropdown[key][6]}>{dataDropdown[key][6]}</option>
-              <option class="" value ={dataDropdown[key][7]}>{dataDropdown[key][7]}</option>
+              <option value ={dataDropdown[key][4]}>{dataDropdown[key][4]}</option>
+              <option value ={dataDropdown[key][5]}>{dataDropdown[key][5]}</option>
+              <option value ={dataDropdown[key][6]}>{dataDropdown[key][6]}</option>
+              <option value ={dataDropdown[key][7]}>{dataDropdown[key][7]}</option>
             </>
           }
         </select>
@@ -308,14 +315,14 @@ function Data({token}) {
                 {periode}
             </button>
             <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
-            {data20212.length!=0  &&
+            {data20212.length!==0  &&
                 <li><button class="dropdown-item" type="button" onClick={() => setPeriode("Genap_2021")}>2021 - Genap</button></li>
             }
-            {data20211.length!=0  &&
+            {data20211.length!==0  &&
                 <li><button class="dropdown-item" type="button" onClick={() => setPeriode("Ganjil_2021")}>2021 - Ganjil</button></li>
-            }{data20202.length!=0  &&
+            }{data20202.length!==0  &&
                 <li><button class="dropdown-item" type="button" onClick={() => setPeriode("Genap_2020")}>2020 - Genap</button></li>
-            }{data20201.length!=0  &&
+            }{data20201.length!==0  &&
                 <li><button class="dropdown-item" type="button" onClick={() => setPeriode("Ganjil_2020")}>2020 - Ganjil</button></li>
             }
             {/* {data20192.length!=0  &&

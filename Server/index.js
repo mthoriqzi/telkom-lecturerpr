@@ -101,7 +101,7 @@ app.post('/api/insert/individu', (req, res) => {
         if(err) throw err;
     });
     const sqlInsert = "insert into " + req.body.periode + " values " + data_values + ";";
-    // console.log(sqlInsert)
+    console.log(sqlInsert)
     db.query(sqlInsert, (err, result) => {
         if(err) throw err;
     });
@@ -153,6 +153,7 @@ app.post('/api/edit', (req, res) => {
                         total_sks=${req.body.data.total_sks}, 
                         pemenuhan_tridarma="${req.body.data.pemenuhan_tridarma}" 
                         where kode_nama="${req.body.data.kode_nama}"`;
+    console.log(sqlDelete)
     db.query(sqlDelete, (err, result) => {
         res.send(result);
     });
