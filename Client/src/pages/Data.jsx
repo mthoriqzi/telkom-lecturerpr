@@ -6,10 +6,6 @@ import { Link } from 'react-router-dom'
 // import Login from "../pages/Login"
 
 function Data({token}) {
-  const [data20201, setData20201] = useState([])
-  const [data20202, setData20202] = useState([])
-  const [data20211, setData20211] = useState([])
-  const [data20212, setData20212] = useState([])
   const [dataList, setDataList] = useState([])
   const [periode, setPeriode] = useState("Genap_2020")
   const [data20201, setData20201] = useState([])
@@ -56,29 +52,29 @@ function Data({token}) {
         //     setData20192(response.data);
 
         // });
-    //     Axios.get("http://34.101.42.148:3001/api/get/Ganjil_2020/").then((response) => {
-    //         setData20201(response.data);
+        Axios.get("http://34.101.42.148:3001/api/get/Ganjil_2020/").then((response) => {
+            setData20201(response.data);
 
-    //     });
-    //     Axios.get("http://34.101.42.148:3001/api/get/Genap_2020/").then((response) => {
-    //         setData20202(response.data);
+        });
+        Axios.get("http://34.101.42.148:3001/api/get/Genap_2020/").then((response) => {
+            setData20202(response.data);
 
-    //     });
-    //     Axios.get("http://34.101.42.148:3001/api/get/Ganjil_2021/").then((response) => {
-    //         setData20211(response.data);
+        });
+        Axios.get("http://34.101.42.148:3001/api/get/Ganjil_2021/").then((response) => {
+            setData20211(response.data);
 
-    //     });
-    //     Axios.get("http://34.101.42.148:3001/api/get/Genap_2021/").then((response) => {
-    //         setData20212(response.data);
+        });
+        Axios.get("http://34.101.42.148:3001/api/get/Genap_2021/").then((response) => {
+            setData20212(response.data);
 
-    //     });
-    //     Axios.get("http://34.101.42.148:3001/api/get/Ganjil_2022/").then((response) => {
-    //         setData20221(response.data);
+        });
+        Axios.get("http://34.101.42.148:3001/api/get/Ganjil_2022/").then((response) => {
+            setData20221(response.data);
 
-    //     });
-    //     Axios.get("http://34.101.42.148:3001/api/get/Genap_2022/").then((response) => {
-    //         setData20222(response.data);
-    // });
+        });
+        Axios.get("http://34.101.42.148:3001/api/get/Genap_2022/").then((response) => {
+            setData20222(response.data);
+    });
   }, [periode]);
 
   const customerTableHead = [
