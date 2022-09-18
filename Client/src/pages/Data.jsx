@@ -16,7 +16,6 @@ function Data({token}) {
   const [data20212, setData20212] = useState([])
   const [data20221, setData20221] = useState([])
   const [data20222, setData20222] = useState([])
-  const [cariNama, setCariNama] = useState([])
 
   const [openModal, setOpenModal] = useState(false)
   
@@ -43,7 +42,7 @@ function Data({token}) {
     total_sks: "",
     pemenuhan_tridarma: ""
   })
-  // console.log(inputs.pendidikan_terakhir)
+
   useEffect(() => {
     Axios.get('http://34.101.42.148:3001/api/get/'+periode).then((response) => {
       var data = response.data
@@ -134,19 +133,19 @@ function Data({token}) {
     Axios.post("http://34.101.42.148:3001/api/insert/individu", {
       "data": data,
       "periode":periode});
-      // console.log(data.pendidikan_terakhir)
-    // console.log(inputs.pendidikan_terakhir)
     const flask = "http://34.101.42.148:4999/api/"+periode
     delay(1000).then(() => Axios.get(flask, 'GET') );
   }
 
   const editDB = (data) => {
+    const index = dataList.findIndex(person => person.kode_nama === data.kode_nama)
     for (var item of Object.keys(inputs)){
       if (inputs[item]===""){
         inputs[item]=data[item]
+        
       }
     }
-    // console.log(inputs.pendidikan_terakhir)
+
     Axios.post("http://34.101.42.148:3001/api/edit", {
       "data": inputs,
       "periode":periode});
@@ -158,6 +157,12 @@ function Data({token}) {
     Axios.post("http://34.101.42.148:3001/api/delete", {
       "data": name,
       "periode":periode});
+    deleteData(name)  
+  }
+
+  const deleteData = nama => {
+    const newData = dataList.filter(person => person.kode_nama !== nama)
+    setDataList(newData)
   }
 
   const handleFileUpload = e => {
@@ -179,7 +184,7 @@ function Data({token}) {
     // setIsEditing(!isEditing)
     // selectedData = data
     setSelected(data)
-    console.log(openModal)
+    // console.log(openModal)
   }
 
   const renderHead = (item, index) => <th key={index}>{item}</th>
@@ -206,12 +211,7 @@ function Data({token}) {
       <td>{item.prof_diakui}</td>
       <td>{item.total_sks.toFixed(2)}</td>
       <td>{item.pemenuhan_tridarma}</td>
-      {/* <td ><button class="btn btn-outline-secondary" type="button" onClick={()=> editItem(item.kode_nama)} id="bukaEdit">Edit</button></td> */}
-      {/* <td onClick={() => editItem(item.kode_nama)} data-bs-target="#edit" data-bs-toggle="modal">Edit</td> */}
-      {/* <td data-bs-target="#edit" data-bs-toggle="modal">Edit</td> */}
       <td><button class="btn btn-outline-secondary" type="button" onClick={() => setSelectedData(item)}>Edit</button></td>
-      {/* <td onClick={() => setIsEditing(true)} >Edit</td> */}
-      {/* <td >{editItem(item.kode_nama)}</td>  */}
       <td><button class="btn btn-outline-secondary" type="button" value={item.kode_nama} onClick={() => handleRemoveItem(item.kode_nama)}>Delete</button></td>
     </tr>
   )
@@ -250,7 +250,6 @@ function Data({token}) {
       <label for="colFormLabel" class="col-sm-4 col-form-label">{nama}</label>
       <div class="col-sm-8">
         {dropdown(key, jumlah)}
-        {/* {generateDropdown(key, jumlah, defaultValue)} */}
       </div>
     </div>
     )
@@ -301,54 +300,6 @@ function Data({token}) {
           }
         </select>
       </>
-    )
-  }
-  
-  async function cari(nama){
-    return dataList.find(i => i.kode_nama === nama)
-  }
-
-  const editItem = async(nama) => {
-    // setCariNama(nama)
-    var dosen = dataList.find(item => item.kode_nama === nama)
-    // let dosen = await cari(nama)
-    console.log(dosen)
-    return(
-      <div>
-        <button class="btn btn-outline-secondary" type="button" data-bs-target="#edit" data-bs-toggle="modal" >Edit2</button>
-        {/* <div class="modal fade" id="edit" aria-labelledby="staticBackdropLabel" tabindex="-1"> */}
-        {/* <div class="modal" aria-labelledby="staticBackdropLabel"> */}
-        <div class="modal fade" id="edit" aria-hidden="true" aria-labelledby="staticBackdropLabel" tabindex="-1">
-          <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h5 class="modal-title">Edit: {nama}</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-              </div>
-              <div class="modal-body">
-                {/* {inputDropdown("pendidikan_terakhir","Pendidikan terakhir",3)}
-                {inputDropdown("kelompok_keahlian","Kelompok Keahlian",4)}
-                {inputDropdown("inpassing","Inpassing",8)}
-                {inputDropdown("sertifikasi","Sertifikasi",2)}
-                {inputDropdown("program_studi","Program Studi",4)}
-                {inputDropdown("status_kepegawaian","Status Kepegawaian",4)}
-                {inputDropdown("jfa","JFA",4)} */}
-                generateDropdown(dosen)
-                {inputManual("number","dik_diakui","Dik Diakui",dosen.dik_diakui)}
-                {inputManual("number","lit_diakui","Lit Diakui",dosen.lit_diakui)}
-                {inputManual("number","abdimas_diakui","Abdimas Diakui",dosen.abdimas_diakui)}
-                {inputManual("number","penunjang","Penunjang",dosen.penunjang)}
-                {inputManual("number","prof_diakui","Prof Diakui",dosen.prof_diakui)}
-                {inputManual("number","total_sks","Total SKS",dosen.total_sks)}
-                {/* {inputDropdown("pemenuhan_tridarma","Pemenuhan Tridharma",2)} */}
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-primary" onClick={() => editDB(dosen)} data-bs-dismiss="modal">Save changes</button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
     )
   }
 
