@@ -9,6 +9,8 @@ const EditModal = (props) => {
   const editDB = props.editDB
   const setOpenModal = props.setOpenModal
   const generateDropdown = props.generateDropdown
+  const setNotifikasi = props.setNotifikasi
+
   // console.log(generateDropdown)
 
   const [modalClass, setModalClass] = useState('modals')
@@ -19,11 +21,13 @@ const EditModal = (props) => {
   const onClose = () => {
     setOpenModal(false)
     setModalClass('')
+    setNotifikasi('kosong')
   }
 
   const updateData = () => {
     editDB(item)
     setOpenModal(false)
+    setNotifikasi('edit')
   }
 
   return (

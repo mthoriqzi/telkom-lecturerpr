@@ -8,6 +8,7 @@ import EditModal from '../components/ModalEdit/EditModal.jsx'
 
 
 function Data({token}) {
+  
   const [dataList, setDataList] = useState([])
   const [periode, setPeriode] = useState("Genap_2020")
   const [data20201, setData20201] = useState([])
@@ -16,6 +17,7 @@ function Data({token}) {
   const [data20212, setData20212] = useState([])
   const [data20221, setData20221] = useState([])
   const [data20222, setData20222] = useState([])
+  const [notifikasi, setNotifikasi] = useState(EditModal.notifikasi)
 
   const [openModal, setOpenModal] = useState(false)
   
@@ -115,6 +117,12 @@ function Data({token}) {
     jfa: ["AA","L","LK","NJFA"],
     pemenuhan_tridarma: ["MEMENUHI","TDK MEMENUHI"]
   }
+
+  const periodeDropdown = {
+    ddperiode: ["Ganjil","Genap"],
+  
+
+  }
   // if(!token) {
   //   return <Login setToken={setToken} />
   // }
@@ -187,7 +195,16 @@ function Data({token}) {
   }
 
   const renderHead = (item, index) => <th key={index}>{item}</th>
-          
+  function someFunc(item={item}) {
+    setNotifikasi("edit5");
+    setSelectedData(item);
+}
+
+function someFuncDelete(item={item}) {
+  setNotifikasi("delete");
+  handleRemoveItem(item.kode_nama);
+}
+  
   const renderBody = (item, index) => (
     <tr key={index}>
       <td>{item.no}</td>
@@ -210,10 +227,12 @@ function Data({token}) {
       <td>{item.prof_diakui}</td>
       <td>{item.total_sks.toFixed(2)}</td>
       <td>{item.pemenuhan_tridarma}</td>
-      <td><button class="btn btn-outline-secondary" type="button" onClick={() => setSelectedData(item)}>Edit</button></td>
-      <td><button class="btn btn-outline-secondary" type="button" value={item.kode_nama} onClick={() => handleRemoveItem(item.kode_nama)}>Delete</button></td>
+      <td><button class="btn btn-outline-secondary" type="button" onClick={() => someFunc(item)}>Edit</button></td>
+      <td><button class="btn btn-outline-secondary" type="button" value={item.kode_nama} onClick={() => someFuncDelete(item)}>Delete</button>     
+</td>
     </tr>
   )
+  console.log(notifikasi)
   
   const changeHandle = e => {
     setInputs({
@@ -387,7 +406,7 @@ function Data({token}) {
         </form>
         }
       </div>
-              
+     
       {/* Tabel */}
       {dataList.length!==0 &&
       <div className="row">
@@ -409,9 +428,37 @@ function Data({token}) {
       </div>
       }
       {
-       openModal && <EditModal data={selected} inputDropdown={inputDropdown} inputManual={inputManual} editDB={editDB} generateDropdown={generateDropdown} setOpenModal={setOpenModal}/>
+       openModal && <EditModal setNotifikasi={setNotifikasi} data={selected} inputDropdown={inputDropdown} inputManual={inputManual} editDB={editDB} generateDropdown={generateDropdown} setOpenModal={setOpenModal}/>
       }
+
+
+{/* notifikasi  */}
+{notifikasi=="edit" ?
+<div className="row">
+        {/* {dataList} */}
+          <div className="col-12">
+              <div className="card">
+                  <div className="card__body height-600">
+                      <h6 >Data telah berhasil di edit, silahkan muat ulang halaman ini</h6>
+                  </div>
+              </div>
+          </div>
+      </div>: null}
+
+{notifikasi=="delete"  ?
+<div className="row">
+        {/* {dataList} */}
+          <div className="col-12">
+              <div className="card">
+                  <div className="card__body height-600" >
+                      <h6 >Data telah berhasil di delete</h6>
+                  </div>
+              </div>
+          </div>
+      </div>: null}
     </div>
+
+    
   );
 }
  
