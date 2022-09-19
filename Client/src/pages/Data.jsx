@@ -82,6 +82,7 @@ function Data({token}) {
             setData20222(response.data);
     });
   }, [periode]);
+  console.log("🚀 ~ file: Data.jsx ~ line 85 ~ Data ~ periode", periode)
 
   const customerTableHead = [
     'NO',
@@ -121,7 +122,7 @@ function Data({token}) {
     return new Promise(resolve => setTimeout(resolve, time));
   }
 
-  const sendToDB = (data, periode) => {
+  const sendToDB = (data) => {
     Axios.post("http://34.101.42.148:3001/api/insert", {
       "data": data,
       "periode":periode});
@@ -138,11 +139,9 @@ function Data({token}) {
   }
 
   const editDB = (data) => {
-    const index = dataList.findIndex(person => person.kode_nama === data.kode_nama)
     for (var item of Object.keys(inputs)){
       if (inputs[item]===""){
         inputs[item]=data[item]
-        
       }
     }
 
@@ -173,7 +172,7 @@ function Data({token}) {
       const wb = XLSX.read(bstr, { type: 'binary' });
       const data = XLSX.utils.sheet_to_json(wb.Sheets[wb.SheetNames[0]])
       // console.log(data)
-      sendToDB(data,wb.SheetNames[0]);
+      sendToDB(data);
     };
     reader.readAsBinaryString(file);
   }
@@ -317,16 +316,16 @@ function Data({token}) {
                 {periode}
             </button>
             <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
-            {data20212.length!==0  &&
+            {/* {data20212.length!==0  && */}
                 <li><button class="dropdown-item" type="button" onClick={() => setPeriode("Genap_2021")}>2021 - Genap</button></li>
-            }
-            {data20211.length!==0  &&
+            {/* }
+            {data20211.length!==0  && */}
                 <li><button class="dropdown-item" type="button" onClick={() => setPeriode("Ganjil_2021")}>2021 - Ganjil</button></li>
-            }{data20202.length!==0  &&
+            {/* }{data20202.length!==0  && */}
                 <li><button class="dropdown-item" type="button" onClick={() => setPeriode("Genap_2020")}>2020 - Genap</button></li>
-            }{data20201.length!==0  &&
+            {/* }{data20201.length!==0  && */}
                 <li><button class="dropdown-item" type="button" onClick={() => setPeriode("Ganjil_2020")}>2020 - Ganjil</button></li>
-            }
+            {/* } */}
             {/* {data20192.length!=0  &&
                 <li><button class="dropdown-item" type="button" onClick={() => setPeriode("Genap_2019")}>2019 - Genap</button></li>
             }{data20191.length!=0  &&
