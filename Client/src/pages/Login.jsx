@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import logo from '../assets/images/logotelkom.png'
+import login from '../assets/images/login.jpeg'
 import PropTypes from 'prop-types';
 import './Login.css';
 
@@ -37,12 +38,14 @@ const Login = ({ setToken,token1 }) => {
       // console.log(tokentemp)
     return (
       <div className="row vh-100 m-0">
-        <div className="col-6 bg-hijau my-auto h-100 d-flex align-items-center justify-content-center text-center text-white">
-          <div>
+        {/* <div className="col-6 bg-hijau my-auto h-100 d-flex align-items-center justify-content-center text-center text-white"> */}
+        <div className="col-6 bg-hijau h-100 overflow-hidden px-0">
+          {/* <div>
             <h1 className='big'>DEK-FRI</h1>
             <h3>Dashboard Evaluasi Kinerja</h3>
             <h3>Fakultas Rekayasa Industri</h3>
-          </div>
+          </div> */}
+          <img src={login} alt="Login" className="w-100 login"/>
         </div>
         <div className="col-6 row">
           <div className="col-9"></div>
