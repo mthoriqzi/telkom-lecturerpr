@@ -34,30 +34,30 @@ const [data20222, setData20222] = useState([])
 const [dataList, setDataList] = useState([])
 const [periode, setPeriode] = useState("Ganjil_2020")
 useEffect(() => {
-    Axios.get('http://34.101.42.148:3001/api/get/'+periode).then((response) => {
+    Axios.get('http://34.101.223.149:3001/api/get/'+periode).then((response) => {
       setDataList(response.data);
     });
-    Axios.get("http://34.101.42.148:3001/api/get/Ganjil_2020/").then((response) => {
+    Axios.get("http://34.101.223.149:3001/api/get/Ganjil_2020/").then((response) => {
         setData20201(response.data);
 
     });
-    Axios.get("http://34.101.42.148:3001/api/get/Genap_2020/").then((response) => {
+    Axios.get("http://34.101.223.149:3001/api/get/Genap_2020/").then((response) => {
         setData20202(response.data);
 
     });
-    Axios.get("http://34.101.42.148:3001/api/get/Ganjil_2021/").then((response) => {
+    Axios.get("http://34.101.223.149:3001/api/get/Ganjil_2021/").then((response) => {
         setData20211(response.data);
 
     });
-    Axios.get("http://34.101.42.148:3001/api/get/Genap_2021/").then((response) => {
+    Axios.get("http://34.101.223.149:3001/api/get/Genap_2021/").then((response) => {
         setData20212(response.data);
 
     });
-    Axios.get("http://34.101.42.148:3001/api/get/Ganjil_2022/").then((response) => {
+    Axios.get("http://34.101.223.149:3001/api/get/Ganjil_2022/").then((response) => {
         setData20221(response.data);
 
     });
-    Axios.get("http://34.101.42.148:3001/api/get/Genap_2022/").then((response) => {
+    Axios.get("http://34.101.223.149:3001/api/get/Genap_2022/").then((response) => {
         setData20222(response.data);
 });
   }, [periode]);
