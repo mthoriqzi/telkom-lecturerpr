@@ -19,7 +19,7 @@ function Cluster() {
     const [data20202, setData20202] = useState([])
     const [data20211, setData20211] = useState([])
     const [data20212, setData20212] = useState([])
-    const [periode, setPeriode] = useState("Genap_2021")
+    const [periode, setPeriode] = useState("Genap_2020")
     const [kelompok_keahlian, setkelompokKeahlian] = useState('All')
     const [program_studi, setProgramStudi] = useState('All')
     const [jfa, setJFA] = useState('All')
@@ -196,7 +196,7 @@ function Cluster() {
             value2[i]=[dataList2[i]["PC1_2d"], dataList2[i]["PC2_2d"].toFixed(2)]
         }
     }
-
+console.log(dataList0.length)
     const scatterCluster = {
         series: [{
             name: "Cluster 0",

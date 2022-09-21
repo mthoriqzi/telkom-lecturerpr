@@ -60,7 +60,7 @@ const EditModal = (props) => {
               </div>
               <div class="modal-footer">
                 {/* <button type="button" class="btn btn-primary" onClick={() => editDB(dosen)} data-bs-dismiss="modal">Save changes</button> */}
-                <button type="button" class="btn btn-primary" onClick={updateData} data-bs-dismiss="modal">Save changes</button>
+                <button type="button" class="btn btn-primary" onClick={updateData} data-bs-target="#" data-bs-toggle="modal" href="#edit" data-bs-dismiss="modal">Save changes</button>
               </div>
             </div>
           </div>

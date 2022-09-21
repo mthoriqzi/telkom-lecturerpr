@@ -21,6 +21,8 @@ function Data({token}) {
 
   const [openModal, setOpenModal] = useState(false)
   const [periode1, setPeriode1] = useState("Ganjil_2020")
+  const [rerender, setRerender] = useState(true)
+
   
   // var selectedData = {}
   const [selected, setSelected] = useState({})
@@ -84,7 +86,7 @@ function Data({token}) {
         Axios.get("http://34.101.223.149:3001/api/get/Genap_2022/").then((response) => {
             setData20222(response.data);
     });
-  }, [periode]);
+  }, [periode, rerender]);
   console.log("🚀 ~ file: Data.jsx ~ line 85 ~ Data ~ periode", periode)
 
   const customerTableHead = [
@@ -137,14 +139,16 @@ function Data({token}) {
       "periode":periode});
     const flask = "http://34.101.223.149:4999/api/"+periode
     delay(1000).then(() => Axios.get(flask, 'GET') );
+    setNotifikasi("file")
   }
+  
 
-  const sendToDBindividu = (data, periode) => {
+  const sendToDBindividu = (data) => {
     Axios.post("http://34.101.223.149:3001/api/insert/individu", {
       "data": data,
-      "periode":periode});
-    const flask = "http://34.101.223.149:4999/api/"+periode
-    delay(1000).then(() => Axios.get(flask, 'GET') );
+      "periode":periode}).then(()=>setRerender(!rerender));
+    // const flask = "http://34.101.223.149:4999/api/"+periode
+    // delay(1000).then(() => Axios.get(flask, 'GET') );
   }
 
   const editDB = (data) => {
@@ -153,12 +157,14 @@ function Data({token}) {
         inputs[item]=data[item]
       }
     }
+    
 
     Axios.post("http://34.101.223.149:3001/api/edit", {
       "data": inputs,
-      "periode":periode});
-    const flask = "http://34.101.223.149:4999/api/"+periode
-    delay(1000).then(() => Axios.get(flask, 'GET') );
+      "periode":periode}).then(()=>setRerender(!rerender));
+      console.log(inputs)
+    // const flask = "http://34.101.223.149:4999/api/"+periode
+    // delay(1000).then(() => Axios.get(flask, 'GET') );
   }
 
   const handleRemoveItem = name => {
@@ -197,7 +203,7 @@ function Data({token}) {
 
   const renderHead = (item, index) => <th key={index}>{item}</th>
   function someFunc(item={item}) {
-    setNotifikasi("edit5");
+    setNotifikasi("edit");
     setSelectedData(item);
 }
 
@@ -228,8 +234,8 @@ function someFuncDelete(item={item}) {
       <td>{item.prof_diakui}</td>
       <td>{item.total_sks.toFixed(2)}</td>
       <td>{item.pemenuhan_tridarma}</td>
-      <td><button class="btn btn-outline-secondary" type="button" onClick={() => someFunc(item)}>Edit</button></td>
-      <td><button class="btn btn-outline-secondary" type="button" value={item.kode_nama} onClick={() => someFuncDelete(item)}>Delete</button>     
+      <td><button class="btn btn-outline-secondary"  onClick={() => someFunc(item)}>Edit</button></td>
+      <td><button class="btn btn-outline-secondary" data-bs-toggle="modal" href="#delete" value={item.kode_nama} onClick={() => someFuncDelete(item)}>Delete</button>     
 </td>
     </tr>
   )
@@ -244,7 +250,10 @@ function someFuncDelete(item={item}) {
   const submitHandle = e => {
     e.preventDefault()
     sendToDBindividu(inputs,periode);
+    setNotifikasi("individu")
   }
+
+  
 
   const inputManual = (type,key, nama, placeholder) => {
     return(
@@ -402,7 +411,7 @@ function someFuncDelete(item={item}) {
                 </div>
         
                 <div class="modal-footer">
-                  <button class="btn btn-primary" data-bs-target="#" data-bs-toggle="modal" data-bs-dismiss="modal" type="button">Submit</button>
+                  <button class="btn btn-primary" data-bs-target="#file" data-bs-toggle="modal" data-bs-dismiss="modal" type="button">Submit</button>
                 </div>
               </div>
               
@@ -446,7 +455,7 @@ function someFuncDelete(item={item}) {
                 </div>
         
                 <div class="modal-footer">
-                  <button class="btn btn-primary" data-bs-target="#" data-bs-toggle="modal" data-bs-dismiss="modal" type="submit">Submit</button>
+                  <button class="btn btn-primary" data-bs-target="#individu" data-bs-toggle="modal" data-bs-dismiss="modal" type="submit">Submit</button>
                 </div>
               </div>
               
@@ -459,30 +468,87 @@ function someFuncDelete(item={item}) {
 <div>
         <br></br>
         </div>
-        {notifikasi=="edit" ?
-        
-        <div className="row">
-                {/* {dataList} */}
-                  <div className="col-12">
-                      <div className="card">
-                          <div className="card__body height-600">
-                              <h6 >Data telah berhasil di edit, silahkan muat ulang halaman ini</h6>
-                          </div>
-                      </div>
-                  </div>
-              </div>: null}
-        
-        {notifikasi=="delete"  ?
-        <div className="row">
-                {/* {dataList} */}
-                  <div className="col-12">
-                      <div className="card">
-                          <div className="card__body height-600" >
-                              <h6 >Data telah berhasil di delete</h6>
-                          </div>
-                      </div>
-                  </div>
-              </div>: null}
+
+        {notifikasi=="file"  ?
+        <form className='col-3' onSubmit={submitHandle}>
+        <div class="modal fade" id="file" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
+          <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content">
+              <div class="modal-header">
+              <h6>Data periode telah berhasil di input, silahkan muat ulang halaman ini</h6>
+              <button class="btn btn-primary" data-bs-target="#" data-bs-toggle="modal" data-bs-dismiss="modal" type="button">OK</button>
+              </div>
+
+      
+    
+            </div>
+            
+          </div>
+        </div>
+   
+      </form>
+              : null}
+
+
+              {notifikasi=="edit"  ?
+        <form className='col-3' onSubmit={submitHandle}>
+        <div class="modal fade" id="edit" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
+          <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content">
+              <div class="modal-header">
+              <h6>Data telah berhasil di edit</h6>
+              <button class="btn btn-primary" data-bs-target="#" data-bs-toggle="modal" data-bs-dismiss="modal" type="button">OK</button>
+              </div>
+
+      
+    
+            </div>
+            
+          </div>
+        </div>
+   
+      </form>
+              : null}
+
+              {notifikasi=="individu"  ?
+        <form className='col-3' onSubmit={submitHandle}>
+        <div class="modal fade" id="individu" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
+          <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content">
+              <div class="modal-header">
+              <h6>Data individu telah berhasil di input, silahkan muat ulang halaman ini</h6>
+              <button class="btn btn-primary" data-bs-target="#" data-bs-toggle="modal" data-bs-dismiss="modal" type="button">OK</button>
+              </div>
+
+      
+    
+            </div>
+            
+          </div>
+        </div>
+   
+      </form>
+              : null}
+
+              {notifikasi=="delete"  ?
+       
+        <div class="modal fade" id="delete" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
+          <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content">
+              <div class="modal-header">
+              <h6>Data telah berhasil di delete</h6>
+              <button class="btn btn-primary" data-bs-target="#" data-bs-toggle="modal" data-bs-dismiss="modal" type="button">OK</button>
+              </div>
+
+      
+    
+            </div>
+            
+          </div>
+        </div>
+   
+    
+              : null}
       </div>
      
       {/* Tabel */}
