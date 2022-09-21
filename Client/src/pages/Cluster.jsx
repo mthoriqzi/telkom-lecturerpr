@@ -26,6 +26,7 @@ function Cluster() {
     const [data0, setData0] = useState([])
     const [data1, setData1] = useState([])
     const [data2, setData2] = useState([])
+
     // let [dataFilter, setDataFilter] = useState()
     // let [dataKK, setDataKK0] = useState([])
     const [hasilSearch, setSearch] = useState('')

@@ -20,6 +20,7 @@ function Data({token}) {
   const [notifikasi, setNotifikasi] = useState(EditModal.notifikasi)
 
   const [openModal, setOpenModal] = useState(false)
+  const [periode1, setPeriode1] = useState("Ganjil_2020")
   
   // var selectedData = {}
   const [selected, setSelected] = useState({})
@@ -358,7 +359,7 @@ function someFuncDelete(item={item}) {
           </div>
         </div>
         {/* Input File */}
-        {token.token==="test123" &&
+        {/* {token.token==="test123" &&
         <div className='col-3'>  
           <input
             type="file"
@@ -366,16 +367,64 @@ function someFuncDelete(item={item}) {
             onChange={handleFileUpload}
           />
         </div>
-        }
+        } */}
 
-        {/* Input Data Individu */}
         {token.token==="test123" &&
         <form className='col-3' onSubmit={submitHandle}>
           <div class="modal fade" id="exampleModalToggle" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
             <div class="modal-dialog modal-lg modal-dialog-centered">
               <div class="modal-content">
                 <div class="modal-header">
-                  <h5 class="modal-title" id="exampleModalToggleLabel">Input Data Individu</h5>
+                  <h5 class="modal-title" id="exampleModalToggleLabel">Input Data Periode</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                <div className='row'>
+                                  <div className='col-6'>
+                {inputManual("number","periode","Periode","")}</div>
+                <div className='col-6'>
+                <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">Tahun Akademik: {periode1}</button>
+                <div class="dropdown-menu">
+                    <li><a class="dropdown-item" onClick={() => setPeriode1("Genap")}>Genap</a></li>
+                    <li><a class="dropdown-item" onClick={() => setPeriode1("Ganjil")}>Ganjil</a></li>
+  
+                </div></div></div>
+
+                <div className='col-3'>  
+                  <input
+                    type="file"
+                    accept=".csv,.xlsx,.xls"
+                    onChange={handleFileUpload}
+                  />
+        </div>
+
+
+                </div>
+        
+                <div class="modal-footer">
+                  <button class="btn btn-primary" data-bs-target="#" data-bs-toggle="modal" data-bs-dismiss="modal" type="button">Submit</button>
+                </div>
+              </div>
+              
+            </div>
+          </div>
+            <a class="btn btn-primary" data-bs-toggle="modal" href="#exampleModalToggle" role="button">Input Data Periode</a>
+        </form>
+        
+        }
+
+
+
+
+
+        {/* Input Data Individu */}
+        {token.token==="test123" &&
+        <form className='col-3' onSubmit={submitHandle}>
+          <div class="modal fade" id="exampleModalToggleq" aria-hidden="true" aria-labelledby="exampleModalToggleLabelq" tabindex="-1">
+            <div class="modal-dialog modal-lg modal-dialog-centered">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalToggleLabelq">Input Data Individu</h5>
                   <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
@@ -400,11 +449,40 @@ function someFuncDelete(item={item}) {
                   <button class="btn btn-primary" data-bs-target="#" data-bs-toggle="modal" data-bs-dismiss="modal" type="submit">Submit</button>
                 </div>
               </div>
+              
             </div>
           </div>
-            <a class="btn btn-primary" data-bs-toggle="modal" href="#exampleModalToggle" role="button">Input Data Individu</a>
+            <a class="btn btn-primary" data-bs-toggle="modal" href="#exampleModalToggleq" role="button">Input Data Individu</a>
         </form>
-        }
+        
+        }{/* notifikasi  */}
+<div>
+        <br></br>
+        </div>
+        {notifikasi=="edit" ?
+        
+        <div className="row">
+                {/* {dataList} */}
+                  <div className="col-12">
+                      <div className="card">
+                          <div className="card__body height-600">
+                              <h6 >Data telah berhasil di edit, silahkan muat ulang halaman ini</h6>
+                          </div>
+                      </div>
+                  </div>
+              </div>: null}
+        
+        {notifikasi=="delete"  ?
+        <div className="row">
+                {/* {dataList} */}
+                  <div className="col-12">
+                      <div className="card">
+                          <div className="card__body height-600" >
+                              <h6 >Data telah berhasil di delete</h6>
+                          </div>
+                      </div>
+                  </div>
+              </div>: null}
       </div>
      
       {/* Tabel */}
@@ -432,30 +510,7 @@ function someFuncDelete(item={item}) {
       }
 
 
-{/* notifikasi  */}
-{notifikasi=="edit" ?
-<div className="row">
-        {/* {dataList} */}
-          <div className="col-12">
-              <div className="card">
-                  <div className="card__body height-600">
-                      <h6 >Data telah berhasil di edit, silahkan muat ulang halaman ini</h6>
-                  </div>
-              </div>
-          </div>
-      </div>: null}
 
-{notifikasi=="delete"  ?
-<div className="row">
-        {/* {dataList} */}
-          <div className="col-12">
-              <div className="card">
-                  <div className="card__body height-600" >
-                      <h6 >Data telah berhasil di delete</h6>
-                  </div>
-              </div>
-          </div>
-      </div>: null}
     </div>
 
     
