@@ -47,41 +47,41 @@ function Data({token}) {
   })
 
   useEffect(() => {
-    Axios.get('http://34.101.223.149:3001/api/get/'+periode).then((response) => {
+    Axios.get('http://34.101.42.148:3001/api/get/'+periode).then((response) => {
       var data = response.data
       data.sort((a, b) => a.no > b.no)
       setDataList(data);
     });
 
-        // Axios.get("http://34.101.223.149:3001/api/get/Ganjil_2019/").then((response) => {
+        // Axios.get("http://34.101.42.148:3001/api/get/Ganjil_2019/").then((response) => {
         //     setData20191(response.data);
 
         // });
-        // Axios.get("http://34.101.223.149:3001/api/get/Genap_2019/").then((response) => {
+        // Axios.get("http://34.101.42.148:3001/api/get/Genap_2019/").then((response) => {
         //     setData20192(response.data);
 
         // });
-        Axios.get("http://34.101.223.149:3001/api/get/Ganjil_2020/").then((response) => {
+        Axios.get("http://34.101.42.148:3001/api/get/Ganjil_2020/").then((response) => {
             setData20201(response.data);
 
         });
-        Axios.get("http://34.101.223.149:3001/api/get/Genap_2020/").then((response) => {
+        Axios.get("http://34.101.42.148:3001/api/get/Genap_2020/").then((response) => {
             setData20202(response.data);
 
         });
-        Axios.get("http://34.101.223.149:3001/api/get/Ganjil_2021/").then((response) => {
+        Axios.get("http://34.101.42.148:3001/api/get/Ganjil_2021/").then((response) => {
             setData20211(response.data);
 
         });
-        Axios.get("http://34.101.223.149:3001/api/get/Genap_2021/").then((response) => {
+        Axios.get("http://34.101.42.148:3001/api/get/Genap_2021/").then((response) => {
             setData20212(response.data);
 
         });
-        Axios.get("http://34.101.223.149:3001/api/get/Ganjil_2022/").then((response) => {
+        Axios.get("http://34.101.42.148:3001/api/get/Ganjil_2022/").then((response) => {
             setData20221(response.data);
 
         });
-        Axios.get("http://34.101.223.149:3001/api/get/Genap_2022/").then((response) => {
+        Axios.get("http://34.101.42.148:3001/api/get/Genap_2022/").then((response) => {
             setData20222(response.data);
     });
   }, [periode]);
@@ -131,18 +131,18 @@ function Data({token}) {
   }
 
   const sendToDB = (data, periode) => {
-    Axios.post("http://34.101.223.149:3001/api/insert", {
+    Axios.post("http://34.101.42.148:3001/api/insert", {
       "data": data,
       "periode":periode});
-    const flask = "http://34.101.223.149:4999/api/"+periode
+    const flask = "http://34.101.42.148:4999/api/"+periode
     delay(1000).then(() => Axios.get(flask, 'GET') );
   }
 
   const sendToDBindividu = (data, periode) => {
-    Axios.post("http://34.101.223.149:3001/api/insert/individu", {
+    Axios.post("http://34.101.42.148:3001/api/insert/individu", {
       "data": data,
       "periode":periode});
-    const flask = "http://34.101.223.149:4999/api/"+periode
+    const flask = "http://34.101.42.148:4999/api/"+periode
     delay(1000).then(() => Axios.get(flask, 'GET') );
   }
 
@@ -155,15 +155,15 @@ function Data({token}) {
       }
     }
 
-    Axios.post("http://34.101.223.149:3001/api/edit", {
+    Axios.post("http://34.101.42.148:3001/api/edit", {
       "data": inputs,
       "periode":periode});
-    const flask = "http://34.101.223.149:4999/api/"+periode
+    const flask = "http://34.101.42.148:4999/api/"+periode
     delay(1000).then(() => Axios.get(flask, 'GET') );
   }
 
   const handleRemoveItem = name => {
-    Axios.post("http://34.101.223.149:3001/api/delete", {
+    Axios.post("http://34.101.42.148:3001/api/delete", {
       "data": name,
       "periode":periode});
     deleteData(name)  

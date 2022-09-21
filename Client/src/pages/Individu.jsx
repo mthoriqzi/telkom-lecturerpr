@@ -17,35 +17,35 @@ const Individu = (props) => {
   
     useEffect(() => {
         // Axios.get(`http://localhost:3001/api/get-user?kode_nama=${props.match.params.id}`, {"periode": "Ganjil_2020"}).then((response) => {
-        Axios.get("http://34.101.223.149:3001/api/get-user/Ganjil_2019/"+props.match.params.id).then((response) => {
+        Axios.get("http://34.101.42.148:3001/api/get-user/Ganjil_2019/"+props.match.params.id).then((response) => {
             setData20191(response.data);
 
         });
-        Axios.get("http://34.101.223.149:3001/api/get-user/Genap_2019/"+props.match.params.id).then((response) => {
+        Axios.get("http://34.101.42.148:3001/api/get-user/Genap_2019/"+props.match.params.id).then((response) => {
             setData20192(response.data);
 
         });
-        Axios.get("http://34.101.223.149:3001/api/get-user/Ganjil_2020/"+props.match.params.id).then((response) => {
+        Axios.get("http://34.101.42.148:3001/api/get-user/Ganjil_2020/"+props.match.params.id).then((response) => {
             setData20201(response.data);
 
         });
-        Axios.get("http://34.101.223.149:3001/api/get-user/Genap_2020/"+props.match.params.id).then((response) => {
+        Axios.get("http://34.101.42.148:3001/api/get-user/Genap_2020/"+props.match.params.id).then((response) => {
             setData20202(response.data);
 
         });
-        Axios.get("http://34.101.223.149:3001/api/get-user/Ganjil_2021/"+props.match.params.id).then((response) => {
+        Axios.get("http://34.101.42.148:3001/api/get-user/Ganjil_2021/"+props.match.params.id).then((response) => {
             setData20211(response.data);
 
         });
-        Axios.get("http://34.101.223.149:3001/api/get-user/Genap_2021/"+props.match.params.id).then((response) => {
+        Axios.get("http://34.101.42.148:3001/api/get-user/Genap_2021/"+props.match.params.id).then((response) => {
             setData20212(response.data);
 
         });
-        Axios.get("http://34.101.223.149:3001/api/get-user/Ganjil_2022/"+props.match.params.id).then((response) => {
+        Axios.get("http://34.101.42.148:3001/api/get-user/Ganjil_2022/"+props.match.params.id).then((response) => {
             setData20221(response.data);
 
         });
-        Axios.get("http://34.101.223.149:3001/api/get-user/Genap_2022/"+props.match.params.id).then((response) => {
+        Axios.get("http://34.101.42.148:3001/api/get-user/Genap_2022/"+props.match.params.id).then((response) => {
             setData20222(response.data);
 
         });

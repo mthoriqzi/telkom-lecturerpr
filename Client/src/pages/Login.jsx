@@ -5,7 +5,7 @@ import './Login.css';
 
 
 async function loginUser(credentials) {
-    return fetch('http://34.101.223.149:3001/login', {
+    return fetch('http://34.101.42.148:3001/login', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
