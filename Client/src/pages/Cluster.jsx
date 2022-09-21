@@ -26,6 +26,7 @@ function Cluster() {
     const [data0, setData0] = useState([])
     const [data1, setData1] = useState([])
     const [data2, setData2] = useState([])
+
     // let [dataFilter, setDataFilter] = useState()
     // let [dataKK, setDataKK0] = useState([])
     const [hasilSearch, setSearch] = useState('')
@@ -37,26 +38,26 @@ function Cluster() {
     }
 
     useEffect(() => {
-        // fetchData('http://34.101.42.148:3001/api/get-cluster/'+periode, setDataList)
+        // fetchData('http://34.101.223.149:3001/api/get-cluster/'+periode, setDataList)
 
-        Axios.get('http://34.101.42.148:3001/api/get-cluster/'+periode).then((response) => {
+        Axios.get('http://34.101.223.149:3001/api/get-cluster/'+periode).then((response) => {
             setDataList(response.data);
         });
-        Axios.get('http://34.101.42.148:3001/api/get-cluster/'+periode+'/0').then((response) => {
+        Axios.get('http://34.101.223.149:3001/api/get-cluster/'+periode+'/0').then((response) => {
             var data = response.data
             data.sort((a, b) => a.kode_nama > b.kode_nama)
             setDataList0(data);
             setData0(data)
             // setDataList(response.data);
         });
-        Axios.get('http://34.101.42.148:3001/api/get-cluster/'+periode+'/1').then((response) => {
+        Axios.get('http://34.101.223.149:3001/api/get-cluster/'+periode+'/1').then((response) => {
             var data = response.data
             data.sort((a, b) => a.kode_nama > b.kode_nama)
             setDataList1(data);
             setData1(data)
             // setDataList1(response.data);
         });
-        Axios.get('http://34.101.42.148:3001/api/get-cluster/'+periode+'/2').then((response) => {
+        Axios.get('http://34.101.223.149:3001/api/get-cluster/'+periode+'/2').then((response) => {
             var data = response.data
             data.sort((a, b) => a.kode_nama > b.kode_nama)
             setDataList2(data);
@@ -64,31 +65,31 @@ function Cluster() {
             // setDataList2(response.data);
         });
     
-    Axios.get("http://34.101.42.148:3001/api/get/Genap_2019/").then((response) => {
+    Axios.get("http://34.101.223.149:3001/api/get/Genap_2019/").then((response) => {
         setData20192(response.data);
 
     });
-    Axios.get("http://34.101.42.148:3001/api/get/Ganjil_2020/").then((response) => {
+    Axios.get("http://34.101.223.149:3001/api/get/Ganjil_2020/").then((response) => {
         setData20201(response.data);
 
     });
-    Axios.get("http://34.101.42.148:3001/api/get/Genap_2020/").then((response) => {
+    Axios.get("http://34.101.223.149:3001/api/get/Genap_2020/").then((response) => {
         setData20202(response.data);
 
     });
-    Axios.get("http://34.101.42.148:3001/api/get/Ganjil_2021/").then((response) => {
+    Axios.get("http://34.101.223.149:3001/api/get/Ganjil_2021/").then((response) => {
         setData20211(response.data);
 
     });
-    Axios.get("http://34.101.42.148:3001/api/get/Genap_2021/").then((response) => {
+    Axios.get("http://34.101.223.149:3001/api/get/Genap_2021/").then((response) => {
         setData20212(response.data);
 
     });
-//     Axios.get("http://34.101.42.148:3001/api/get/Ganjil_2022/").then((response) => {
+//     Axios.get("http://34.101.223.149:3001/api/get/Ganjil_2022/").then((response) => {
 //         setData20221(response.data);
 
 //     });
-//     Axios.get("http://34.101.42.148:3001/api/get/Genap_2022/").then((response) => {
+//     Axios.get("http://34.101.223.149:3001/api/get/Genap_2022/").then((response) => {
 //         setData20222(response.data);
 // });
 
