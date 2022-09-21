@@ -133,7 +133,7 @@ function Data({token}) {
     return new Promise(resolve => setTimeout(resolve, time));
   }
 
-  const sendToDB = (data) => {
+  const sendToDB = (data, periode) => {
     Axios.post("http://34.101.223.149:3001/api/insert", {
       "data": data,
       "periode":periode});
@@ -143,7 +143,7 @@ function Data({token}) {
   }
   
 
-  const sendToDBindividu = (data) => {
+  const sendToDBindividu = (data, periode) => {
     Axios.post("http://34.101.223.149:3001/api/insert/individu", {
       "data": data,
       "periode":periode}).then(()=>setRerender(!rerender));

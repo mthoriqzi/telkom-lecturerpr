@@ -319,10 +319,10 @@ function filterby(cluster){
                 <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">Program Studi: {program_studi}</button>
                 <ul class="dropdown-menu">
                     <li><a class="dropdown-item" onClick={() => setProgramStudi("All")}>All</a></li>
-                    <li><a class="dropdown-item" onClick={() => setProgramStudi("PRODI S2 TEKNIK INDUSTRI (FRI) (2019)")}>PRODI S2 TEKNIK INDUSTRI (FRI) (2019)</a></li>
-                    <li><a class="dropdown-item" onClick={() => setProgramStudi("PRODI S1 TEKNIK INDUSTRI (FRI) (2019)")}>PRODI S1 TEKNIK INDUSTRI (FRI) (2019)</a></li>
-                    <li><a class="dropdown-item" onClick={() => setProgramStudi("PRODI S1 SISTEM INFORMASI (FRI) (2019)")}>PRODI S1 SISTEM INFORMASI (FRI) (2019)</a></li>
-                    <li><a class="dropdown-item" onClick={() => setProgramStudi("PRODI S1 TEKNIK LOGISTIK (FRI) (2019)")}>PRODI S1 TEKNIK LOGISTIK (FRI) (2019)</a></li>
+                    <li><a class="dropdown-item" onClick={() => setProgramStudi("PROGRAM STUDI S2 TEKNIK INDUSTRI (FRI)")}>PROGRAM STUDI S2 TEKNIK INDUSTRI (FRI)</a></li>
+                    <li><a class="dropdown-item" onClick={() => setProgramStudi("PROGRAM STUDI S1 TEKNIK INDUSTRI (FRI)")}>PROGRAM STUDI S1 TEKNIK INDUSTRI (FRI)</a></li>
+                    <li><a class="dropdown-item" onClick={() => setProgramStudi("PROGRAM STUDI S1 SISTEM INFORMASI (FRI)")}>PROGRAM STUDI S1 SISTEM INFORMASI (FRI)</a></li>
+                    <li><a class="dropdown-item" onClick={() => setProgramStudi("PROGRAM STUDI S1 TEKNIK LOGISTIK (FRI)")}>PROGRAM STUDI S1 TEKNIK LOGISTIK (FRI)</a></li>
                 </ul>
                 <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">JFA: {jfa}</button>
                 <ul class="dropdown-menu">

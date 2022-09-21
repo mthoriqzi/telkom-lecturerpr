@@ -598,7 +598,7 @@ const dbps = {
             name: 'AA',
             data: [AAPM, AAEMS, AAC, AAE]
           }, {
-            name: 'NJAD',
+            name: 'NJFA',
             data: [NJPM, NJEMS, NJC, NJE]
           }],
           options:{
