@@ -115,7 +115,7 @@ function Data({token}) {
     kelompok_keahlian: ["ENGINEERING MANAGEMENT SYSTEM","ENTERPRISE AND INDUSTRIAL SYSTEM", "CYBERNETICS", "PRODUCTION AND MANUFACTURING SYSTEM"],
     inpassing: ["Pembina","Pembina TK 1","Pembina Utama","Pembina Utama Madya","Pembina Utama Muda","Penata","Penata Muda TK 1","Penata TK 1"],
     sertifikasi: ["SUDAH","BELUM"],
-    program_studi: ["PRODI S2 TEKNIK INDUSTRI (FRI) (2019)","PRODI S1 TEKNIK INDUSTRI (FRI) (2019)","PRODI S1 SISTEM INFORMASI (FRI) (2019)","PRODI S1 TEKNIK LOGISTIK (FRI) (2019)"],
+    program_studi: ["PRODI S2 TEKNIK INDUSTRI (FRI)","PRODI S1 TEKNIK INDUSTRI (FRI)","PRODI S1 SISTEM INFORMASI (FRI)","PRODI S1 TEKNIK LOGISTIK (FRI)"],
     status_kepegawaian: ["DOSEN PEGAWAI TETAP","DOSEN PROFESIONAL FULL TIME","DOSEN CALON PEGAWAI TETAP","DOSEN PROFESIONAL PART TIME"],
     jfa: ["AA","L","LK","NJFA"],
     pemenuhan_tridarma: ["MEMENUHI","TDK MEMENUHI"]

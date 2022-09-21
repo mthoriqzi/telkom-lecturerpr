@@ -461,7 +461,7 @@ if (dataList.length!=0){
             AAC = AAC + 1}
             if (dataList[i]["kelompok_keahlian"]=="ENTERPRISE AND INDUSTRIAL SYSTEM"){
             AAE = AAE + 1}}
-        if (dataList[i]["jfa"]=="NJ"){
+        if (dataList[i]["jfa"]=="NJFA"){
             if (dataList[i]["kelompok_keahlian"]=="PRODUCTION AND MANUFACTURING SYSTEM"){
             NJPM = NJPM + 1}
             if (dataList[i]["kelompok_keahlian"]=="ENGINEERING MANAGEMENT SYSTEM"){
