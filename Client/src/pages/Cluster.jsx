@@ -19,7 +19,7 @@ function Cluster() {
     const [data20202, setData20202] = useState([])
     const [data20211, setData20211] = useState([])
     const [data20212, setData20212] = useState([])
-    const [periode, setPeriode] = useState("Genap_2020")
+    const [periode, setPeriode] = useState("Ganjil_2021")
     const [kelompok_keahlian, setkelompokKeahlian] = useState('All')
     const [program_studi, setProgramStudi] = useState('All')
     const [jfa, setJFA] = useState('All')

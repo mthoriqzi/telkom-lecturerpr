@@ -10,7 +10,7 @@ import EditModal from '../components/ModalEdit/EditModal.jsx'
 function Data({token}) {
   
   const [dataList, setDataList] = useState([])
-  const [periode, setPeriode] = useState("Genap_2020")
+  const [periode, setPeriode] = useState("Ganjil_2021")
   const [data20201, setData20201] = useState([])
   const [data20202, setData20202] = useState([])
   const [data20211, setData20211] = useState([])

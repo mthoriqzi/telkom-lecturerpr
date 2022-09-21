@@ -13,7 +13,7 @@ const Individu = (props) => {
     const [data20212, setData20212] = useState([])
     const [data20221, setData20221] = useState([])
     const [data20222, setData20222] = useState([])
-    const [periode, setPeriode] = useState("Ganjil_2019")
+    const [periode, setPeriode] = useState("Ganjil_2021")
   
     useEffect(() => {
         // Axios.get(`http://localhost:3001/api/get-user?kode_nama=${props.match.params.id}`, {"periode": "Ganjil_2020"}).then((response) => {
@@ -193,7 +193,7 @@ const Individu = (props) => {
     }
     return (
         <div>
-        { data20201.length!=0 &&
+        { data20211.length!=0 &&
             <div>
                 <div className='row'>
                     <div className="col-7">
