@@ -136,7 +136,7 @@ function Data({token}) {
   const sendToDB = (data, periode) => {
     Axios.post("http://34.101.223.149:3001/api/insert", {
       "data": data,
-      "periode":periode});
+      "periode":periode}).then(()=>setRerender(!rerender));
     const flask = "http://34.101.223.149:4999/api/"+periode
     delay(1000).then(() => Axios.get(flask, 'GET') );
     setNotifikasi("file")
@@ -173,11 +173,13 @@ function Data({token}) {
       "data": name,
       "periode":periode});
     deleteData(name)  
+    setNotifikasi("delete")
   }
 
   const deleteData = nama => {
     const newData = dataList.filter(person => person.kode_nama !== nama)
     setDataList(newData)
+    setNotifikasi("delete")
   }
 
   const handleFileUpload = e => {
@@ -251,6 +253,7 @@ function someFuncDelete(item={item}) {
   const submitHandle = e => {
     e.preventDefault()
     sendToDBindividu(inputs,periode);
+    setNotifikasi("individu")
 
   }
 
@@ -418,7 +421,7 @@ function someFuncDelete(item={item}) {
               
             </div>
           </div>
-            <a class="btn btn-primary" data-bs-toggle="modal" href="#exampleModalToggle" role="button">Input Data Periode</a>
+            <a class="btn btn-primary" data-bs-toggle="modal" href="#exampleModalToggle" role="button" onClick={() => setNotifikasi("file")}>Input Data Periode</a>
         </form>
         
         }
@@ -456,13 +459,13 @@ function someFuncDelete(item={item}) {
                 </div>
         
                 <div class="modal-footer">
-                  <button class="btn btn-primary" data-bs-target="#individu" data-bs-toggle="modal" data-bs-dismiss="modal" type="button">Submit</button>
+                  <button class="btn btn-primary" data-bs-target="#individu" data-bs-toggle="modal" data-bs-dismiss="modal" type="submit">Submit</button>
                 </div>
               </div>
               
             </div>
           </div>
-            <a class="btn btn-primary" data-bs-toggle="modal" href="#exampleModalToggleq" role="button">Input Data Individu</a>
+            <a class="btn btn-primary" data-bs-toggle="modal" href="#exampleModalToggleq" role="button" onClick={() => setNotifikasi("individu")}>Input Data Individu</a>
         </form>
         
         }{/* notifikasi  */}
