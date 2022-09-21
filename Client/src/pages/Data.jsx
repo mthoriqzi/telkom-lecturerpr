@@ -149,6 +149,7 @@ function Data({token}) {
       "periode":periode}).then(()=>setRerender(!rerender));
     // const flask = "http://34.101.223.149:4999/api/"+periode
     // delay(1000).then(() => Axios.get(flask, 'GET') );
+    setNotifikasi("individu")
   }
 
   const editDB = (data) => {
@@ -250,7 +251,7 @@ function someFuncDelete(item={item}) {
   const submitHandle = e => {
     e.preventDefault()
     sendToDBindividu(inputs,periode);
-    setNotifikasi("individu")
+
   }
 
   
@@ -455,7 +456,7 @@ function someFuncDelete(item={item}) {
                 </div>
         
                 <div class="modal-footer">
-                  <button class="btn btn-primary" data-bs-target="#individu" data-bs-toggle="modal" data-bs-dismiss="modal" type="submit">Submit</button>
+                  <button class="btn btn-primary" data-bs-target="#individu" data-bs-toggle="modal" data-bs-dismiss="modal" type="button">Submit</button>
                 </div>
               </div>
               
