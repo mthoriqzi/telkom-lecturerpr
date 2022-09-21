@@ -32,7 +32,7 @@ const [data20212, setData20212] = useState([])
 const [data20221, setData20221] = useState([])
 const [data20222, setData20222] = useState([])
 const [dataList, setDataList] = useState([])
-const [periode, setPeriode] = useState("Ganjil_2020")
+const [periode, setPeriode] = useState("Ganjil_2021")
 useEffect(() => {
     Axios.get('http://34.101.223.149:3001/api/get/'+periode).then((response) => {
       setDataList(response.data);
