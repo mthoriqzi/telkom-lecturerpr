@@ -336,21 +336,21 @@ function someFuncDelete(item={item}) {
                 {periode}
             </button>
             <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
-            {/* {data20212.length!==0  && */}
+            {data20212.length!==0  && 
                 <li><button class="dropdown-item" type="button" onClick={() => setPeriode("Genap_2021")}>2021 - Genap</button></li>
-            {/* }
-            {data20211.length!==0  && */}
+            }
+            {data20211.length!==0  && 
                 <li><button class="dropdown-item" type="button" onClick={() => setPeriode("Ganjil_2021")}>2021 - Ganjil</button></li>
-            {/* }{data20202.length!==0  && */}
+            }{data20202.length!==0  && 
                 <li><button class="dropdown-item" type="button" onClick={() => setPeriode("Genap_2020")}>2020 - Genap</button></li>
-            {/* }{data20201.length!==0  && */}
+            }{data20201.length!==0  && 
                 <li><button class="dropdown-item" type="button" onClick={() => setPeriode("Ganjil_2020")}>2020 - Ganjil</button></li>
-            {/* } */}
+            } 
             {/* {data20192.length!=0  &&
                 <li><button class="dropdown-item" type="button" onClick={() => setPeriode("Genap_2019")}>2019 - Genap</button></li>
             }{data20191.length!=0  &&
                 <li><button class="dropdown-item" type="button" onClick={() => setPeriode("Ganjil_2019")}>2019 - Ganjil</button></li>
-} */}
+}  */}
                 {/* <li><button class="dropdown-item" type="button" onClick={() => setPeriode("Genap_2021")}>2021 - Genap</button></li>
                 <li><button class="dropdown-item" type="button" onClick={() => setPeriode("Genap_2020")}>2020 - Genap</button></li>
                 <li><button class="dropdown-item" type="button" onClick={() => setPeriode("Ganjil_2020")}>2020 - Ganjil</button></li> */}
