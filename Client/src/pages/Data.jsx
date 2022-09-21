@@ -147,8 +147,8 @@ function Data({token}) {
     Axios.post("http://34.101.223.149:3001/api/insert/individu", {
       "data": data,
       "periode":periode}).then(()=>setRerender(!rerender));
-    const flask = "http://34.101.223.149:4999/api/"+periode
-    delay(1000).then(() => Axios.get(flask, 'GET') );
+    // const flask = "http://34.101.223.149:4999/api/"+periode
+    // delay(1000).then(() => Axios.get(flask, 'GET') );
   }
 
   const editDB = (data) => {
@@ -163,8 +163,8 @@ function Data({token}) {
       "data": inputs,
       "periode":periode}).then(()=>setRerender(!rerender));
       console.log(inputs)
-    const flask = "http://34.101.223.149:4999/api/"+periode
-    delay(1000).then(() => Axios.get(flask, 'GET') );
+    // const flask = "http://34.101.223.149:4999/api/"+periode
+    // delay(1000).then(() => Axios.get(flask, 'GET') );
   }
 
   const handleRemoveItem = name => {
