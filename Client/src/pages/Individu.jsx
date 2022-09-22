@@ -203,27 +203,27 @@ const Individu = (props) => {
                                 <table>
                                     <tr>
                                         <td>KODE DOSEN</td>
-                                        <td>: {data20201[0].kode_nama}</td>
+                                        <td>: {data20211[0].kode_nama}</td>
                                     </tr>
                                     <tr>
                                         <td>KODE</td>
-                                        <td>: {data20201[0].kode}</td>
+                                        <td>: {data20211[0].kode}</td>
                                     </tr>
                                     <tr>
                                         <td>JFA</td>
-                                        <td>: {data20201[0].jfa}</td>
+                                        <td>: {data20211[0].jfa}</td>
                                     </tr>
                                     <tr>
                                         <td>PENDIDIKAN</td>
-                                        <td>: {data20201[0].pendidikan_terakhir}</td>
+                                        <td>: {data20211[0].pendidikan_terakhir}</td>
                                     </tr>
                                     <tr>
                                         <td>KELOMPOK KEAHLIAN</td>
-                                        <td>: {data20201[0].kelompok_keahlian}</td>
+                                        <td>: {data20211[0].kelompok_keahlian}</td>
                                     </tr>
                                     <tr>
                                         <td>PROGRAM STUDI</td>
-                                        <td>: {data20201[0].program_studi}</td>
+                                        <td>: {data20211[0].program_studi}</td>
                                     </tr>
                                 </table>
 
